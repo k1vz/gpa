@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="text-align: left; margin-top: 20px;">Edição de de Jornadas </h1>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>DATA</th>
+                <th>Inicio</th>
+                <th>Intervalo da Manhã</th>
+                <th>Intervalo do Almoço</th>
+                <th>Intervalo da Tarde</th>
+                <th>Fim da Jornada</th>
+                <th>Tempo total de jornada</th>
+                <th>Tempo total de descanço</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop para exibir os motoristas -->
+            <!-- Não tem nada nesses dados, tem q ver se funciona -->
+            {% for motoristas in dados_jornadas %}
+            <tr>
+                <td>{{ jornada.data }}</td>
+                <td>{{ jornada.inicio }}</td>
+                <td>{{ jornada.intervaloManhã }}</td>
+                <td>{{ jornada.intervaloAlmoco }}</td>
+                <td>{{ jornada.intervaloTarde }}</td>
+                <td>{{ jornada.final }}</td>
+                <td>{{ jornada.totalJornada }}</td>
+                <td>{{ jornada.totalDescanco }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="text-align: left; margin-top: 20px;">Lista de Motoristas </h1>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>CNH</th>
+                <th>Ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop para exibir os motoristas -->
+            <!-- Não tem nada nesses dados, tem q ver se funciona -->
+            {% for motoristas in dados_motoristas %}
+            <tr>
+                <td>{{ motorista.nome }}</td>
+                <td>{{ motorista.CPF }}</td>
+                <td>{{ motorista.CNH }}</td>
+                <td>{{ motorista.Ativo }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

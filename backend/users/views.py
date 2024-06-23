@@ -18,10 +18,10 @@ class LoginView(APIView):
 		user = User.objects.filter(email=req.data['email']).first()
 
 		if user is None:
-			raise AuthenticationFailed('User not found')
+			raise AuthenticationFailed('Email não encontrado')
 
 		if not user.check_password(req.data['password']):
-			raise AuthenticationFailed('Incorrect Password')
+			raise AuthenticationFailed('Senha incorreta')
 
 		payload = {
 			'id': user.id,
@@ -57,7 +57,7 @@ class UserView(APIView):
 		return Response(serializer.data)
 
 class LogoutView(APIView):
-	def post(self, req):
+	def get(self, req):
 		res = Response()
 		res.delete_cookie('jwt')
 		res.data = {

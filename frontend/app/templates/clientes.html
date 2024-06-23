@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 style="text-align: left; margin-top: 20px;">Lista de Clientes</h1>
+<div style="text-align: right; margin-bottom: 10px;">
+    <h1 style="text-align: left; margin-top: 20px;">Lista de Clientes</h1>
+    <a href="{% url 'cadastrar_cliente' %}">
+        <button class="button">
+            Cadastrar Cliente
+        </button>
+    </a>
+</div>
 <div class="table-container">
     <table>
         <thead>

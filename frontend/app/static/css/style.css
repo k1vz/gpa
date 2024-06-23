@@ -1,11 +1,10 @@
 /* style.css */
+/*-------------------------------------------------------------------------------------*/
 /* Estilos para o menu lateral */
-
 body {
     background-color: #172654; /* Azul acinzentado */
     font-family: "Arial", sans-serif; /* Define uma fonte mais profissional */
 }
-
 .sidebar {
     width: 200px;
     height: 100%;
@@ -18,23 +17,19 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 /* Estilos para o logotipo */
 .logo img {
     width: 150px; /* Ajuste conforme necessário */
 }
-
 /* Estilos para os itens do menu */
 .sidebar ul {
     list-style-type: none;
     padding: 0;
     margin-top: 30px; /* Espaçamento acima dos itens do menu */
 }
-
 .sidebar ul li {
     padding: 15px;
 }
-
 .sidebar ul li a {
     color: black; /* Cor do texto */
     text-decoration: none;
@@ -45,19 +40,17 @@ body {
     padding: 10px; /* Espaçamento interno */
     background-color: #D9D9D9; /* Cor de fundo do botão */
 }
-
 .sidebar ul li a:hover {
     background-color: #6a6a6a; /* Cor de fundo ao passar o mouse */
     border-color: #555; /* Altera a cor da borda ao passar o mouse */
 }
-
 .sidebar ul li a img {
     width: 20px; /* Largura da imagem reduzida */
     height: 20px; /* Altura da imagem reduzida */
     margin-right: 10px; /* Espaçamento entre a imagem e o texto */
 }
 
-
+/*-------------------------------------------------------------------------------------*/
 /*Todo o conteudo*/
 .content {
     margin-left: 220px;  /* Ajusta a margem esquerda para deixar espaço para o menu lateral */
@@ -67,7 +60,6 @@ body {
     background-color: #C5C5C5; /* Cor de fundo ao passar o mouse */
     border-radius: 5px; /* Adiciona bordas arredondadas */
 }
-
 .table-container {
     width: 100%;
     max-width: 1000px; /* Largura máxima da tabela */
@@ -75,28 +67,23 @@ body {
     border-radius: 10px; /* Bordas arredondadas para a tabela */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para dar um efeito visual */
 }
-
 table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0; /* Remove o espaço entre as células para que o border-radius funcione */
 }
-
 th, td {
     padding: 12px; /* Espaçamento dentro das células */
     border: 1px solid #ddd; /* Bordas das células */
     text-align: center; /* Alinhamento do texto */
 }
-
 th {
     background-color: #f4f4f4; /* Cor de fundo do cabeçalho */
     font-weight: bold; /* Negrito para o texto do cabeçalho */
 }
-
 tr:nth-child(even) {
     background-color: #f9f9f9; /* Cor de fundo alternada para as linhas pares */
 }
-
 /* Adiciona bordas arredondadas às primeiras e últimas células */
 .table-container table tr:first-child th:first-child {
     border-top-left-radius: 10px;
@@ -112,4 +99,29 @@ tr:nth-child(even) {
 
 .table-container table tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*Botão de Cadastro*/
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #286ff3;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 20px; /* Espaçamento à direita do título */
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1056d6;
+}
+
+right {
+    float: right; /* Alinha o botão à direita */
+    margin-right: 20px; /* Espaço entre o botão e o conteúdo */
 }

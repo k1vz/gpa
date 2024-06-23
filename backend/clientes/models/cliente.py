@@ -1,5 +1,5 @@
 from django.db import models
-from usuarios.models import Usuario
+from users.models import User
 from .endereco import Endereco
 from .contato import Contato
 
@@ -22,7 +22,7 @@ class Cliente(models.Model):
 	razaoSocial = models.CharField(max_length=100)
 	nomeFantasia = models.CharField(max_length=100)
 	contato = models.ForeignKey(Contato, on_delete=models.CASCADE, related_name='clientes')
-	usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='clientes')
+	usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='clientes')
 	data_criacao = models.DateTimeField(auto_now_add=True)
 	data_modificacao = models.DateTimeField(auto_now=True)
 

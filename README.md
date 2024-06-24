@@ -1,2 +1,0 @@
-# gpa
-Gerencie GPA

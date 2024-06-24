@@ -1,17 +1,44 @@
-from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework import status
 from .models.cliente import Cliente
-from .models.endereco import Endereco
-from .models.contato import Contato
-from .serializers import ClienteSerializer, EnderecoSerializer, ContatoSerializer
+from .serializers import ClienteSerializer
 
-class ClienteViewSet(viewsets.ModelViewSet):
-    queryset = Cliente.objects.all()
-    serializer_class = ClienteSerializer
+class ClienteCreateView(APIView):
+    def post(self, request):
+        serializer = ClienteSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-class EnderecoViewSet(viewsets.ModelViewSet):
-    queryset = Endereco.objects.all()
-    serializer_class = EnderecoSerializer
+class ClienteDetailView(APIView):
+    def get_object(self, pk):
+        try:
+            return Cliente.objects.get(pk=pk)
+        except Cliente.DoesNotExist:
+            raise NotFound('Cliente não encontrado')
 
-class ContatoViewSet(viewsets.ModelViewSet):
-    queryset = Contato.objects.all()
-    serializer_class = ContatoSerializer
+    def get(self, request, pk):
+        cliente = self.get_object(pk)
+        serializer = ClienteSerializer(cliente)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        cliente = self.get_object(pk)
+        serializer = ClienteSerializer(cliente, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def patch(self, request, pk):
+        cliente = self.get_object(pk)
+        serializer = ClienteSerializer(cliente, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk):
+        cliente = self.get_object(pk)
+        cliente.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

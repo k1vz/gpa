@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 style="text-align: left; margin-top: 20px;">Edição de de Jornadas </h1>
+<div style="text-align: right; margin-bottom: 10px;">
+    <h1 style="text-align: left; margin-top: 20px;">Edição de de Jornadas </h1>
+    <a href="{% url 'cadastrar_jornada' %}">
+        <button class="button">
+            Cadastrar Cliente
+        </button>
+    </a>
+</div>
 <div class="table-container">
     <table>
         <thead>
             <tr>
-                <th>DATA</th>
+                <th>Data</th>
                 <th>Inicio</th>
                 <th>Intervalo da Manhã</th>
                 <th>Intervalo do Almoço</th>

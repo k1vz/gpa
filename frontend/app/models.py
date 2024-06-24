@@ -1,5 +1,6 @@
 # models.py
 from django.db import models
+from django.utils import timezone
 class Cliente(models.Model):
     TIPO_PESSOA_CHOICES = [
         ('F', 'Pessoa Física'),
@@ -12,11 +13,13 @@ class Cliente(models.Model):
     nome_fantasia = models.CharField(max_length=100)
     tipo_empresa = models.CharField(max_length=100)
     quantidade_caminhoes = models.IntegerField()
+    
     nome = models.CharField(max_length=100)
     cargo = models.CharField(max_length=100)
     email = models.EmailField()
     telefone_primario = models.CharField(max_length=20)
     telefone_secundario = models.CharField(max_length=20, blank=True, null=True)
+    
     logradouro = models.CharField(max_length=255)
     numero = models.CharField(max_length=10)
     municipio = models.CharField(max_length=100)
@@ -35,8 +38,6 @@ class Motorista(models.Model):
     cnh = models.CharField(max_length=20)
     tipo_habilitacao = models.CharField(max_length=20)
     foto_cnh = models.ImageField(upload_to='motoristas/cnh/')
-    foto_perfil = models.ImageField(upload_to='motoristas/perfil/')
-
     def __str__(self):
         return self.nome
     
@@ -45,8 +46,8 @@ class Multa(models.Model):
     cliente = models.CharField(max_length=100)
     motorista = models.CharField(max_length=100)
     placa_veiculo = models.CharField(max_length=20)
-    vencimento = models.DateField()
-    data_infracao = models.DateField()
+    vencimento = models.DateField(default=timezone.now)
+    data_infracao = models.DateField(default=timezone.now)
     uf = models.CharField(max_length=2)
     municipio = models.CharField(max_length=100)
     logradouro = models.CharField(max_length=200)
@@ -57,4 +58,16 @@ class Multa(models.Model):
     observacoes = models.TextField(blank=True)
 
     def __str__(self):
-        return f"{self.multa_tipificada} - {self.cliente.nome} - {self.motorista.nome}"
+        return f"{self.multa_tipificada} - {self.cliente}"
+    
+class Jornada(models.Model):
+    data = models.DateField()
+    inicio_jornada = models.TimeField()
+    intervalo_refeicao = models.DurationField()
+    fim_jornada = models.TimeField()
+    tempo_total_jornada = models.DurationField()
+    tempo_total_parado = models.DurationField()
+    veiculo = models.CharField(max_length=100)
+    motorista = models.CharField(max_length=100)
+    def __str__(self):
+        return f"Jornada de {self.motorista.nome} em {self.data}"

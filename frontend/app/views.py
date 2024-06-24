@@ -5,9 +5,31 @@ from django.shortcuts import render, redirect
 from .forms import ClienteForm
 from .forms import MotoristaForm
 from .forms import MultaForm
+from .forms import JornadaForm
+from datetime import datetime, timedelta
+#--Login--
+def login_view(request):
+    # Lógica de autenticação
+    if request.method == 'POST':
+        # Aqui você pode verificar os dados de login, por exemplo:
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        
+        # Lógica de autenticação (geralmente você fará isso com o Django Auth)
+        # Por exemplo:
+        if email == 'usuario' and senha == 'senha':
+            # Autenticação bem-sucedida, redirecionar para a página 'base'
+            return redirect('base')
+        else:
+            # Se a autenticação falhar, pode adicionar uma mensagem de erro
+            # Ou qualquer outra lógica que desejar
+            return render(request, 'login.html', {'erro': True})
+    
+    # Se não for um POST, renderiza o formulário de login
+    return render(request, 'login.html')
 
 # --Base--
-def base(request):
+def base_view(request):
     return render(request, 'base.html')
 
 # --Clientes--
@@ -44,7 +66,7 @@ def cadastrar_motorista(request):
         form = MotoristaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('motoristas')  # Redireciona para a lista de motoristas após o cadastro
+            return redirect('motoristas')
     else:
         form = MotoristaForm()
     return render(request, 'cadastrar_motorista.html', {'form': form})
@@ -59,16 +81,88 @@ def cadastrar_multa(request):
         form = MultaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista_multas')  # Redireciona para a página de lista de multas após o cadastro
+            return redirect('base')  # Redireciona para a página base após o cadastro
     else:
         form = MultaForm()
     
     return render(request, 'cadastrar_multa.html', {'form': form})
+
 # --Jornadas--
 def jornadas(request):
     return render(request, 'jornadas.html')
 
+def cadastrar_jornada(request):
+    if request.method == 'POST':
+        form = JornadaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_jornadas') 
+    else:
+        form = JornadaForm()
+    return render(request, 'cadastrar_jornada.html', {'form': form})
 
+# "We have a dashboard at home", dashboard at home
+def dashboard(request):
+    # Lógica para recuperar as informações do dashboard aqui
+    # Exemplo de informações fictícias:
+    num_motoristas = 50
+    num_motoristas_ativos = 40
+    frota_total = 100
+    frota_ativa = 80
+    frota_manutencao = 20
+    num_diarios_cadastrados = 200
+    num_diarios_assinados_mes = 150
+    num_multas_total = 500
+    num_multas_ultimo_mes = 50
+    num_multas_ativas = 30
+    num_motoristas_desativados = 10
+    num_multas_terminadas = 200
+    context = {
+        'num_motoristas': num_motoristas,
+        'num_motoristas_ativos': num_motoristas_ativos,
+        'frota_total': frota_total,
+        'frota_ativa': frota_ativa,
+        'frota_manutencao': frota_manutencao,
+        'num_diarios_cadastrados': num_diarios_cadastrados,
+        'num_diarios_assinados_mes': num_diarios_assinados_mes,
+        'num_multas_total': num_multas_total,
+        'num_multas_ultimo_mes': num_multas_ultimo_mes,
+        'num_multas_ativas': num_multas_ativas,
+        'num_motoristas_desativados': num_motoristas_desativados,
+        'num_multas_terminadas': num_multas_terminadas,
+    }
+    return render(request, 'dashboard.html', context)
 
-
-
+#Dashboard só que funcional, só tem q fazer o bagulho do tempo funcionar: o 'num_multas_ultimo_mes'
+'''def dashboard(request):
+    # Consulta para obter as informações necessárias
+    num_motoristas = Motorista.objects.count()
+    num_motoristas_ativos = Motorista.objects.filter(ativo=True).count()
+    frota_total = Frota.objects.count()
+    frota_ativa = Frota.objects.filter(ativa=True).count()
+    frota_manutencao = Frota.objects.filter(em_manutencao=True).count()
+    num_diarios_cadastrados = DiarioBordo.objects.count()
+    num_diarios_assinados_mes = DiarioBordo.objects.filter(data_assinatura__month=now.month).count()
+    num_multas_total = Multa.objects.count()
+    num_multas_mes = Multa.objects.filter(data_infracao__month=now.month).count()
+    num_multas_ultimo_mes = Multa.objects.filter(data_infracao__month=last_month.month).count()
+    num_multas_ativas = Multa.objects.filter(ativa=True).count()
+    # Exemplo de cálculo para os demais números
+    num_motoristas_desativados = num_motoristas - num_motoristas_ativos
+    num_multas_terminadas = num_multas_total - num_multas_ativas
+    context = {
+        'num_motoristas': num_motoristas,
+        'num_motoristas_ativos': num_motoristas_ativos,
+        'frota_total': frota_total,
+        'frota_ativa': frota_ativa,
+        'frota_manutencao': frota_manutencao,
+        'num_diarios_cadastrados': num_diarios_cadastrados,
+        'num_diarios_assinados_mes': num_diarios_assinados_mes,
+        'num_multas_total': num_multas_total,
+        'num_multas_mes': num_multas_mes,
+        'num_multas_ultimo_mes': num_multas_ultimo_mes,
+        'num_multas_ativas': num_multas_ativas,
+        'num_motoristas_desativados': num_motoristas_desativados,
+        'num_multas_terminadas': num_multas_terminadas,
+    }
+    return render(request, 'dashboard.html', context)'''

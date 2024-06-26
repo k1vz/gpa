@@ -8,7 +8,6 @@ class Endereco(models.Model):
 	ponto_referencia = models.CharField(max_length=255, blank=True, null=True)
 	bairro = models.CharField(max_length=100)
 	complemento = models.CharField(max_length=100, blank=True, null=True)
-	cliente = models.ForeignKey('clientes.Cliente', on_delete=models.CASCADE, related_name='enderecos')
 
 	def __str__(self):
 		return f"{self.logradouro}, {self.numero} - {self.municipio}/{self.estado}"

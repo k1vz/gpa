@@ -1,3 +1,10 @@
+/* Estilos globais */
+body {
+    background-color: #172654; /* Azul escuro para o fundo */
+    font-family: "Arial", sans-serif; /* Fonte padrão */
+    color: #000000; /* Cor do texto global */
+}
+
 /* Estilos para o menu lateral */
 .sidebar {
     width: 200px; /* Largura padrão da barra lateral */
@@ -31,13 +38,13 @@
 }
 
 .sidebar ul li a {
-    color: black; /* Cor do texto */
+    color: #000000; /* Cor do texto */
     text-decoration: none;
     display: flex; /* Faz com que os itens do menu se comportem como flex containers */
     align-items: center; /* Alinha os itens verticalmente */
-    justify-content: flex-start; /* Alinha o texto à esquerda */
+    justify-content: center; /* Centraliza o texto */
     border-radius: 20px; /* Adiciona bordas arredondadas */
-    padding: 10px; /* Espaçamento interno */
+    padding: 12px; /* Espaçamento interno */
     background-color: #D9D9D9; /* Cor de fundo do botão */
     margin-bottom: 10px; /* Espaçamento entre os itens do menu */
     transition: all 0.3s ease; /* Adiciona uma transição suave */
@@ -67,36 +74,72 @@
     border: 1px solid #fff; /* Adiciona uma borda de 1px sólida branca */
     background-color: #C5C5C5; /* Cor de fundo ao passar o mouse */
     border-radius: 5px; /* Adiciona bordas arredondadas */
+    color: #000000; /* Cor do texto */
 }
 
-@media screen and (max-width: 768px) {
-    .sidebar {
-        width: 60px; /* Reduz a largura do menu para melhorar a responsividade */
-        padding-top: 10px; /* Ajusta o espaçamento superior */
-    }
+/* Estilos para tabelas */
+.table-container {
+    width: 100%;
+    max-width: 1000px; /* Largura máxima da tabela */
+    overflow: hidden; /* Previne que as bordas arredondadas sejam cortadas */
+    border-radius: 10px; /* Bordas arredondadas para a tabela */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para dar um efeito visual */
+}
 
-    .sidebar ul li a {
-        padding: 8px; /* Reduz o espaçamento interno dos itens do menu */
-        font-size: 12px; /* Reduz o tamanho da fonte */
-    }
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0; /* Remove o espaço entre as células para que o border-radius funcione */
+}
 
-    .sidebar ul li a img {
-        width: 16px; /* Reduz a largura da imagem */
-        height: 16px; /* Reduz a altura da imagem */
-    }
+th, td {
+    padding: 12px; /* Espaçamento dentro das células */
+    border: 1px solid #ddd; /* Bordas das células */
+    text-align: center; /* Alinhamento do texto */
+}
 
-    .content {
-        margin-left: 60px; /* Ajusta a margem esquerda para deixar espaço para o menu lateral */
-    }
+th {
+    background-color: #f4f4f4; /* Cor de fundo do cabeçalho */
+    font-weight: bold; /* Negrito para o texto do cabeçalho */
+}
 
-    .toggle-menu {
-        display: block; /* Exibe o botão de toggle */
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 9999; /* Garante que o botão esteja acima de outros elementos */
-    }
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Cor de fundo alternada para as linhas pares */
+}
+
+/* Adiciona bordas arredondadas às primeiras e últimas células */
+.table-container table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.table-container table tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table-container table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.table-container table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+/* Estilos para botões */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #286ff3;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
+    margin-right: 20px; /* Espaçamento à direita do título */
+}
+
+.button:hover {
+    background-color: #1056d6;
 }

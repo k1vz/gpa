@@ -1,9 +1,6 @@
 # forms.py
 from django import forms
-from .models import Cliente
-from .models import Motorista
-from .models import Multa
-from .models import Jornada
+from .models import Cliente, Jornada, Motorista, Multa, Frota
 
 class ClienteForm(forms.Form):
     # Tópico: Informações Gerais
@@ -47,3 +44,8 @@ class JornadaForm(forms.ModelForm):
     class Meta:
         model = Jornada
         fields = '__all__'
+
+class FrotaForm(forms.ModelForm):
+    class Meta:
+        model = Frota
+        fields = ['placa', 'cor', 'motorista', 'modelo', 'ano']

@@ -1,11 +1,8 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count
 from datetime import datetime, timedelta
-from .models import Jornada, Motorista, Multa
-from .forms import ClienteForm
-from .forms import MotoristaForm
-from .forms import MultaForm
-from .forms import JornadaForm
+from .models import Jornada, Motorista, Multa, Frota
+from .forms import ClienteForm, MotoristaForm, MultaForm, JornadaForm, FrotaForm
 
 #--Login--
 def login_view(request):
@@ -162,3 +159,18 @@ def handler404(request, exception):
 
 def handler500(request):
     return render(request, '500.html', status=500)
+
+def frota(request):
+    frota_list = Frota.objects.all()
+    return render(request, 'frota.html', {'frota_list': frota_list})
+
+def cadastrar_frota(request):
+    if request.method == 'POST':
+        form = FrotaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('frota')  # Redireciona para a página de listagem da frota após o cadastro
+    else:
+        form = FrotaForm()
+    
+    return render(request, 'cadastrar_frota.html', {'form': form})

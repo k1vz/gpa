@@ -29,7 +29,7 @@ class Cliente(models.Model):
     ponto_referencia = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return self.nome  # Retorna o nome do cliente como representação no admin
+        return self.nome
     
 class Motorista(models.Model):
     nome = models.CharField(max_length=100)
@@ -71,3 +71,13 @@ class Jornada(models.Model):
     motorista = models.CharField(max_length=100)
     def __str__(self):
         return f"Jornada de {self.motorista.nome} em {self.data}"
+    
+class Frota(models.Model):
+    placa = models.CharField(max_length=20)
+    cor = models.CharField(max_length=50)
+    motorista = models.ForeignKey(Motorista, on_delete=models.SET_NULL, blank=True, null=True)
+    modelo = models.CharField(max_length=50)
+    ano = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.placa 

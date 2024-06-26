@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align: right; margin-bottom: 10px;">
+    <h1 style="text-align: left; margin-top: 20px;"> Frota: </h1>
+    <a href="{% url 'cadas_frota' %}">
+        <button class="button">
+            Cadastrar Frota
+        </button>
+    </a>
+</div>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Motorista</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Cor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop para exibir os motoristas -->
+            <!-- tem que arrumar essa parte conectando ao banco de dados -->
+            <!-- tem q fazer uma opção para buscar jornadas de uma pessoa em específico -->
+            <!--{% for motoristas in dados_jornadas %}
+            <tr>
+                <td>{{ frota.placa }}</td>
+                <td>{{ frota.motorista }}</td>
+                <td>{{ frota.modelo }}</td>
+                <td>{{ frota.ano }}</td>
+                <td>{{ frota.cor }}</td>
+            </tr>
+            {% endfor %}-->
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

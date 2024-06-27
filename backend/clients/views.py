@@ -52,3 +52,28 @@ class ClientListView(APIView):
 
 		return Response(serializer.data)
 
+class ClientUpdateView(APIView):
+    def put(self, req, pk):
+        try:
+            client = Client.objects.get(pk=pk)
+        except Client.DoesNotExist:
+            raise NotFound('Cliente não encontrado')
+
+        serializer = ClientSerializer(client, data=req.data)
+        
+        if serializer.is_valid():
+            serializer.save()
+            
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ClientDeleteView(APIView):
+    def delete(self, req, pk):
+        try:
+            client = Client.objects.get(pk=pk)
+        except Client.DoesNotExist:
+            raise NotFound('Cliente não encontrado')
+
+        client.delete()
+        return Response({'message': 'Cliente deletado com sucesso'}, status=status.HTTP_204_NO_CONTENT)

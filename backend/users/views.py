@@ -67,40 +67,40 @@ class UserDetailView(APIView):
 		return Response(serializer.data)
 
 
-# class ClienteDetailView(APIView):
+# class ClientDetailView(APIView):
 # 	def get_object(self, pk):
 # 		try:
-# 			return Cliente.objects.get(pk=pk)
-# 		except Cliente.DoesNotExist:
-# 			raise NotFound('Cliente não encontrado')
+# 			return Client.objects.get(pk=pk)
+# 		except Client.DoesNotExist:
+# 			raise NotFound('Client não encontrado')
 
 # 	def get(self, req, pk):
-# 		cliente = self.get_object(pk)
-# 		serializer = ClienteSerializer(cliente)
+# 		client = self.get_object(pk)
+# 		serializer = ClientSerializer(client)
 
 # 		return Response(serializer.data)
 
 # 	def put(self, req, pk):
-# 		cliente = self.get_object(pk)
+# 		client = self.get_object(pk)
 
-# 		serializer = ClienteSerializer(cliente, data=req.data)
+# 		serializer = ClientSerializer(client, data=req.data)
 # 		serializer.is_valid(raise_exception=True)
 # 		serializer.save()
 
 # 		return Response(serializer.data)
 
 # 	def patch(self, req, pk):
-# 		cliente = self.get_object(pk)
+# 		client = self.get_object(pk)
 
-# 		serializer = ClienteSerializer(cliente, data=req.data, partial=True)
+# 		serializer = ClientSerializer(client, data=req.data, partial=True)
 # 		serializer.is_valid(raise_exception=True)
 # 		serializer.save()
 
 # 		return Response(serializer.data)
 
 # 	def delete(self, req, pk):
-# 		cliente = self.get_object(pk)
-# 		cliente.delete()
+# 		client = self.get_object(pk)
+# 		client.delete()
 
 # 		return Response(status=status.HTTP_204_NO_CONTENT)
 	

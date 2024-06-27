@@ -2,53 +2,53 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from .serializers import ClienteSerializer
-from .models.cliente import Cliente
+from .serializers import ClientSerializer
+from .models.client import Client
 
-class ClienteCreateView(APIView):
+class ClientCreateView(APIView):
 	def post(self, req):
-		serializer = ClienteSerializer(data=req.data)
+		serializer = ClientSerializer(data=req.data)
 
 		serializer.is_valid(raise_exception=True)
 		serializer.save()
 
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-class ClienteDetailView(APIView):
+class ClientDetailView(APIView):
 	def get(self, req, pk):
-		cliente = self.get_object(pk)
-		serializer = ClienteSerializer(cliente)
+		client = self.get_object(pk)
+		serializer = ClientSerializer(client)
 
 		return Response(serializer.data)
 
 	def put(self, req, pk):
-		cliente = self.get_object(pk)
+		client = self.get_object(pk)
 
-		serializer = ClienteSerializer(cliente, data=req.data)
+		serializer = ClientSerializer(client, data=req.data)
 		serializer.is_valid(raise_exception=True)
 		serializer.save()
 
 		return Response(serializer.data)
 
 	def patch(self, req, pk):
-		cliente = self.get_object(pk)
+		client = self.get_object(pk)
 
-		serializer = ClienteSerializer(cliente, data=req.data, partial=True)
+		serializer = ClientSerializer(client, data=req.data, partial=True)
 		serializer.is_valid(raise_exception=True)
 		serializer.save()
 
 		return Response(serializer.data)
 
 	def delete(self, req, pk):
-		cliente = self.get_object(pk)
-		cliente.delete()
+		client = self.get_object(pk)
+		client.delete()
 
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
-class ClienteListView(APIView):
+class ClientListView(APIView):
 	def get(self, req):
-		clientes = Cliente.objects.all()
-		serializer = ClienteSerializer(clientes, many=True)
+		clients = Client.objects.all()
+		serializer = ClientSerializer(clients, many=True)
 
 		return Response(serializer.data)
 

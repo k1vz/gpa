@@ -1,11 +1,18 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
-from .models import User
 from .serializers import UserSerializer
+from .models import User
 import jwt, datetime
 
-class RegisterView(APIView):
+class UserListView(APIView):
+	def get(self, req):
+		users = User.objects.all()
+		serializer = UserSerializer(users, many=True)
+
+		return Response(serializer.data)
+
+class UserRegisterView(APIView):
 	def post(self, req):
 		serializer = UserSerializer(data=req.data)
 		serializer.is_valid(raise_exception=True)
@@ -13,7 +20,7 @@ class RegisterView(APIView):
 
 		return Response(serializer.data)
 
-class LoginView(APIView):
+class UserLoginView(APIView):
 	def post(self, req):
 		user = User.objects.filter(email=req.data['email']).first()
 
@@ -39,8 +46,8 @@ class LoginView(APIView):
 
 		return res
 
-class UserView(APIView):
-	def get(self, req):
+class UserDetailView(APIView):
+	def get(self, req, pk):
 		token = req.COOKIES.get('jwt')
 
 		if not token:
@@ -51,12 +58,53 @@ class UserView(APIView):
 		except jwt.ExpiredSignatureError:
 			raise AuthenticationFailed('Não autorizado')
 
-		user = User.objects.filter(id=payload['id']).first()
+		if pk:
+			user = User.objects.filter(id=pk).first()
+		else:
+			user = User.objects.filter(id=payload['id']).first()
 		serializer = UserSerializer(user)
 
 		return Response(serializer.data)
 
-class LogoutView(APIView):
+
+# class ClienteDetailView(APIView):
+# 	def get_object(self, pk):
+# 		try:
+# 			return Cliente.objects.get(pk=pk)
+# 		except Cliente.DoesNotExist:
+# 			raise NotFound('Cliente não encontrado')
+
+# 	def get(self, req, pk):
+# 		cliente = self.get_object(pk)
+# 		serializer = ClienteSerializer(cliente)
+
+# 		return Response(serializer.data)
+
+# 	def put(self, req, pk):
+# 		cliente = self.get_object(pk)
+
+# 		serializer = ClienteSerializer(cliente, data=req.data)
+# 		serializer.is_valid(raise_exception=True)
+# 		serializer.save()
+
+# 		return Response(serializer.data)
+
+# 	def patch(self, req, pk):
+# 		cliente = self.get_object(pk)
+
+# 		serializer = ClienteSerializer(cliente, data=req.data, partial=True)
+# 		serializer.is_valid(raise_exception=True)
+# 		serializer.save()
+
+# 		return Response(serializer.data)
+
+# 	def delete(self, req, pk):
+# 		cliente = self.get_object(pk)
+# 		cliente.delete()
+
+# 		return Response(status=status.HTTP_204_NO_CONTENT)
+	
+class UserLogoutView(APIView):
 	def get(self, req):
 		res = Response()
 		res.delete_cookie('jwt')

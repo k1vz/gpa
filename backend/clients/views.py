@@ -21,30 +21,6 @@ class ClientDetailView(APIView):
 
 		return Response(serializer.data)
 
-	def put(self, req, pk):
-		client = self.get_object(pk)
-
-		serializer = ClientSerializer(client, data=req.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
-
-		return Response(serializer.data)
-
-	def patch(self, req, pk):
-		client = self.get_object(pk)
-
-		serializer = ClientSerializer(client, data=req.data, partial=True)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
-
-		return Response(serializer.data)
-
-	def delete(self, req, pk):
-		client = self.get_object(pk)
-		client.delete()
-
-		return Response(status=status.HTTP_204_NO_CONTENT)
-
 class ClientListView(APIView):
 	def get(self, req):
 		clients = Client.objects.all()

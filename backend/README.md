@@ -3,12 +3,16 @@
 ### Users
 Request | Method | Route URI | Query | Cookies | Body | Response 
 --- | --- | --- | --- | --- | --- |--- 
-Register User |<div align="center">  ![GET](https://img.shields.io/badge/POST-yellow?style=flat) </div>| /users/register/ | <div align="center"> --- </div> | <div align="center">null</div> | ` { "email": string, "password": string } ` | ` {"id": int, "email": string} `
-Login User |<div align="center">  ![GET](https://img.shields.io/badge/POST-yellow?style=flat) </div>| /users/login/ | <div align="center"> --- </div> | <div align="center">null</div> | ` { "email": string, "password": string } ` | ` { "jwt": string } `
+Register User |<div align="center">  ![POST](https://img.shields.io/badge/POST-yellow?style=flat) </div>| /users/register/ | <div align="center"> --- </div> | <div align="center">null</div> | ` { "email": string, "password": string } ` | ` {"id": int, "email": string} `
+Login User |<div align="center">  ![POST](https://img.shields.io/badge/POST-yellow?style=flat) </div>| /users/login/ | <div align="center"> --- </div> | <div align="center">null</div> | ` { "email": string, "password": string } ` | ` { "jwt": string } `
 Logout | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/logout/ | <div align="center"> --- </div> | ` jwt=string ` | <div align="center">null</div> | ` {"message": string} `
-Detail User | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/detail/ |  <div align="center">` int `</div> | ` jwt=string ` | <div align="center">null</div> | ` {"id": int, "email": string} `
-List All users | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/ | <div align="center"> --- </div> | ` jwt=string ` | <div align="center">null</div> | ` [{"id": int, "email": string}] `
-Update Password | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/ | <div align="center"> --- </div> | ` jwt=string ` | <div align="center">null</div> | ` [{"id": int, "email": string}] `
+Detail User | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/detail/ |  <div align="center"> `pk=int` </div> | ` jwt=string ` | <div align="center">null</div> | ` {"id": int, "email": string} `
+List All Users | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/ | <div align="center"> --- </div> | ` jwt=string ` | <div align="center">null</div> | ` [{"id": int, "email": string}] `
+Update User | <div align="center"> ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) </div>| /users/update/ | <div align="center"> --- </div> | ` jwt=string ` | ` { "email"?: string, "current_password": string, "new_password"?: string } ` | ` {"id": int, "email": string} `
+Delete User | <div align="center"> ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) </div>| /users/delete/ | <div align="center"> `pk=int` </div> | ` jwt=string ` | <div align="center">null</div> | ` {"message": string} `
+
+"?" means opcional parameter
+You can use 0 in the "pk" fields to refer to the current user
 
 ---
 

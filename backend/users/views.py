@@ -1,12 +1,27 @@
+from django.forms import ValidationError
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.hashers import check_password
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework import status
 from .serializers import UserSerializer
+from .utils import getUser, isAuth
 from .models import User
 import jwt, datetime
 
 class UserListView(APIView):
 	def get(self, req):
+		token = req.COOKIES.get('jwt')
+
+		if not token:
+			raise AuthenticationFailed('Não autorizado')
+
+		try:
+			payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+		except jwt.ExpiredSignatureError:
+			raise AuthenticationFailed('Não autorizado')
+		
 		users = User.objects.all()
 		serializer = UserSerializer(users, many=True)
 
@@ -22,10 +37,7 @@ class UserRegisterView(APIView):
 
 class UserLoginView(APIView):
 	def post(self, req):
-		user = User.objects.filter(email=req.data['email']).first()
-
-		if user is None:
-			raise AuthenticationFailed('Email não encontrado')
+		user = get_object_or_404(User, email=req.data['email'])		
 
 		if not user.check_password(req.data['password']):
 			raise AuthenticationFailed('Senha incorreta')
@@ -48,62 +60,49 @@ class UserLoginView(APIView):
 
 class UserDetailView(APIView):
 	def get(self, req, pk):
-		token = req.COOKIES.get('jwt')
-
-		if not token:
-			raise AuthenticationFailed('Não autorizado')
-
-		try:
-			payload = jwt.decode(token, 'secret', algorithms=['HS256'])
-		except jwt.ExpiredSignatureError:
-			raise AuthenticationFailed('Não autorizado')
-
-		if pk:
-			user = User.objects.filter(id=pk).first()
-		else:
-			user = User.objects.filter(id=payload['id']).first()
+		payload = isAuth(req)
+		user = getUser(payload['id'], pk)
+		
 		serializer = UserSerializer(user)
 
 		return Response(serializer.data)
 
+class UserUpdateView(APIView):
+	def put(self, req):
+		payload = isAuth(req)
+		user = get_object_or_404(User, id=payload['id'])
 
-# class ClientDetailView(APIView):
-# 	def get_object(self, pk):
-# 		try:
-# 			return Client.objects.get(pk=pk)
-# 		except Client.DoesNotExist:
-# 			raise NotFound('Client não encontrado')
+		data = req.data
+		current_password = data.get('current_password')
+		new_password = data.get('new_password')
+		email = data.get('email')
 
-# 	def get(self, req, pk):
-# 		client = self.get_object(pk)
-# 		serializer = ClientSerializer(client)
+		if current_password and not user.check_password(current_password):
+			raise ValidationError("A senha atual está incorreta")
 
-# 		return Response(serializer.data)
+		if email:
+			user.email = email
 
-# 	def put(self, req, pk):
-# 		client = self.get_object(pk)
+		if new_password:
+			if current_password:
+				user.set_password(new_password)
+			else:
+				raise ValidationError("A senha atual é necessária para definir uma nova senha")
 
-# 		serializer = ClientSerializer(client, data=req.data)
-# 		serializer.is_valid(raise_exception=True)
-# 		serializer.save()
+		user.save()
+		serializer = UserSerializer(user)
 
-# 		return Response(serializer.data)
+		return Response(serializer.data, status=status.HTTP_200_OK)
 
-# 	def patch(self, req, pk):
-# 		client = self.get_object(pk)
 
-# 		serializer = ClientSerializer(client, data=req.data, partial=True)
-# 		serializer.is_valid(raise_exception=True)
-# 		serializer.save()
+class UserDeleteView(APIView):
+	def delete(self, req, pk):
+		payload = isAuth(req)
+		user = getUser(payload['id'], pk)
+		user.delete()
 
-# 		return Response(serializer.data)
+		return Response(status=status.HTTP_204_NO_CONTENT)
 
-# 	def delete(self, req, pk):
-# 		client = self.get_object(pk)
-# 		client.delete()
-
-# 		return Response(status=status.HTTP_204_NO_CONTENT)
-	
 class UserLogoutView(APIView):
 	def get(self, req):
 		res = Response()

@@ -73,9 +73,9 @@ class UserUpdateView(APIView):
 		user = get_object_or_404(User, id=payload['id'])
 
 		data = req.data
+		email = data.get('email')
 		current_password = data.get('current_password')
 		new_password = data.get('new_password')
-		email = data.get('email')
 
 		if current_password and not user.check_password(current_password):
 			raise ValidationError("A senha atual está incorreta")

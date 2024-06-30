@@ -51,7 +51,7 @@ class UserLoginView(APIView):
 		token = jwt.encode(payload, 'secret', algorithm='HS256')
 
 		res = Response()
-		res.set_cookie(key='jwt', value=token, httponly=True)
+		res.set_cookie(key='jwt', value=f'Bearer {token}', httponly=True)
 		res.data = {
 			'jwt': token
 		}

@@ -21,6 +21,7 @@ INSTALLED_APPS = [
 	'clients',
 	'users',
 	'tickets',
+	'drivers',
 ]
 
 MIDDLEWARE = [

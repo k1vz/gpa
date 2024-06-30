@@ -3,15 +3,12 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from rest_framework.permissions import IsAuthenticated
 from drivers.models.daily import Daily
 from drivers.models.driver import Driver
 from drivers.serializers import DriverSerializer, WorkPeriodSerializer, DailySerializer
 from drivers.models.work_period import WorkPeriod
 
 class DriverCreateView(APIView):
-	# permission_classes = [IsAuthenticated]
-
 	def post(self, req):
 		serializer = DriverSerializer(data=req.data)
 		serializer.is_valid(raise_exception=True)
@@ -20,8 +17,6 @@ class DriverCreateView(APIView):
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class DriverDetailView(generics.RetrieveAPIView):
-	# permission_classes = [IsAuthenticated]
-
 	def get(self, req, pk):
 		try:
 			driver = Driver.objects.get(pk=pk)
@@ -45,8 +40,6 @@ class DriverDetailView(generics.RetrieveAPIView):
 		return Response(response_data, status=status.HTTP_200_OK)
 
 class DriverListView(APIView):
-	# permission_classes = [IsAuthenticated]
-
 	def get(self, req):
 		drivers = Driver.objects.all()
 		drivers_data = []
@@ -69,8 +62,6 @@ class DriverListView(APIView):
 
 
 class DriverUpdateView(APIView):
-	# permission_classes = [IsAuthenticated]
-
 	def put(self, req, pk):
 		try:
 			driver = Driver.objects.get(pk=pk)
@@ -85,8 +76,6 @@ class DriverUpdateView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DriverDeleteView(APIView):
-	# permission_classes = [IsAuthenticated]
-
 	def delete(self, req, pk):
 		try:
 			driver = Driver.objects.get(pk=pk)

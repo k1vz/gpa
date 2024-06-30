@@ -1,0 +1,85 @@
+<!-- cadastro_cliente.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Cadastro de Cliente</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <!-- Tópico: Informações Gerais -->
+    <div class="topic-container">
+        <h2>Informações Gerais</h2>
+        <hr>
+        {{ form.tipo_pessoa.label_tag }}
+        {{ form.tipo_pessoa }}
+        <br><br>
+        {{ form.cnpj.label_tag }}
+        {{ form.cnpj }}
+        <br><br>
+        {{ form.razao_social.label_tag }}
+        {{ form.razao_social }}
+        <br><br>
+        {{ form.nome_fantasia.label_tag }}
+        {{ form.nome_fantasia }}
+        <br><br>
+        {{ form.tipo_empresa.label_tag }}
+        {{ form.tipo_empresa }}
+        <br><br>
+        {{ form.quantidade_caminhoes.label_tag }}
+        {{ form.quantidade_caminhoes }}
+        <br><br>
+    </div>
+    
+    <!-- Tópico: Contato -->
+    <div class="topic-container">
+        <h2>Contato</h2>
+        <hr>
+        {{ form.nome.label_tag }}
+        {{ form.nome }}
+        <br><br>
+        {{ form.cargo.label_tag }}
+        {{ form.cargo }}
+        <br><br>
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        <br><br>
+        {{ form.telefone_primario.label_tag }}
+        {{ form.telefone_primario }}
+        <br><br>
+        {{ form.telefone_secundario.label_tag }}
+        {{ form.telefone_secundario }}
+        <br><br>
+    </div>
+    
+    <!-- Tópico: Endereço -->
+    <div class="topic-container">
+        <h2>Endereço</h2>
+        <hr>
+        {{ form.logradouro.label_tag }}
+        {{ form.logradouro }}
+        <br><br>
+        {{ form.numero.label_tag }}
+        {{ form.numero }}
+        <br><br>
+        {{ form.municipio.label_tag }}
+        {{ form.municipio }}
+        <br><br>
+        {{ form.estado.label_tag }}
+        {{ form.estado }}
+        <br><br>
+        {{ form.bairro.label_tag }}
+        {{ form.bairro }}
+        <br><br>
+        {{ form.complemento.label_tag }}
+        {{ form.complemento }}
+        <br><br>
+        {{ form.ponto_referencia.label_tag }}
+        {{ form.ponto_referencia }}
+        <br><br>
+    </div>
+    
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+<!-- cadastrar_multa.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Cadastrar Multa</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <!-- Seção: Multa Tipificada -->
+    <div class="form-section">
+        <h2>Multa Tipificada</h2>
+        <hr>
+        {{ form.multa_tipificada.label_tag }}
+        {{ form.multa_tipificada }}
+    </div>
+    
+    <!-- Seção: Envolvidos -->
+    <!-- Arrumar e fazer o motorista e o veiculo serem retirados do banco de dados -->
+    <div class="form-section">
+        <h2>Envolvidos</h2>
+        <hr>
+        {{ form.cliente.label_tag }}
+        {{ form.cliente }}
+        <br><br>
+        {{ form.motorista.label_tag }}
+        {{ form.motorista }}
+        <br><br>
+        {{ form.placa_veiculo.label_tag }}
+        {{ form.placa_veiculo }}
+    </div>
+    
+    <!-- Seção: Datas e Localização -->
+    <div class="form-section">
+        <h2>Datas e Localização</h2>
+        <hr>
+        {{ form.vencimento.label_tag }}
+        {{ form.vencimento }}
+        <br><br>
+        {{ form.data_infracao.label_tag }}
+        {{ form.data_infracao }}
+        <br><br>
+        {{ form.uf.label_tag }}
+        {{ form.uf }}
+        <br><br>
+        {{ form.municipio.label_tag }}
+        {{ form.municipio }}
+        <br><br>
+        {{ form.logradouro.label_tag }}
+        {{ form.logradouro }}
+    </div>
+    
+    <!-- Seção: Detalhes da Infração -->
+    <div class="form-section">
+        <h2>Detalhes da Infração</h2>
+        <hr>
+        {{ form.codigo_denatran.label_tag }}
+        {{ form.codigo_denatran }}
+        <br><br>
+        {{ form.codigo_atuador.label_tag }}
+        {{ form.codigo_atuador }}
+        <br><br>
+        {{ form.estado_judicial.label_tag }}
+        {{ form.estado_judicial }}
+        <br><br>
+        {{ form.numero_auto_infracoes.label_tag }}
+        {{ form.numero_auto_infracoes }}
+        <br><br>
+        {{ form.observacoes.label_tag }}
+        {{ form.observacoes }}
+        <br><br>
+    </div>
+    
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}

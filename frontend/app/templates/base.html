@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Título</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Microsoft Clarity - falta colocar o token de rastreamento
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "YOUR_CLARITY_TRACKING_CODE");
+    </script>
+    -->
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'imagens/GPA.png' %}" alt="Logo GPA">
+        </div>
+        <ul>
+            <li><a href="{% url 'base' %}">
+                <img src="{% static 'imagens/ImgHome.png' %}" alt="_Home_">
+                <span>Home</span>
+            <li><a href="{% url 'dashboard' %}">
+                <img src="{% static 'imagens/ImgDash.png' %}" alt="_Dashboard_">
+                <span>DASHBOARD</span>
+            <li><a href="{% url 'clientes' %}">
+                <img src="{% static 'imagens/ImgCliente.png' %}" alt="_Clientes_">
+                <span>CLIENTES</span>
+            </a></li>
+            <li><a href="{% url 'motoristas' %}">   
+                <img src="{% static 'imagens/ImgMoto.png' %}" alt="_Moto_">
+                <span>MOTORISTAS</span>
+            </a></li>
+            <li><a href="{% url 'frota' %}">   
+                <img src="{% static 'imagens/ImgFrota.png' %}" alt="_Frota_">
+                <span>FROTA</span>
+            </a></li>
+            <li><a href="{% url 'multas' %}">
+                <img src="{% static 'imagens/ImgMulta.png' %}" alt="_Moto_">
+                <span>MULTAS</span>
+            </a></li>
+            <li><a href="{% url 'jornadas' %}">
+                <img src="{% static 'imagens/ImgJornada.png' %}" alt="_Moto_">
+                <span>JORNADAS</span>
+            </a></li>
+            <li><a href="{% url 'login' %}">
+                <img src="{% static 'imagens/imfOff.png' %}" alt="_Off_">
+                <span>Logout</span>
+            </a></li>
+        </ul>
+    </div>
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

@@ -1,49 +1,19 @@
-<!-- cadastrar_jornada.html -->
-{% extends 'base.html' %}
-
-{% block content %}
-<h1>Cadastrar Jornada</h1>
-
-<form method="post">
-    {% csrf_token %}
-
-     <!-- Seção: Veículo e Motorista -->
-    <!-- Arrumar para colocar o motorista e o veiculo para serem retirados do banco de dados -->
-     <div class="form-section">
-        <h2>Veículo e Motorista</h2>
-        <hr>
-        {{ form.veiculo.label_tag }}
-        {{ form.veiculo }}
-        <br><br>
-        {{ form.motorista.label_tag }}
-        {{ form.motorista }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Jornada</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div>
+        <h2>Cadastro de Jornada</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button">Cadastrar</button>
+        </form>
     </div>
-    
-    <!-- Seção: Horários -->
-    <div class="form-section">
-        <h2>Horários</h2>
-        <hr>
-        {{ form.data.label_tag }}
-        {{ form.data }}
-        <br><br>
-        {{ form.inicio_jornada.label_tag }}
-        {{ form.inicio_jornada }}
-        <br><br>
-        {{ form.intervalo_refeicao.label_tag }}
-        {{ form.intervalo_refeicao }}
-        <br><br>
-        {{ form.fim_jornada.label_tag }}
-        {{ form.fim_jornada }}
-        <br><br>
-        {{ form.tempo_total_jornada.label_tag }}
-        {{ form.tempo_total_jornada }}
-        <br><br>
-        {{ form.tempo_total_parado.label_tag }}
-        {{ form.tempo_total_parado }}
-        <br><br>
-    </div>
-    
-    <button type="submit">Salvar</button>
-</form>
-
-{% endblock %}
+</body>
+</html>

@@ -58,7 +58,7 @@ class Multa(models.Model):
     observacoes = models.TextField(blank=True)
 
     def __str__(self):
-        return f"{self.multa_tipificada} - {self.cliente}"
+        return f'Multa de {self.motorista} em {self.data}'
     
 class Jornada(models.Model):
     data = models.DateField()
@@ -69,15 +69,16 @@ class Jornada(models.Model):
     tempo_total_parado = models.DurationField()
     veiculo = models.CharField(max_length=100)
     motorista = models.CharField(max_length=100)
+    
     def __str__(self):
-        return f"Jornada de {self.motorista.nome} em {self.data}"
+        return f'Jornada de {self.motorista} de {self.inicio} a {self.fim}'
     
 class Frota(models.Model):
-    placa = models.CharField(max_length=20)
-    cor = models.CharField(max_length=50)
-    motorista = models.ForeignKey(Motorista, on_delete=models.SET_NULL, blank=True, null=True)
+    placa = models.CharField(max_length=10)
+    cor = models.CharField(max_length=20)
+    motorista = models.CharField(max_length=100)
     modelo = models.CharField(max_length=50)
-    ano = models.CharField(max_length=50)
+    ano = models.IntegerField()
 
     def __str__(self):
-        return self.placa 
+        return f'{self.placa} - {self.modelo}'

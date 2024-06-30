@@ -6,22 +6,12 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework import status
 from .serializers import UserSerializer
-from .utils import getUser, isAuth
+from .utils import getUser, getPayload
 from .models import User
 import jwt, datetime
 
 class UserListView(APIView):
 	def get(self, req):
-		token = req.COOKIES.get('jwt')
-
-		if not token:
-			raise AuthenticationFailed('Não autorizado')
-
-		try:
-			payload = jwt.decode(token, 'secret', algorithms=['HS256'])
-		except jwt.ExpiredSignatureError:
-			raise AuthenticationFailed('Não autorizado')
-		
 		users = User.objects.all()
 		serializer = UserSerializer(users, many=True)
 
@@ -37,7 +27,7 @@ class UserRegisterView(APIView):
 
 class UserLoginView(APIView):
 	def post(self, req):
-		user = get_object_or_404(User, email=req.data['email'])		
+		user = get_object_or_404(User, email=req.data['email'])
 
 		if not user.check_password(req.data['password']):
 			raise AuthenticationFailed('Senha incorreta')
@@ -51,7 +41,7 @@ class UserLoginView(APIView):
 		token = jwt.encode(payload, 'secret', algorithm='HS256')
 
 		res = Response()
-		res.set_cookie(key='jwt', value=f'Bearer {token}', httponly=True)
+		res.set_cookie(key='jwt', value=token, httponly=True)
 		res.data = {
 			'jwt': token
 		}
@@ -60,7 +50,7 @@ class UserLoginView(APIView):
 
 class UserDetailView(APIView):
 	def get(self, req, pk):
-		payload = isAuth(req)
+		payload = getPayload(req)
 		user = getUser(payload['id'], pk)
 		
 		serializer = UserSerializer(user)
@@ -69,7 +59,7 @@ class UserDetailView(APIView):
 
 class UserUpdateView(APIView):
 	def put(self, req):
-		payload = isAuth(req)
+		payload = getPayload(req)
 		user = get_object_or_404(User, id=payload['id'])
 
 		data = req.data
@@ -97,7 +87,7 @@ class UserUpdateView(APIView):
 
 class UserDeleteView(APIView):
 	def delete(self, req, pk):
-		payload = isAuth(req)
+		payload = getPayload(req)
 		user = getUser(payload['id'], pk)
 		user.delete()
 

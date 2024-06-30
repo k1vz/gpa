@@ -1,10 +1,9 @@
-from django.shortcuts import get_object_or_404
 import jwt
-from rest_framework.exceptions import AuthenticationFailed
 from .models import User
+from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import AuthenticationFailed
 
-def isAuth(req):
-	print(req, 'UTILS')
+def getPayload(req):
 	token = req.COOKIES.get('jwt')
 
 	if not token:
@@ -12,9 +11,9 @@ def isAuth(req):
 
 	try:
 		payload = jwt.decode(token, 'secret', algorithms=['HS256'])
-	except jwt.ExpiredSignatureError:	
+	except jwt.ExpiredSignatureError:
 		raise AuthenticationFailed('Não autorizado')
-	
+
 	return payload
 
 def getUser(id, pk):

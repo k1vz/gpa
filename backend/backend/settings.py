@@ -18,8 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'rest_framework',
 	'corsheaders', 
-	'clients',
 	'users',
+	'clients',
 	'tickets',
 	'drivers',
 ]
@@ -33,6 +33,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'backend.middleware.AuthMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'

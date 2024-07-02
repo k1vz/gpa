@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 import jwt
-from rest_framework.exceptions import AuthenticationFailed
 from django.utils.deprecation import MiddlewareMixin
 
 class AuthMiddleware(MiddlewareMixin):

@@ -1,8 +1,8 @@
 from django.forms import ValidationError
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.exceptions import AuthenticationFailed
 from rest_framework import status
 from .serializers import UserSerializer
 from .utils import getUser, getPayload
@@ -29,7 +29,7 @@ class UserLoginView(APIView):
 		user = get_object_or_404(User, email=req.data['email'])
 
 		if not user.check_password(req.data['password']):
-			raise AuthenticationFailed('Incorred password')
+			return JsonResponse({'error': 'Not authorized'}, status=401)
 
 		payload = {
 			'id': user.id,

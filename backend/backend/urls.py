@@ -7,4 +7,5 @@ urlpatterns = [
     path('clients/', include('clients.urls')),
     path('tickets/', include('tickets.urls')),
     path('drivers/', include('drivers.urls')),
+    path('', include('app.urls')),
 ]

@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
-from django.db.models import Count
-from datetime import datetime, timedelta
-from .models import Jornada, Motorista, Multa, Frota
+from clients.models.client import Client, Address, Contact
 from .forms import ClienteForm, MotoristaForm, MultaForm, JornadaForm, FrotaForm
 
 #--Login--
@@ -24,15 +22,20 @@ def login_view(request):
     
     # Se não for um POST, renderiza o formulário de login
     return render(request, 'login.html')
+
+
 # --Base--
 def base_view(request):
     return render(request, 'base.html')
+
+
 # --Clientes--
 def clientes(request):
     return render(request, 'clientes.html')
+
 def cadastrar_cliente(request):
     if request.method == 'POST':
-        form = ClienteForm(request.POST)
+        form = Client(request.POST)
         if form.is_valid():
             form.save()  # Salva os dados no banco de dados
             return redirect('clientes')  # Redireciona para a página de listagem de clientes
@@ -40,15 +43,20 @@ def cadastrar_cliente(request):
         form = ClienteForm()
     
     return render(request, 'cadastrar_cliente.html', {'form': form})
-def lista_clientes(request):
-    # Dados fictícios dos clientes para testes
-    clientes = [
-        {'nome': 'Cliente A', 'cnpj': '123456789', 'tipo_empresa': 'Tipo 1', 'ativa': True},
-        {'nome': 'Cliente B', 'cnpj': '987654321', 'tipo_empresa': 'Tipo 2', 'ativa': False},
-        # Adicione mais clientes fictícios conforme necessário
-    ]
-    # Renderize o template com os dados dos clientes
-    return render(request, 'clientes.html', {'clientes': clientes})
+
+def client_list(request):
+    clients = Client.objects.all()
+    contacts = Contact.objects.all()
+    addresses = Address.objects.all()
+
+    context = {
+        'clients': clients,
+        'contacts': contacts,
+        'addresses': addresses
+    }
+
+    return render(request, 'cadastrar_cliente.html', context)
+
 # --Motoristas--
 def motoristas(request):
     return render(request, 'motoristas.html')
@@ -61,6 +69,8 @@ def cadastrar_motorista(request):
     else:
         form = MotoristaForm()
     return render(request, 'cadastrar_motorista.html', {'form': form})
+
+
 # --Multas--
 def multas(request):
     return render(request, 'multas.html')
@@ -74,6 +84,8 @@ def cadastrar_multa(request):
         form = MultaForm()
     
     return render(request, 'cadastrar_multa.html', {'form': form})
+
+
 # --Jornadas--
 def jornadas(request):
     return render(request, 'jornadas.html')
@@ -160,7 +172,9 @@ def handler404(request, exception):
 def handler500(request):
     return render(request, '500.html', status=500)
 
-def frota(request):
+
+#Frota - Não usado
+'''def frota(request):
     frota_list = Frota.objects.all()
     return render(request, 'frota.html', {'frota_list': frota_list})
 
@@ -173,4 +187,4 @@ def cadastrar_frota(request):
     else:
         form = FrotaForm()
     
-    return render(request, 'cadastrar_frota.html', {'form': form})
+    return render(request, 'cadastrar_frota.html', {'form': form})'''

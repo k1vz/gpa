@@ -1,33 +1,25 @@
 from django.shortcuts import render, redirect
-from clients.models.client import Client, Address, Contact
+from clients.models import client, address, contact
+from drivers.models import daily, driver, work_period
+from tickets.models import ticket
 from .forms import ClienteForm, MotoristaForm, MultaForm, JornadaForm, FrotaForm
+from .models import Cliente, Motorista, Jornada, Multa
+from datetime import datetime, timedelta
 
 #--Login--
 def login_view(request):
-    # Lógica de autenticação
     if request.method == 'POST':
-        # Aqui você pode verificar os dados de login, por exemplo:
         email = request.POST.get('email')
         senha = request.POST.get('senha')
-        
-        # Lógica de autenticação (geralmente você fará isso com o Django Auth)
-        # Por exemplo:
         if email == 'usuario' and senha == 'senha':
-            # Autenticação bem-sucedida, redirecionar para a página 'base'
             return redirect('base')
         else:
-            # Se a autenticação falhar, pode adicionar uma mensagem de erro
-            # Ou qualquer outra lógica que desejar
             return render(request, 'login.html', {'erro': True})
-    
-    # Se não for um POST, renderiza o formulário de login
     return render(request, 'login.html')
-
 
 # --Base--
 def base_view(request):
     return render(request, 'base.html')
-
 
 # --Clientes--
 def clientes(request):
@@ -35,19 +27,19 @@ def clientes(request):
 
 def cadastrar_cliente(request):
     if request.method == 'POST':
-        form = Client(request.POST)
+        form = Cliente(request.POST)
         if form.is_valid():
-            form.save()  # Salva os dados no banco de dados
-            return redirect('clientes')  # Redireciona para a página de listagem de clientes
+            form.save()
+            return redirect('clientes')
     else:
         form = ClienteForm()
     
     return render(request, 'cadastrar_cliente.html', {'form': form})
 
 def client_list(request):
-    clients = Client.objects.all()
-    contacts = Contact.objects.all()
-    addresses = Address.objects.all()
+    clients = client.objects.all()
+    contacts = contact.objects.all()
+    addresses = address.objects.all()
 
     context = {
         'clients': clients,
@@ -70,7 +62,6 @@ def cadastrar_motorista(request):
         form = MotoristaForm()
     return render(request, 'cadastrar_motorista.html', {'form': form})
 
-
 # --Multas--
 def multas(request):
     return render(request, 'multas.html')
@@ -79,12 +70,11 @@ def cadastrar_multa(request):
         form = MultaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('base')  # Redireciona para a página base após o cadastro
+            return redirect('base')
     else:
         form = MultaForm()
     
     return render(request, 'cadastrar_multa.html', {'form': form})
-
 
 # --Jornadas--
 def jornadas(request):
@@ -99,7 +89,7 @@ def cadastrar_jornada(request):
         form = JornadaForm()
     return render(request, 'cadastrar_jornada.html', {'form': form})
 
-# "We have a dashboard at home", dashboard at home
+"""
 def dashboard(request):
     # Lógica para recuperar as informações do dashboard aqui
     # Exemplo de informações fictícias:
@@ -130,22 +120,23 @@ def dashboard(request):
         'num_multas_terminadas': num_multas_terminadas,
     }
     return render(request, 'dashboard.html', context)
+"""
 
 # Pedro, o dashboard deve estár funcionando, só tem que testar com db, esse código de baixo é o integrado a base de dados
-'''def dashboard(request):
-    # Var de tempo
+def dashboard(request):
+    # Variáveis de tempo
     now = datetime.now()
     last_month = now - timedelta(days=30)
     
-    # Consulta para obter as informações necessárias
-    num_motoristas = Motorista.objects.count()
-    num_motoristas_ativos = Motorista.objects.filter(ativo=True).count()
-    num_diarios_cadastrados = Jornada.objects.count()
-    num_diarios_assinados_mes = Jornada.objects.filter(data_assinatura__month=now.month).count()
-    num_multas_total = Multa.objects.count()
-    num_multas_mes = Multa.objects.filter(data_infracao__month=now.month).count()
-    num_multas_ultimo_mes = Multa.objects.filter(data_infracao__month=last_month.month).count()
-    num_multas_ativas = Multa.objects.filter(ativa=True).count()
+    # Consultas para obter as informações necessárias
+    num_motoristas = driver.objects.count()
+    num_motoristas_ativos = driver.objects.filter(ativo=True).count()
+    num_diarios_cadastrados = driver.work_period.objects.count()
+    num_diarios_assinados_mes = driver.work_period.objects.filter(data_assinatura__month=now.month).count()
+    num_multas_total = ticket.objects.count()
+    num_multas_mes = ticket.objects.filter(data_infracao__month=now.month).count()
+    num_multas_ultimo_mes = ticket.objects.filter(data_infracao__month=last_month.month).count()
+    num_multas_ativas = ticket.objects.filter(ativa=True).count()
     
     # Exemplo de cálculo para os demais números
     num_motoristas_desativados = num_motoristas - num_motoristas_ativos
@@ -163,7 +154,7 @@ def dashboard(request):
         'num_motoristas_desativados': num_motoristas_desativados,
         'num_multas_terminadas': num_multas_terminadas,
     }
-    return render(request, 'dashboard.html', context)'''
+    return render(request, 'dashboard.html', context)
 
 #Erros
 def handler404(request, exception):

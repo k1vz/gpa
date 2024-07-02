@@ -112,7 +112,7 @@
             if (response.ok) {
                 const result = await response.json();
                 alert('Cliente criado com sucesso!');
-                window.location.href = '{% url "clientes" %}'; // Redireciona para a lista de clientes após o sucesso
+                window.location.href = '{% url "clientes" %}';
             } else {
                 const errorData = await response.json();
                 console.error('Erro ao criar cliente:', errorData);

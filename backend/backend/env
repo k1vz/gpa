@@ -4,7 +4,7 @@ DB_NAME='pgdb'
 DB_USER='postgres'
 DB_PASSWORD='banana'
 DB_HOST='127.0.0.1'
-DB_PORT='5432'
+DB_PORT='5433'
 
 # 'ENGINE': 'django.db.backends.sqlite3',
 # 'NAME': BASE_DIR / 'db.sqlite3',

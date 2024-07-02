@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-
+<!-- Não está sendo usado -->
+<!-- Não está sendo usado -->
+<!-- Não está sendo usado -->
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
     <h1 style="text-align: left; margin-top: 20px;"> Frota: </h1>
@@ -22,9 +24,7 @@
         </thead>
         <tbody>
             <!-- Loop para exibir os motoristas -->
-            <!-- tem que arrumar essa parte conectando ao banco de dados -->
-            <!-- tem q fazer uma opção para buscar jornadas de uma pessoa em específico -->
-            <!--{% for motoristas in dados_jornadas %}
+            {% for caminhao in frota %}
             <tr>
                 <td>{{ frota.placa }}</td>
                 <td>{{ frota.motorista }}</td>
@@ -32,7 +32,7 @@
                 <td>{{ frota.ano }}</td>
                 <td>{{ frota.cor }}</td>
             </tr>
-            {% endfor %}-->
+            {% endfor %}
         </tbody>
     </table>
 </div>

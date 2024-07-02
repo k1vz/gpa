@@ -29,7 +29,7 @@
             if (response.ok) {
                 const result = await response.json();
                 alert('Motorista criado com sucesso!');
-                window.location.href = '{% url "lista_de_motoristas" %}'; // Redireciona para a lista de motoristas após o sucesso
+                window.location.href = '{% url "motoristas" %}';
             } else {
                 const errorData = await response.json();
                 console.error('Erro ao criar motorista:', errorData);

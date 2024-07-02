@@ -62,3 +62,9 @@ class ClientSerializer(serializers.ModelSerializer):
 
 		instance.save()
 		return instance
+
+class ClientListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = ['name', 'cnpj', 'client_type', 'active']
+		

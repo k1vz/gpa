@@ -1,8 +1,9 @@
+from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from .serializers import ClientSerializer
+from .serializers import ClientSerializer, ClientListSerializer
 from .models.client import Client
 
 class ClientCreateView(APIView):
@@ -24,32 +25,32 @@ class ClientDetailView(APIView):
 class ClientListView(APIView):
 	def get(self, req):
 		clients = Client.objects.all()
-		serializer = ClientSerializer(clients, many=True)
-
-		return Response(serializer.data)
+		serializer = ClientListSerializer(clients, many=True)
+		
+		return render(req, 'clientes.html', {'clients': serializer.data})
 
 class ClientUpdateView(APIView):
-    def put(self, req, pk):
-        try:
-            client = Client.objects.get(pk=pk)
-        except Client.DoesNotExist:
-            raise NotFound('Client not found!')
+	def put(self, req, pk):
+		try:
+			client = Client.objects.get(pk=pk)
+		except Client.DoesNotExist:
+			raise NotFound('Client not found!')
 
-        serializer = ClientSerializer(client, data=req.data)
-        
-        if serializer.is_valid():
-            serializer.save()
-            
-            return Response(serializer.data)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+		serializer = ClientSerializer(client, data=req.data)
+		
+		if serializer.is_valid():
+			serializer.save()
+			
+			return Response(serializer.data)
+		
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ClientDeleteView(APIView):
-    def delete(self, req, pk):
-        try:
-            client = Client.objects.get(pk=pk)
-        except Client.DoesNotExist:
-            raise NotFound('Client not found!')
+	def delete(self, req, pk):
+		try:
+			client = Client.objects.get(pk=pk)
+		except Client.DoesNotExist:
+			raise NotFound('Client not found!')
 
-        client.delete()
-        return Response({'message': 'Client deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+		client.delete()
+		return Response({'message': 'Client deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

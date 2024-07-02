@@ -21,12 +21,12 @@
         </thead>
         <tbody>
             <!-- Loop para exibir os clientes -->
-            {% for cliente in dados %}
+            {% for client in clients %}
             <tr>
-                <td>{{ cliente.nome }}</td>
-                <td>{{ cliente.cnpj }}</td>
-                <td>{{ cliente.tipo_empresa }}</td>
-                <td>{{ cliente.ativa }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.cnpj }}</td>
+                <td>{{ client.client_type }}</td>
+                <td>{{ client.active }}</td>
             </tr>
             {% endfor %}
         </tbody>

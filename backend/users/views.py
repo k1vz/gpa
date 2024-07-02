@@ -42,7 +42,7 @@ class UserLoginView(APIView):
 
 		token = jwt.encode(payload, 'secret', algorithm='HS256')
 
-		res = redirect('base')
+		res = redirect('home')
 		res.set_cookie(key='jwt', value=token, httponly=True)
 	
 		return res
@@ -94,10 +94,7 @@ class UserDeleteView(APIView):
 
 class UserLogoutView(APIView):
 	def get(self, req):
-		res = Response()
+		res = redirect('user-login')
 		res.delete_cookie('jwt')
-		res.data = {
-			'message': 'success'
-		}
 
 		return res

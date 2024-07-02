@@ -13,9 +13,9 @@ class AuthMiddleware(MiddlewareMixin):
 		token = req.COOKIES.get('jwt')
 
 		if not token:
-			return JsonResponse({'error': 'Não autorizado'}, status=401)
+			return JsonResponse({'error': 'Not authorized'}, status=401)
 
 		try:
 			jwt.decode(token, 'secret', algorithms=['HS256'])
 		except jwt.ExpiredSignatureError:
-			return JsonResponse({'error': 'Não autorizado'}, status=401)
+			return JsonResponse({'error': 'Not authorized'}, status=401)

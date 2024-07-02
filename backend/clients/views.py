@@ -33,7 +33,7 @@ class ClientUpdateView(APIView):
         try:
             client = Client.objects.get(pk=pk)
         except Client.DoesNotExist:
-            raise NotFound('Cliente não encontrado')
+            raise NotFound('Client not found!')
 
         serializer = ClientSerializer(client, data=req.data)
         
@@ -49,7 +49,7 @@ class ClientDeleteView(APIView):
         try:
             client = Client.objects.get(pk=pk)
         except Client.DoesNotExist:
-            raise NotFound('Cliente não encontrado')
+            raise NotFound('Client not found!')
 
         client.delete()
-        return Response({'message': 'Cliente deletado com sucesso'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Client deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

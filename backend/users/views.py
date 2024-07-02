@@ -29,7 +29,7 @@ class UserLoginView(APIView):
 		user = get_object_or_404(User, email=req.data['email'])
 
 		if not user.check_password(req.data['password']):
-			raise AuthenticationFailed('Senha incorreta')
+			raise AuthenticationFailed('Incorred password')
 
 		payload = {
 			'id': user.id,
@@ -67,7 +67,7 @@ class UserUpdateView(APIView):
 		new_password = data.get('new_password')
 
 		if current_password and not user.check_password(current_password):
-			raise ValidationError("A senha atual está incorreta")
+			raise ValidationError("Incorrect current password")
 
 		if email:
 			user.email = email
@@ -76,7 +76,7 @@ class UserUpdateView(APIView):
 			if current_password:
 				user.set_password(new_password)
 			else:
-				raise ValidationError("A senha atual é necessária para definir uma nova senha")
+				raise ValidationError("Current password is needed to create a new password")
 
 		user.save()
 		serializer = UserSerializer(user)

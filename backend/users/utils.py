@@ -7,12 +7,12 @@ def getPayload(req):
 	token = req.COOKIES.get('jwt')
 
 	if not token:
-		raise AuthenticationFailed('Não autorizado')
+		raise AuthenticationFailed('Not authorized')
 
 	try:
 		payload = jwt.decode(token, 'secret', algorithms=['HS256'])
 	except jwt.ExpiredSignatureError:
-		raise AuthenticationFailed('Não autorizado')
+		raise AuthenticationFailed('Not authorized')
 
 	return payload
 

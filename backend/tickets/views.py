@@ -25,7 +25,7 @@ class TicketDetailView(APIView):
 		try:
 			return Ticket.objects.get(pk=pk, active=True)
 		except Ticket.DoesNotExist:
-			raise NotFound('Multa não encontrada')
+			raise NotFound('Ticket not found')
 
 class TicketListView(APIView):
 	def get(self, req):
@@ -56,13 +56,13 @@ class TicketDeleteView(APIView):
 		ticket.active = False
 		ticket.save()
 
-		return Response({'message': 'Multa desativada com sucesso'}, status=status.HTTP_204_NO_CONTENT)
+		return Response({'message': 'Ticket deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
 	def get_object(self, pk):
 		try:
 			return Ticket.objects.get(pk=pk, active=True)
 		except Ticket.DoesNotExist:
-			raise NotFound('Multa não encontrada')
+			raise NotFound('Ticket not found')
 
 class TicketTypeCreateView(APIView):
 	def post(self, req):
@@ -83,7 +83,7 @@ class TicketTypeDetailView(APIView):
 		try:
 			return TicketType.objects.get(pk=pk)
 		except TicketType.DoesNotExist:
-			raise NotFound('Tipo de multa não encontrado')
+			raise NotFound('Ticket type not found')
 
 class TicketTypeListView(APIView):
 	def get(self, req):
@@ -105,17 +105,17 @@ class TicketTypeUpdateView(APIView):
 		try:
 			return TicketType.objects.get(pk=pk)
 		except TicketType.DoesNotExist:
-			raise NotFound('Tipo de multa não encontrado')
+			raise NotFound('Ticket type not found')
 
 class TicketTypeDeleteView(APIView):
 	def delete(self, req, pk):
 		ticket_type = self.get_object(pk)
 		ticket_type.delete()
 
-		return Response({'message': 'Tipo de multa desativada com sucesso'}, status=status.HTTP_204_NO_CONTENT)
+		return Response({'message': 'Ticket type deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
 	def get_object(self, pk):
 		try:
 			return TicketType.objects.get(pk=pk)
 		except TicketType.DoesNotExist:
-			raise NotFound('Tipo de multa não encontrado')
+			raise NotFound('Ticket type not found')

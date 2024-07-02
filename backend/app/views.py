@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Frota
-from .forms import ClienteForm, MotoristaForm, MultaForm, JornadaForm, FrotaForm
+from .forms import ClienteForm
 
 # --Base--
 def base_view(request):

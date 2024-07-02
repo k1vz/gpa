@@ -1,0 +1,94 @@
+<!-- cadastro_cliente.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Cadastro de Cliente</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <!-- Tópico: Informações Gerais -->
+    <div class="topic-container">
+        <h2>Informações Gerais</h2>
+        <hr>
+        {{ form.client_type.label_tag }}
+        {{ form.client_type }}
+        <br><br>
+        {% if form.client_type.value == 'PJ' %}
+            {{ form.cnpj.label_tag }}
+            {{ form.cnpj }}
+            <br><br>
+            {{ form.corporate_name.label_tag }}
+            {{ form.corporate_name }}
+            <br><br>
+            {{ form.trade_name.label_tag }}
+            {{ form.trade_name }}
+            <br><br>
+            {{ form.business_registration.label_tag }}
+            {{ form.business_registration }}
+            <br><br>
+        {% elif form.client_type.value == 'PF' %}
+            {{ form.cpf.label_tag }}
+            {{ form.cpf }}
+            <br><br>
+            {{ form.birth_date.label_tag }}
+            {{ form.birth_date }}
+            <br><br>
+        {% endif %}
+        {{ form.truck_count.label_tag }}
+        {{ form.truck_count }}
+        <br><br>
+    </div>
+    
+    <!-- Tópico: Contato -->
+    <div class="topic-container">
+        <h2>Contato</h2>
+        <hr>
+        {{ form.contact.name.label_tag }}
+        {{ form.contact.name }}
+        <br><br>
+        {{ form.contact.role.label_tag }}
+        {{ form.contact.role }}
+        <br><br>
+        {{ form.contact.email.label_tag }}
+        {{ form.contact.email }}
+        <br><br>
+        {{ form.contact.phone.label_tag }}
+        {{ form.contact.phone }}
+        <br><br>
+        {{ form.contact.phone_alt.label_tag }}
+        {{ form.contact.phone_alt }}
+        <br><br>
+    </div>
+    
+    <!-- Tópico: Endereço -->
+    <div class="topic-container">
+        <h2>Endereço</h2>
+        <hr>
+        {{ form.address.street.label_tag }}
+        {{ form.address.street }}
+        <br><br>
+        {{ form.address.number.label_tag }}
+        {{ form.address.number }}
+        <br><br>
+        {{ form.address.city.label_tag }}
+        {{ form.address.city }}
+        <br><br>
+        {{ form.address.state.label_tag }}
+        {{ form.address.state }}
+        <br><br>
+        {{ form.address.neighborhood.label_tag }}
+        {{ form.address.neighborhood }}
+        <br><br>
+        {{ form.address.complement.label_tag }}
+        {{ form.address.complement }}
+        <br><br>
+        {{ form.address.reference_point.label_tag }}
+        {{ form.address.reference_point }}
+        <br><br>
+    </div>
+    
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}

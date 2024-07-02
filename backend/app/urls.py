@@ -39,5 +39,4 @@ urlpatterns = [
     path('cadastrar-multa/', views.cadastrar_multa, name='cadastrar_multa'),
     path('jornadas/', views.jornadas, name='jornadas'),
     path('cadastrar-jornada/', views.cadastrar_jornada, name='cadastrar_jornada'),
-    
 ]

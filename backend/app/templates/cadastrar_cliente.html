@@ -11,23 +11,32 @@
     <div class="topic-container">
         <h2>Informações Gerais</h2>
         <hr>
-        {{ form.tipo_pessoa.label_tag }}
-        {{ form.tipo_pessoa }}
+        {{ form.client_type.label_tag }}
+        {{ form.client_type }}
         <br><br>
-        {{ form.cnpj.label_tag }}
-        {{ form.cnpj }}
-        <br><br>
-        {{ form.razao_social.label_tag }}
-        {{ form.razao_social }}
-        <br><br>
-        {{ form.nome_fantasia.label_tag }}
-        {{ form.nome_fantasia }}
-        <br><br>
-        {{ form.tipo_empresa.label_tag }}
-        {{ form.tipo_empresa }}
-        <br><br>
-        {{ form.quantidade_caminhoes.label_tag }}
-        {{ form.quantidade_caminhoes }}
+        {% if form.client_type.value == 'PJ' %}
+            {{ form.cnpj.label_tag }}
+            {{ form.cnpj }}
+            <br><br>
+            {{ form.corporate_name.label_tag }}
+            {{ form.corporate_name }}
+            <br><br>
+            {{ form.trade_name.label_tag }}
+            {{ form.trade_name }}
+            <br><br>
+            {{ form.business_registration.label_tag }}
+            {{ form.business_registration }}
+            <br><br>
+        {% elif form.client_type.value == 'PF' %}
+            {{ form.cpf.label_tag }}
+            {{ form.cpf }}
+            <br><br>
+            {{ form.birth_date.label_tag }}
+            {{ form.birth_date }}
+            <br><br>
+        {% endif %}
+        {{ form.truck_count.label_tag }}
+        {{ form.truck_count }}
         <br><br>
     </div>
     
@@ -35,20 +44,20 @@
     <div class="topic-container">
         <h2>Contato</h2>
         <hr>
-        {{ form.nome.label_tag }}
-        {{ form.nome }}
+        {{ form.contact.name.label_tag }}
+        {{ form.contact.name }}
         <br><br>
-        {{ form.cargo.label_tag }}
-        {{ form.cargo }}
+        {{ form.contact.role.label_tag }}
+        {{ form.contact.role }}
         <br><br>
-        {{ form.email.label_tag }}
-        {{ form.email }}
+        {{ form.contact.email.label_tag }}
+        {{ form.contact.email }}
         <br><br>
-        {{ form.telefone_primario.label_tag }}
-        {{ form.telefone_primario }}
+        {{ form.contact.phone.label_tag }}
+        {{ form.contact.phone }}
         <br><br>
-        {{ form.telefone_secundario.label_tag }}
-        {{ form.telefone_secundario }}
+        {{ form.contact.phone_alt.label_tag }}
+        {{ form.contact.phone_alt }}
         <br><br>
     </div>
     
@@ -56,26 +65,26 @@
     <div class="topic-container">
         <h2>Endereço</h2>
         <hr>
-        {{ form.logradouro.label_tag }}
-        {{ form.logradouro }}
+        {{ form.address.street.label_tag }}
+        {{ form.address.street }}
         <br><br>
-        {{ form.numero.label_tag }}
-        {{ form.numero }}
+        {{ form.address.number.label_tag }}
+        {{ form.address.number }}
         <br><br>
-        {{ form.municipio.label_tag }}
-        {{ form.municipio }}
+        {{ form.address.city.label_tag }}
+        {{ form.address.city }}
         <br><br>
-        {{ form.estado.label_tag }}
-        {{ form.estado }}
+        {{ form.address.state.label_tag }}
+        {{ form.address.state }}
         <br><br>
-        {{ form.bairro.label_tag }}
-        {{ form.bairro }}
+        {{ form.address.neighborhood.label_tag }}
+        {{ form.address.neighborhood }}
         <br><br>
-        {{ form.complemento.label_tag }}
-        {{ form.complemento }}
+        {{ form.address.complement.label_tag }}
+        {{ form.address.complement }}
         <br><br>
-        {{ form.ponto_referencia.label_tag }}
-        {{ form.ponto_referencia }}
+        {{ form.address.reference_point.label_tag }}
+        {{ form.address.reference_point }}
         <br><br>
     </div>
     

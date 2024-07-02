@@ -2,48 +2,64 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Cadastrar Jornada</h1>
-
-<form method="post">
+<h1 style="text-align: left; margin-top: 20px;">Cadastro de Jornada</h1>
+<form id="workPeriodForm">
     {% csrf_token %}
-
-     <!-- Seção: Veículo e Motorista -->
-    <!-- Arrumar para colocar o motorista e o veiculo para serem retirados do banco de dados -->
-     <div class="form-section">
+    
+    <!-- Seção: Veículo e Motorista -->
+    <div class="form-section">
         <h2>Veículo e Motorista</h2>
         <hr>
-        {{ form.veiculo.label_tag }}
-        {{ form.veiculo }}
+        {{ form.driver.label_tag }}
+        {{ form.driver }}
         <br><br>
-        {{ form.motorista.label_tag }}
-        {{ form.motorista }}
     </div>
     
     <!-- Seção: Horários -->
     <div class="form-section">
         <h2>Horários</h2>
         <hr>
-        {{ form.data.label_tag }}
-        {{ form.data }}
+        {{ form.periodStart.label_tag }}
+        {{ form.periodStart }}
         <br><br>
-        {{ form.inicio_jornada.label_tag }}
-        {{ form.inicio_jornada }}
-        <br><br>
-        {{ form.intervalo_refeicao.label_tag }}
-        {{ form.intervalo_refeicao }}
-        <br><br>
-        {{ form.fim_jornada.label_tag }}
-        {{ form.fim_jornada }}
-        <br><br>
-        {{ form.tempo_total_jornada.label_tag }}
-        {{ form.tempo_total_jornada }}
-        <br><br>
-        {{ form.tempo_total_parado.label_tag }}
-        {{ form.tempo_total_parado }}
+        {{ form.periodEnd.label_tag }}
+        {{ form.periodEnd }}
         <br><br>
     </div>
     
     <button type="submit">Salvar</button>
 </form>
 
+<script>
+    document.getElementById('workPeriodForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/backend/drivers/views/work_periods/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert('Jornada criada com sucesso!');
+                window.location.href = '{% url "lista_de_jornadas" %}'; // Redireciona para a lista de jornadas após o sucesso
+            } else {
+                const errorData = await response.json();
+                console.error('Erro ao criar jornada:', errorData);
+                alert('Erro ao criar jornada.');
+            }
+        } catch (error) {
+            console.error('Erro ao enviar requisição:', error);
+            alert('Erro ao enviar requisição.');
+        }
+    });
+</script>
 {% endblock %}

@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Cadastro de Cliente</h1>
 
-<form method="post">
+<form id="clientForm">
     {% csrf_token %}
     
     <!-- Tópico: Informações Gerais -->
@@ -14,7 +14,7 @@
         {{ form.client_type.label_tag }}
         {{ form.client_type }}
         <br><br>
-        {% if form.client_type.value == 'PJ' %}
+        <div id="pj_fields" style="display: none;">
             {{ form.cnpj.label_tag }}
             {{ form.cnpj }}
             <br><br>
@@ -27,14 +27,15 @@
             {{ form.business_registration.label_tag }}
             {{ form.business_registration }}
             <br><br>
-        {% elif form.client_type.value == 'PF' %}
+        </div>
+        <div id="pf_fields" style="display: none;">
             {{ form.cpf.label_tag }}
             {{ form.cpf }}
             <br><br>
             {{ form.birth_date.label_tag }}
             {{ form.birth_date }}
             <br><br>
-        {% endif %}
+        </div>
         {{ form.truck_count.label_tag }}
         {{ form.truck_count }}
         <br><br>
@@ -91,4 +92,42 @@
     <button type="submit">Salvar</button>
 </form>
 
+<script>
+    document.getElementById('clientForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('backend/clients/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert('Cliente criado com sucesso!');
+                window.location.href = '{% url "clientes" %}'; // Redireciona para a lista de clientes após o sucesso
+            } else {
+                const errorData = await response.json();
+                console.error('Erro ao criar cliente:', errorData);
+                alert('Erro ao criar cliente.');
+            }
+        } catch (error) {
+            console.error('Erro ao enviar requisição:', error);
+            alert('Erro ao enviar requisição.');
+        }
+    });
+
+    document.getElementById('id_client_type').addEventListener('change', function(event) {
+        const type = event.target.value;
+        document.getElementById('pj_fields').style.display = type === 'PJ' ? 'block' : 'none';
+        document.getElementById('pf_fields').style.display = type === 'PF' ? 'block' : 'none';
+    });
+</script>
 {% endblock %}

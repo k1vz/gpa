@@ -32,8 +32,8 @@ class DriverDetailView(generics.RetrieveAPIView):
 		work_periods_data = []
 
 		for work_period in work_periods:
-			dailies = Daily.objects.filter(work_period=work_period)
 			work_period_data = WorkPeriodSerializer(work_period).data
+			dailies = Daily.objects.filter(work_period=work_period)
 			work_period_data['dailies'] = DailySerializer(dailies, many=True).data
 			work_periods_data.append(work_period_data)
 

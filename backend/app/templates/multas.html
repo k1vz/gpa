@@ -1,33 +1,40 @@
+<!-- multas.html -->
 {% extends 'base.html' %}
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-    <h1 style="text-align: left; margin-top: 20px;">Lista de Multas </h1>
-    <a href="{% url 'cadastrar_multa' %}">
-        <button class="button">
-            Cadastrar Multas
-        </button>
+    <h1 style="text-align: left; margin-top: 20px;">Lista de Multas</h1>
+    <a href="{% url 'cadastrar_multa' %}" class="button">
+        <span>Cadastrar Multa</span>
     </a>
 </div>
+
 <div class="table-container">
     <table>
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>CNH</th>
-                <th>Estatus Judicial</th>
+                <th>Veículo</th>
+                <th>Motorista</th>
+                <th>Placa do Veículo</th>
+                <th>Vencimento</th>
+                <th>Data da Infração</th>
+                <th>Código Denatran</th>
+                <th>Código Atuador</th>
+                <th>Status Judicial</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Loop para exibir os motoristas -->
-            <!-- Não tem nada nesses dados, tem q ver se funciona -->
-            {% for motoristas in dados_motoristas %}
+            <!-- Loop para exibir as multas -->
+            {% for multa in multas %}
             <tr>
-                <td>{{ motorista.nome }}</td>
-                <td>{{ motorista.CPF }}</td>
-                <td>{{ motorista.CNH }}</td>
-                <td>{{ multa.ativa }}</td>
+                <td>{{ multa.motorista.nome }}</td>
+                <td>{{ multa.license_plate }}</td>
+                <td>{{ multa.due_date }}</td>
+                <td>{{ multa.infraction_datetime }}</td>
+                <td>{{ multa.infraction_location }}</td>
+                <td>{{ multa.denatran_agency_code }}</td>
+                <td>{{ multa.autuador_agency_code }}</td>
+                <td>{{ multa.judicial_status }}</td>
             </tr>
             {% endfor %}
         </tbody>

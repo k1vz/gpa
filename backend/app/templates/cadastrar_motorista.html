@@ -3,10 +3,42 @@
 
 {% block content %}
 <h1 style="text-align: left; margin-top: 20px;">Cadastro de Motorista</h1>
-<form method="post" enctype="multipart/form-data">
+<form id="driverForm">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Salvar</button>
 </form>
 
+<script>
+    document.getElementById('driverForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/backend/drivers/views/driver', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert('Motorista criado com sucesso!');
+                window.location.href = '{% url "lista_de_motoristas" %}'; // Redireciona para a lista de motoristas após o sucesso
+            } else {
+                const errorData = await response.json();
+                console.error('Erro ao criar motorista:', errorData);
+                alert('Erro ao criar motorista.');
+            }
+        } catch (error) {
+            console.error('Erro ao enviar requisição:', error);
+            alert('Erro ao enviar requisição.');
+        }
+    });
+</script>
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="Home">
+	<h1>Home</h1>
+	<hr>
+	<h2>Clientes</h2>
+	<p>Número de clientes: {{ clients }}</p>
+	<p>Número de clientes Ativos: {{ active_clients }}</p>
+	<hr>
+	<h2>Motoristas</h2>
+	<p>Número de total motoristas: {{ drivers }}</p>
+	<p>Número de total motoristas ativos: {{ active_drivers }}</p>
+	<hr>
+	<h2>Diárias</h2>
+	<p>Número de diárias cadastrados: {{ dailies }}</p>
+	<p>Número de diárias no mês atual: {{ last_month_dailies }}</p>
+	<hr>
+	<h2>Multas</h2>
+	<p>Número total de multas: {{ tickets }}</p>
+	<p>Número de multas no último mês: {{ last_month_tickets }}</p>
+	<p>Número de multas ativas: {{ active_tickets }}</p>
+</div>
+{% endblock %}

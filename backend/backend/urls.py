@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from .views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -8,4 +9,5 @@ urlpatterns = [
     path('tickets/', include('tickets.urls')),
     path('drivers/', include('drivers.urls')),
     path('', include('app.urls')),
+	path('home/', HomeView.as_view(), name='home')
 ]

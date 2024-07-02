@@ -25,7 +25,6 @@ handler500 = 'app.views.handler500'
 
 #Outros caminhos
 urlpatterns = [
-    path('', views.login_view, name='login'),
     path('base/', views.base_view, name='base'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('clientes/', views.clientes, name='clientes'),

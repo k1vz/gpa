@@ -15,8 +15,12 @@ class Ticket(models.Model):
 	active = models.BooleanField(default=True)
 	judicial_status = models.CharField(max_length=50)
 	license_plate = models.CharField(max_length=7)
+	
 	client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='tickets')
 	ticket_type = models.ForeignKey(TicketType, on_delete=models.CASCADE, related_name='tickets')
+
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return f"Ticket {self.id} - {self.ticket_type.description}"

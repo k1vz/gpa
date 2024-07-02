@@ -1,29 +1,7 @@
 from django.shortcuts import render, redirect
-from django.db.models import Count
-from datetime import datetime, timedelta
-from .models import Jornada, Motorista, Multa, Frota
+from .models import Frota
 from .forms import ClienteForm, MotoristaForm, MultaForm, JornadaForm, FrotaForm
 
-#--Login--
-def login_view(request):
-    # Lógica de autenticação
-    if request.method == 'POST':
-        # Aqui você pode verificar os dados de login, por exemplo:
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
-        
-        # Lógica de autenticação (geralmente você fará isso com o Django Auth)
-        # Por exemplo:
-        if email == 'usuario' and senha == 'senha':
-            # Autenticação bem-sucedida, redirecionar para a página 'base'
-            return redirect('base')
-        else:
-            # Se a autenticação falhar, pode adicionar uma mensagem de erro
-            # Ou qualquer outra lógica que desejar
-            return render(request, 'login.html', {'erro': True})
-    
-    # Se não for um POST, renderiza o formulário de login
-    return render(request, 'login.html')
 # --Base--
 def base_view(request):
     return render(request, 'base.html')

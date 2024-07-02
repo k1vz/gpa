@@ -1,6 +1,6 @@
 from django.forms import ValidationError
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -25,6 +25,9 @@ class UserRegisterView(APIView):
 		return Response(serializer.data)
 
 class UserLoginView(APIView):
+	def get(self, req):
+		return render(req, 'login.html')
+
 	def post(self, req):
 		user = get_object_or_404(User, email=req.data['email'])
 
@@ -39,12 +42,9 @@ class UserLoginView(APIView):
 
 		token = jwt.encode(payload, 'secret', algorithm='HS256')
 
-		res = Response()
+		res = redirect('base')
 		res.set_cookie(key='jwt', value=token, httponly=True)
-		res.data = {
-			'jwt': token
-		}
-
+	
 		return res
 
 class UserDetailView(APIView):

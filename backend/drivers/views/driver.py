@@ -1,20 +1,35 @@
+from django.views import View
 from rest_framework import status
 from rest_framework import generics
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
+from drivers.forms import DriverForm
 from drivers.models.daily import Daily
+from rest_framework.views import APIView
 from drivers.models.driver import Driver
-from drivers.serializers import DriverSerializer, WorkPeriodSerializer, DailySerializer
+from rest_framework.response import Response
+from django.shortcuts import redirect, render
+from rest_framework.exceptions import NotFound
 from drivers.models.work_period import WorkPeriod
+from drivers.serializers import DriverSerializer, WorkPeriodSerializer, DailySerializer
 
-class DriverCreateView(APIView):
+class DriverCreateView(View):
+	def get(self, req):
+		driver_form = DriverForm()
+
+		return render(req, 'cadastrar_motorista.html', {
+			'form': driver_form,
+		})
+	
 	def post(self, req):
-		serializer = DriverSerializer(data=req.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
+		driver_form = DriverForm(req.POST)
 
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		if driver_form.is_valid():
+			driver = driver_form.save(commit=False)
+
+			driver.save()
+		else:
+			print(driver_form.errors)
+
+		return redirect('driver-list')
 
 class DriverDetailView(generics.RetrieveAPIView):
 	def get(self, req, pk):
@@ -40,6 +55,13 @@ class DriverDetailView(generics.RetrieveAPIView):
 		return Response(response_data, status=status.HTTP_200_OK)
 
 class DriverListView(APIView):
+	def get(self, req):
+		drivers = Driver.objects.all()
+		serializer = DriverSerializer(drivers, many=True)
+
+		return render(req, 'motoristas.html', {'drivers': serializer.data})
+	
+class DriverListAPIView(APIView):
 	def get(self, req):
 		drivers = Driver.objects.all()
 		drivers_data = []

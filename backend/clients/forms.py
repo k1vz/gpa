@@ -43,8 +43,7 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = [
-            'client_type', 'name', 'active', 'defaulting', 'cpf', 'cnpj', 'birth_date',
-            'truck_count', 'business_registration', 'trade_name'
+            'client_type', 'name', 'active', 'defaulting', 'cpf', 'cnpj', 'birth_date', 'truck_count', 'business_registration', 'trade_name'
         ]
         labels = {
             'client_type': 'Tipo de Cliente',

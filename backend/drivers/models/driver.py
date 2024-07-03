@@ -2,11 +2,20 @@ from django.db import models
 from clients.models.client import Client
 
 class Driver(models.Model):
+	LICENSE_TYPE = [
+		('A', 'Moto'),
+		('B', 'Carro'),
+		('AB', 'Carro e Moto'),
+		('C', 'Caminhões pequenos'),
+		('D', 'Ôninus'),
+		('E', 'Reboque'),
+	]
+
 	active = models.BooleanField(default=True)
 	name = models.CharField(max_length=100)
 	cpf = models.CharField(max_length=14, unique=True)
 	birth_date = models.DateField()
-	license_type = models.CharField(max_length=2)
+	license_type = models.CharField(max_length=2, choices=LICENSE_TYPE)
 	cnh = models.CharField(max_length=11, unique=True)
 	demerit_points = models.IntegerField()
 

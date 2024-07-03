@@ -4,7 +4,7 @@
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
     <h1 style="text-align: left; margin-top: 20px;">Lista de Motoristas</h1>
-    <a href="{% url 'cadastrar_motorista' %}" class="button">
+    <a href="{% url 'driver-create' %}" class="button">
         <span>Cadastrar Motorista</span>
     </a>
 </div>
@@ -18,19 +18,18 @@
                 <th>Data de Nascimento</th>
                 <th>CNH</th>
                 <th>Tipo de Habilitação</th>
-                <!-- Adicione mais colunas conforme necessário -->
+                <th>Cliente Relacionado</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Loop para exibir os motoristas -->
-            {% for motorista in dados %}
+            {% for driver in drivers %}
             <tr>
-                <td>{{ motorista.nome }}</td>
-                <td>{{ motorista.cpf }}</td>
-                <td>{{ motorista.data_nascimento }}</td>
-                <td>{{ motorista.cnh }}</td>
-                <td>{{ motorista.tipo_habilitacao }}</td>
-                <!-- Adicione mais campos conforme necessário -->
+                <td>{{ driver.name }}</td>
+                <td>{{ driver.cpf }}</td>
+                <td>{{ driver.birth_date }}</td>
+                <td>{{ driver.cnh }}</td>
+                <td>{{ driver.license_type }}</td>
+                <td>{{ driver.client }}</td>
             </tr>
             {% endfor %}
         </tbody>

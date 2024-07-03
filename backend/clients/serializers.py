@@ -66,6 +66,14 @@ class ClientSerializer(serializers.ModelSerializer):
 class ClientListSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Client
-		# fields = '__all__'
-		fields = ['name', 'cnpj', 'client_type', 'active']
-		
+		fields = ['name', 'client_type', 'active']
+
+	def to_representation(self, instance):
+		representation = super().to_representation(instance)
+
+		if instance.client_type == 'PJ':
+			representation['cnpj'] = instance.cnpj
+		elif instance.client_type == 'PF':
+			representation['cpf'] = instance.cpf
+
+		return representation

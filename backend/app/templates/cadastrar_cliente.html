@@ -9,40 +9,40 @@
     <div class="topic-container">
         <h2>Informações Gerais</h2>
         <hr>
-        {{ form.client_type.label_tag }}
-        {{ form.client_type }}
+        {{ client_form.client_type.label_tag }}
+        {{ client_form.client_type }}
         <br><br>
-        {{ form.name.label_tag }}
-        {{ form.name }}
+        {{ client_form.name.label_tag }}
+        {{ client_form.name }}
         <br><br>
-        {{ form.active.label_tag }}
-        {{ form.active }}
+        {{ client_form.active.label_tag }}
+        {{ client_form.active }}
         <br><br>
-        {{ form.defaulting.label_tag }}
-        {{ form.defaulting }}
+        {{ client_form.defaulting.label_tag }}
+        {{ client_form.defaulting }}
         <br><br>
-        {{ form.truck_count.label_tag }}
-        {{ form.truck_count }}
+        {{ client_form.truck_count.label_tag }}
+        {{ client_form.truck_count }}
         <br><br>
 
         <div id="pj_fields" style="display: none;">
-            {{ form.cnpj.label_tag }}
-            {{ form.cnpj }}
+            {{ client_form.cnpj.label_tag }}
+            {{ client_form.cnpj }}
             <br><br>
-            {{ form.trade_name.label_tag }}
-            {{ form.trade_name }}
+            {{ client_form.trade_name.label_tag }}
+            {{ client_form.trade_name }}
             <br><br>
-            {{ form.business_registration.label_tag }}
-            {{ form.business_registration }}
+            {{ client_form.business_registration.label_tag }}
+            {{ client_form.business_registration }}
             <br><br>
         </div>
 
         <div id="pf_fields" style="display: none;">
-            {{ form.cpf.label_tag }}
-            {{ form.cpf }}
+            {{ client_form.cpf.label_tag }}
+            {{ client_form.cpf }}
             <br><br>
-            {{ form.birth_date.label_tag }}
-            {{ form.birth_date}}
+            {{ client_form.birth_date.label_tag }}
+            {{ client_form.birth_date}}
             <br><br>
         </div>
     </div>
@@ -50,60 +50,51 @@
     <div class="topic-container">
         <h2>Contato</h2>
         <hr>
-        {{ form.contact.management_form }}
-        {% for formset in form.contact %}
-            {{ formset.id }}
-            {{ formset.name.label_tag }}
-            {{ formset.name }}
-            <br><br>
-            {{ formset.role.label_tag }}
-            {{ formset.role }}
-            <br><br>
-            {{ formset.email.label_tag }}
-            {{ formset.email }}
-            <br><br>
-            {{ formset.phone.label_tag }}
-            {{ formset.phone }}
-            {{ formset.phone_alt.label_tag }}
-            {{ formset.phone_alt }}
-            <br><br>
+			{{ contact_form.id }}
+			{{ contact_form.role.label_tag }}
+			{{ contact_form.role }}
+			<br><br>
+			{{ contact_form.email.label_tag }}
+			{{ contact_form.email }}
+			<br><br>
+			{{ contact_form.phone.label_tag }}
+			{{ contact_form.phone }}
+			{{ contact_form.phone_alt.label_tag }}
+			{{ contact_form.phone_alt }}
+			<br><br>
 
-            {% for error in formset.errors %}
-                <div>{{ error }}</div>
-            {% endfor %}
-        {% endfor %}
+			{% for error in contact_form.errors %}
+				<div>{{ error }}</div>
+			{% endfor %}
     </div>
 
     <div class="topic-container">
         <h2>Endereço</h2>
         <hr>
-        {{ form.address.management_form }}
-        {% for formset in form.address %}
-            {{ formset.id }}
-            {{ formset.street.label_tag }}
-            {{ formset.street }}
-            {{ formset.number.label_tag }}
-            {{ formset.number }}
+            {{ address_form.id }}
+            {{ address_form.street.label_tag }}
+            {{ address_form.street }}
+            {{ address_form.number.label_tag }}
+            {{ address_form.number }}
             <br><br>
-            {{ formset.city.label_tag }}
-            {{ formset.city }}
-            {{ formset.state.label_tag }}
-            {{ formset.state }}
-			<br><br>
-            {{ formset.neighborhood.label_tag }}
-            {{ formset.neighborhood }}
+            {{ address_form.city.label_tag }}
+            {{ address_form.city }}
+            {{ address_form.state.label_tag }}
+            {{ address_form.state }}
             <br><br>
-            {{ formset.complement.label_tag }}
-            {{ formset.complement }}
+            {{ address_form.neighborhood.label_tag }}
+            {{ address_form.neighborhood }}
             <br><br>
-            {{ formset.reference_point.label_tag }}
-            {{ formset.reference_point }}
+            {{ address_form.complement.label_tag }}
+            {{ address_form.complement }}
+            <br><br>
+            {{ address_form.reference_point.label_tag }}
+            {{ address_form.reference_point }}
             <br><br>
 
-            {% for error in formset.errors %}
+            {% for error in address_form.errors %}
                 <div>{{ error }}</div>
             {% endfor %}
-        {% endfor %}
     </div>
 
     <button type="submit">Salvar</button>

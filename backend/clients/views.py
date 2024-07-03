@@ -1,46 +1,45 @@
-from .forms import ClientForm
 from django.views import View
 from .models.client import Client
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from rest_framework.exceptions import NotFound
+from .forms import ClientForm, AddressForm, ContactForm
 from .serializers import ClientSerializer, ClientListSerializer
 
 class ClientCreateView(View):
 	def get(self, req):
 		client_form = ClientForm()
+		address_form = AddressForm()
+		contact_form = ContactForm()
 
-		return render(req, 'cadastrar_cliente.html', {'form': client_form})
-
+		return render(req, 'cadastrar_cliente.html', {
+			'client_form': client_form,
+			'address_form': address_form,
+			'contact_form': contact_form
+		})
+	
 	def post(self, req):
-		form = ClientForm(req.POST)
-		if form.is_valid():
-			form.save()
-			client = form.save(commit=False)
+		client_form = ClientForm(req.POST)
+		address_form = AddressForm(req.POST)
+		contact_form = ContactForm(req.POST)
+
+		if client_form.is_valid() and address_form.is_valid() and contact_form.is_valid():
+			address = address_form.save()
+			contact = contact_form.save()
+
+			client = client_form.save(commit=False)
+			client.address = address
+			client.contact = contact
+
 			client.save()
-
-			serializer = ClientSerializer(data=req.data)
-
-			serializer.is_valid(raise_exception=True)
-			serializer.save()
-
-			return redirect('home')
 		else:
-			form = ClientForm()
+			print(client_form.errors)
+			print(address_form.errors)
+			print(contact_form.errors)
 
-		return render(req, 'cadastrar_cliente.html', {'form': form})
-
-
-# class ClientCreateView(APIView):
-# 	def post(self, req):
-# 		serializer = ClientSerializer(data=req.data)
-
-# 		serializer.is_valid(raise_exception=True)
-# 		serializer.save()
-
-# 		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return redirect('home')
 	
 class ClientDetailView(APIView):
 	def get(self, req, pk):

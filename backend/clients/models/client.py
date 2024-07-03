@@ -1,6 +1,6 @@
 from django.db import models
-# from .address import Address
-# from .contact import Contact
+from .address import Address
+from .contact import Contact
 
 class Client(models.Model):
 	CLIENT_TYPE = [
@@ -24,8 +24,8 @@ class Client(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
-	# address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='clients')
-	# contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='clients')
+	address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='clients')
+	contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='clients')
 
 	def __str__(self):
 		return self.name

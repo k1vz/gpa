@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import MotoristaForm
+from .forms import JornadaForm, MotoristaForm, MultaForm
 from .models import Frota
 
 # --Motoristas--

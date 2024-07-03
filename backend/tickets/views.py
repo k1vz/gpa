@@ -1,19 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.views import View
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from .forms import TicketForm
 from .serializers import TicketSerializer, TicketTypeSerializer
 from .models.ticket_type import TicketType
 from .models.ticket import Ticket
 
-class TicketCreateView(APIView):
+class TicketCreateView(View):
+	def get(self, req):
+		ticket_form = TicketForm()
+
+		return render(req, 'cadastrar_multa.html', {
+			'form': ticket_form,
+		})
+	
 	def post(self, req):
-		serializer = TicketSerializer(data=req.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
+		ticket_form = TicketForm(req.POST)
+
+		if ticket_form.is_valid():
+			ticket = ticket_form.save(commit=False)
+
+			ticket.save()
+		else:
+			print(ticket_form.errors)
+
+		return redirect('ticket-list')
+
+# class TicketCreateAPIView(APIView):
+# 	def post(self, req):
+# 		serializer = TicketSerializer(data=req.data)
+# 		serializer.is_valid(raise_exception=True)
+# 		serializer.save()
 		
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+# 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class TicketDetailView(APIView):
 	def get(self, req, pk):

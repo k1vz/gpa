@@ -1,6 +1,5 @@
 from django import forms
 from .models.driver import Driver
-from clients.models.client import Client
 
 class DriverForm(forms.ModelForm):
     birth_date = forms.DateField(

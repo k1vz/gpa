@@ -1,4 +1,3 @@
-<!-- cadastrar_multa.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -7,67 +6,61 @@
 <form method="post">
     {% csrf_token %}
     
-    <!-- Seção: Multa Tipificada -->
     <div class="form-section">
         <h2>Multa Tipificada</h2>
         <hr>
-        {{ form.multa_tipificada.label_tag }}
-        {{ form.multa_tipificada }}
+        {{ form.ticket_type.label_tag }}
+        {{ form.ticket_type }}
     </div>
     
-    <!-- Seção: Envolvidos -->
-    <!-- Arrumar e fazer o motorista e o veiculo serem retirados do banco de dados -->
     <div class="form-section">
         <h2>Envolvidos</h2>
         <hr>
-        {{ form.cliente.label_tag }}
-        {{ form.cliente }}
+        {{ form.client.label_tag }}
+        {{ form.client }}
         <br><br>
-        {{ form.motorista.label_tag }}
-        {{ form.motorista }}
-        <br><br>
-        {{ form.placa_veiculo.label_tag }}
-        {{ form.placa_veiculo }}
     </div>
     
-    <!-- Seção: Datas e Localização -->
     <div class="form-section">
         <h2>Datas e Localização</h2>
         <hr>
-        {{ form.vencimento.label_tag }}
-        {{ form.vencimento }}
+        {{ form.due_date.label_tag }}
+        {{ form.due_date }}
         <br><br>
-        {{ form.data_infracao.label_tag }}
-        {{ form.data_infracao }}
+        {{ form.infraction_datetime.label_tag }}
+        {{ form.infraction_datetime }}
         <br><br>
-        {{ form.uf.label_tag }}
-        {{ form.uf }}
+        {{ form.state.label_tag }}
+        {{ form.state }}
         <br><br>
-        {{ form.municipio.label_tag }}
-        {{ form.municipio }}
+        {{ form.city.label_tag }}
+        {{ form.city }}
         <br><br>
-        {{ form.logradouro.label_tag }}
-        {{ form.logradouro }}
+        {{ form.infraction_location.label_tag }}
+        {{ form.infraction_location }}
+        <br><br>
     </div>
     
-    <!-- Seção: Detalhes da Infração -->
     <div class="form-section">
         <h2>Detalhes da Infração</h2>
         <hr>
-        {{ form.codigo_denatran.label_tag }}
-        {{ form.codigo_denatran }}
+        {{ form.ait.label_tag }}
+        {{ form.ait }}
         <br><br>
-        {{ form.codigo_atuador.label_tag }}
-        {{ form.codigo_atuador }}
+        {{ form.denatran_agency_code.label_tag }}
+        {{ form.denatran_agency_code }}
         <br><br>
-        {{ form.estado_judicial.label_tag }}
-        {{ form.estado_judicial }}
+        {{ form.autuador_agency_code.label_tag }}
+        {{ form.autuador_agency_code }}
         <br><br>
-        {{ form.numero_auto_infracoes.label_tag }}
-        {{ form.numero_auto_infracoes }}
+        {{ form.judicial_status.label_tag }}
+        {{ form.judicial_status }}
         <br><br>
-        {{ form.observacoes.label_tag }}
-        {{ form.observacoes }}
+        {{ form.license_plate.label_tag }}
+        {{ form.license_plate }}
+        <br><br>
+        {{ form.observation.label_tag }}
+        {{ form.observation }}
         <br><br>
     </div>
     

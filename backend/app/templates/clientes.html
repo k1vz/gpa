@@ -2,34 +2,41 @@
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-    <h1 style="text-align: left; margin-top: 20px;">Lista de Clientes</h1>
-    <a href="{% url 'client-create' %}">
-        <button class="button">
-            Cadastrar Cliente
-        </button>
-    </a>
+	<h1 style="text-align: left; margin-top: 20px;">Lista de Clientes</h1>
+
+	<a href="{% url 'client-create' %}">
+		<button class="button">
+			Cadastrar Cliente
+		</button>
+	</a>
 </div>
 <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>CNPJ</th>
-                <th>Tipo da Empresa</th>
-                <th>Ativa</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loop para exibir os clientes -->
-            {% for client in clients %}
-            <tr>
-                <td>{{ client.name }}</td>
-                <td>{{ client.cnpj }}</td>
-                <td>{{ client.client_type }}</td>
-                <td>{{ client.active }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>CPF/CNPJ</th>
+				<th>Tipo da Empresa</th>
+				<th>Ativo</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			{% for client in clients %}
+			<tr>
+				<td>{{ client.name }}</td>
+				<td>
+					{% if client.client_type == 'PF' %}
+						{{ client.cpf }}
+					{% elif client.client_type == 'PJ' %}
+						{{ client.cnpj }}
+					{% endif %}
+				</td>
+				<td>{{ client.client_type }}</td>
+				<td>{{ client.active }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 {% endblock %}

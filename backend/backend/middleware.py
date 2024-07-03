@@ -1,6 +1,5 @@
-from django.http import JsonResponse
-from django.shortcuts import redirect
 import jwt
+from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 
 class AuthMiddleware(MiddlewareMixin):
@@ -13,7 +12,6 @@ class AuthMiddleware(MiddlewareMixin):
 		token = req.COOKIES.get('jwt')
 
 		if not token:
-			print('i')
 			return redirect('user-login')
 
 		try:

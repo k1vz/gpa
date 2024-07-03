@@ -1,38 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Frota
-from clients.forms import ClientForm
 
-# --Base--
-def base_view(request):
-    return render(request, 'base.html')
-# --Clientes--
-def clientes(request):
-    return render(request, 'clientes.html')
-# clients/views.py
-
-def cadastrar_cliente(request):
-    print('foo')
-    if request.method == 'POST':
-        form = ClientForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = ClientForm()
-
-    return render(request, 'cadastrar_cliente.html', {'form': form})
-
-
-
-def lista_clientes(request):
-    # Dados fictícios dos clientes para testes
-    clientes = [
-        {'nome': 'Cliente A', 'cnpj': '123456789', 'tipo_empresa': 'Tipo 1', 'ativa': True},
-        {'nome': 'Cliente B', 'cnpj': '987654321', 'tipo_empresa': 'Tipo 2', 'ativa': False},
-        # Adicione mais clientes fictícios conforme necessário
-    ]
-    # Renderize o template com os dados dos clientes
-    return render(request, 'clientes.html', {'clientes': clientes})
 # --Motoristas--
 def motoristas(request):
     return render(request, 'motoristas.html')

@@ -50,6 +50,15 @@ body, html {
     border-radius: 4px;
 }
 
+.register {
+    background-color: #b3b3b3; /* Cor de fundo do botão */
+}
+
+.register:hover {
+    background-color: #888888; /* Cor de fundo do botão ao passar o mouse */
+}
+
+
 button {
     background-color: #286ff3; /* Cor de fundo do botão */
     color: white; /* Cor do texto do botão */

@@ -1,11 +1,14 @@
 from django.forms import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views import View
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from .forms import UserLoginForm, UserRegistrationForm
 from .serializers import UserSerializer
 from .utils import getUser, getPayload
+from django.contrib import messages
 from .models import User
 import jwt, datetime
 
@@ -16,22 +19,50 @@ class UserListView(APIView):
 
 		return Response(serializer.data)
 
-class UserRegisterView(APIView):
-	def post(self, req):
-		serializer = UserSerializer(data=req.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
+class UserRegisterView(View):
+	def get(self, req):
+		user_form = UserRegistrationForm()
 
-		return Response(serializer.data)
+		return render(req, 'registrar_usuario.html', {
+			'form': user_form,
+		})
+	
+	def post(self, req):
+		user_form = UserRegistrationForm(req.POST)
+
+		if user_form.is_valid():
+			
+			user = user_form.save(commit=False)
+			messages.success(req, 'Registro realizado com sucesso. Você já pode fazer login.')
+
+			user.save()
+		else:
+			messages.error(req, 'Erro no formulário. Verifique os campos.')
+			print(user_form.errors)
+			return redirect('user-register')
+
+		return redirect('home')
+
+# class UserRegisterAPIView(APIView):
+# 	def post(self, req):
+# 		serializer = UserSerializer(data=req.data)
+# 		serializer.is_valid(raise_exception=True)
+# 		serializer.save()
+
+# 		return Response(serializer.data)
 
 class UserLoginView(APIView):
 	def get(self, req):
-		return render(req, 'login.html')
+		form = UserLoginForm()
+		
+		return render(req, 'login.html', {'form': form})
 
 	def post(self, req):
+		form = UserLoginForm(req.POST)
 		user = get_object_or_404(User, email=req.data['email'])
 
 		if not user.check_password(req.data['password']):
+			messages.error(req, 'Senha incorreta.')
 			return JsonResponse({'error': 'Not authorized'}, status=401)
 
 		payload = {

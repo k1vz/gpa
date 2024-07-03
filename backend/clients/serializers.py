@@ -64,7 +64,8 @@ class ClientSerializer(serializers.ModelSerializer):
 		return instance
 
 class ClientListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Client
-        fields = ['name', 'cnpj', 'client_type', 'active']
+	class Meta:
+		model = Client
+		# fields = '__all__'
+		fields = ['name', 'cnpj', 'client_type', 'active']
 		

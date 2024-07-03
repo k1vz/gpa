@@ -1,30 +1,31 @@
 from django.db import models
-from .address import Address
-from .contact import Contact
+# from .address import Address
+# from .contact import Contact
 
 class Client(models.Model):
 	CLIENT_TYPE = [
-		('PJ', 'Legal Entity'),
-		('PF', 'Natural Person'),
+		('PF', 'Pessoa Física'),
+		('PJ', 'Pessoa Jurídica')
 	]
 
 	active = models.BooleanField(default=True)
 	name = models.CharField(max_length=255)
 	defaulting = models.BooleanField(default=False) # Inadimplente
 	client_type = models.CharField(max_length=2, choices=CLIENT_TYPE)
-	cpf = models.CharField(max_length=14, unique=True, blank=True, null=True)
-	cnpj = models.CharField(max_length=18, unique=True, blank=True, null=True)
-	birth_date = models.DateField(blank=True, null=True)
 	truck_count = models.IntegerField()
+	
+	cpf = models.CharField(max_length=14, unique=True, blank=True, null=True)
+	birth_date = models.DateField(blank=True, null=True)
+
+	cnpj = models.CharField(max_length=18, unique=True, blank=True, null=True)
 	business_registration = models.CharField(max_length=9, blank=True, null=True) # Inscrição estadual
-	corporate_name = models.CharField(max_length=100, blank=True, null=True) # Razão social
 	trade_name = models.CharField(max_length=100, blank=True, null=True) # Nome fantasia
 
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
-	address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='clients')
-	contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='clients')
+	# address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='clients')
+	# contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='clients')
 
 	def __str__(self):
 		return self.name

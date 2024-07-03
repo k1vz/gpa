@@ -12,6 +12,9 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['*']
 
+DATE_FORMAT = 'd/m/Y'
+DATETIME_FORMAT = 'd/m/Y H:i:s'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

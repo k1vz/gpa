@@ -1,4 +1,3 @@
-<!-- cadastro_cliente.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -6,80 +5,128 @@
 
 <form method="post">
     {% csrf_token %}
-    
-    <!-- Tópico: Informações Gerais -->
+
     <div class="topic-container">
         <h2>Informações Gerais</h2>
         <hr>
-        {{ form.tipo_pessoa.label_tag }}
-        {{ form.tipo_pessoa }}
+        {{ form.client_type.label_tag }}
+        {{ form.client_type }}
         <br><br>
-        {{ form.cnpj.label_tag }}
-        {{ form.cnpj }}
+        {{ form.name.label_tag }}
+        {{ form.name }}
         <br><br>
-        {{ form.razao_social.label_tag }}
-        {{ form.razao_social }}
+        {{ form.active.label_tag }}
+        {{ form.active }}
         <br><br>
-        {{ form.nome_fantasia.label_tag }}
-        {{ form.nome_fantasia }}
+        {{ form.defaulting.label_tag }}
+        {{ form.defaulting }}
         <br><br>
-        {{ form.tipo_empresa.label_tag }}
-        {{ form.tipo_empresa }}
+        {{ form.truck_count.label_tag }}
+        {{ form.truck_count }}
         <br><br>
-        {{ form.quantidade_caminhoes.label_tag }}
-        {{ form.quantidade_caminhoes }}
-        <br><br>
+
+        <div id="pj_fields" style="display: none;">
+            {{ form.cnpj.label_tag }}
+            {{ form.cnpj }}
+            <br><br>
+            {{ form.trade_name.label_tag }}
+            {{ form.trade_name }}
+            <br><br>
+            {{ form.business_registration.label_tag }}
+            {{ form.business_registration }}
+            <br><br>
+        </div>
+
+        <div id="pf_fields" style="display: none;">
+            {{ form.cpf.label_tag }}
+            {{ form.cpf }}
+            <br><br>
+            {{ form.birth_date.label_tag }}
+            {{ form.birth_date}}
+            <br><br>
+        </div>
     </div>
-    
-    <!-- Tópico: Contato -->
+
     <div class="topic-container">
         <h2>Contato</h2>
         <hr>
-        {{ form.nome.label_tag }}
-        {{ form.nome }}
-        <br><br>
-        {{ form.cargo.label_tag }}
-        {{ form.cargo }}
-        <br><br>
-        {{ form.email.label_tag }}
-        {{ form.email }}
-        <br><br>
-        {{ form.telefone_primario.label_tag }}
-        {{ form.telefone_primario }}
-        <br><br>
-        {{ form.telefone_secundario.label_tag }}
-        {{ form.telefone_secundario }}
-        <br><br>
+        {{ form.contact.management_form }}
+        {% for formset in form.contact %}
+            {{ formset.id }}
+            {{ formset.name.label_tag }}
+            {{ formset.name }}
+            <br><br>
+            {{ formset.role.label_tag }}
+            {{ formset.role }}
+            <br><br>
+            {{ formset.email.label_tag }}
+            {{ formset.email }}
+            <br><br>
+            {{ formset.phone.label_tag }}
+            {{ formset.phone }}
+            {{ formset.phone_alt.label_tag }}
+            {{ formset.phone_alt }}
+            <br><br>
+
+            {% for error in formset.errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
     </div>
-    
-    <!-- Tópico: Endereço -->
+
     <div class="topic-container">
         <h2>Endereço</h2>
         <hr>
-        {{ form.logradouro.label_tag }}
-        {{ form.logradouro }}
-        <br><br>
-        {{ form.numero.label_tag }}
-        {{ form.numero }}
-        <br><br>
-        {{ form.municipio.label_tag }}
-        {{ form.municipio }}
-        <br><br>
-        {{ form.estado.label_tag }}
-        {{ form.estado }}
-        <br><br>
-        {{ form.bairro.label_tag }}
-        {{ form.bairro }}
-        <br><br>
-        {{ form.complemento.label_tag }}
-        {{ form.complemento }}
-        <br><br>
-        {{ form.ponto_referencia.label_tag }}
-        {{ form.ponto_referencia }}
-        <br><br>
+        {{ form.address.management_form }}
+        {% for formset in form.address %}
+            {{ formset.id }}
+            {{ formset.street.label_tag }}
+            {{ formset.street }}
+            {{ formset.number.label_tag }}
+            {{ formset.number }}
+            <br><br>
+            {{ formset.city.label_tag }}
+            {{ formset.city }}
+            {{ formset.state.label_tag }}
+            {{ formset.state }}
+			<br><br>
+            {{ formset.neighborhood.label_tag }}
+            {{ formset.neighborhood }}
+            <br><br>
+            {{ formset.complement.label_tag }}
+            {{ formset.complement }}
+            <br><br>
+            {{ formset.reference_point.label_tag }}
+            {{ formset.reference_point }}
+            <br><br>
+
+            {% for error in formset.errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
     </div>
-    
+
     <button type="submit">Salvar</button>
 </form>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var clientTypeField = document.querySelector('#id_client_type');
+        var pjFields = document.querySelector('#pj_fields');
+        var pfFields = document.querySelector('#pf_fields');
+
+        function toggleFields() {
+            if (clientTypeField.value === 'PJ') {
+                pjFields.style.display = 'block';
+                pfFields.style.display = 'none';
+            } else if (clientTypeField.value === 'PF') {
+                pjFields.style.display = 'none';
+                pfFields.style.display = 'block';
+            }
+        }
+
+        clientTypeField.addEventListener('change', toggleFields);
+        toggleFields();
+    });
+</script>
 {% endblock %}

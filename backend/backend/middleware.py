@@ -8,7 +8,6 @@ class AuthMiddleware(MiddlewareMixin):
 		excluded_paths = ['/users/register/', '/users/login/', '/users/logout/']
 
 		if req.path in excluded_paths:
-			print('a')
 			return
 
 		token = req.COOKIES.get('jwt')

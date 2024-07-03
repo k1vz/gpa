@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Frota
-from .forms import ClienteForm
+from clients.forms import ClientForm
 
 # --Base--
 def base_view(request):
@@ -8,16 +8,22 @@ def base_view(request):
 # --Clientes--
 def clientes(request):
     return render(request, 'clientes.html')
+# clients/views.py
+
 def cadastrar_cliente(request):
+    print('foo')
     if request.method == 'POST':
-        form = ClienteForm(request.POST)
+        form = ClientForm(request.POST)
         if form.is_valid():
-            form.save()  # Salva os dados no banco de dados
-            return redirect('clientes')  # Redireciona para a página de listagem de clientes
+            form.save()
+            return redirect('home')
     else:
-        form = ClienteForm()
-    
+        form = ClientForm()
+
     return render(request, 'cadastrar_cliente.html', {'form': form})
+
+
+
 def lista_clientes(request):
     # Dados fictícios dos clientes para testes
     clientes = [

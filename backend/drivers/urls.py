@@ -7,6 +7,8 @@ from .views.driver import (
 	DriverDeleteView
 )
 from .views.work_period import (
+	WorkPeriodListAPIView,
+	WorkPeriodCreateAPIView,
 	WorkPeriodCreateView,
 	WorkPeriodDetailView,
 	WorkPeriodListView,
@@ -30,7 +32,9 @@ urlpatterns = [
 	path('delete/<int:pk>/', DriverDeleteView.as_view(), name='driver-delete'),
 
 	path('work_periods/', WorkPeriodListView.as_view(), name='work-period-list'),
+	path('work_periods/api/', WorkPeriodListAPIView.as_view()),
 	path('work_periods/create/', WorkPeriodCreateView.as_view(), name='work-period-create'),
+	path('work_periods/create/api/', WorkPeriodCreateAPIView.as_view()),
 	path('work_periods/detail/<int:pk>/', WorkPeriodDetailView.as_view(), name='work-period-detail'),
 	path('work_periods/update/<int:pk>/', WorkPeriodUpdateView.as_view(), name='work-period-update'),
 	path('work_periods/delete/<int:pk>/', WorkPeriodDeleteView.as_view(), name='work-period-delete'),

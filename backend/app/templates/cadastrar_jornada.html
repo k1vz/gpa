@@ -1,4 +1,3 @@
-<!-- cadastrar_jornada.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -6,41 +5,19 @@
 
 <form method="post">
     {% csrf_token %}
-
-     <!-- Seção: Veículo e Motorista -->
-    <!-- Arrumar para colocar o motorista e o veiculo para serem retirados do banco de dados -->
-     <div class="form-section">
-        <h2>Veículo e Motorista</h2>
-        <hr>
-        {{ form.veiculo.label_tag }}
-        {{ form.veiculo }}
-        <br><br>
-        {{ form.motorista.label_tag }}
-        {{ form.motorista }}
-    </div>
     
-    <!-- Seção: Horários -->
     <div class="form-section">
-        <h2>Horários</h2>
-        <hr>
-        {{ form.data.label_tag }}
-        {{ form.data }}
+        {{ form.responsibleSignature.label_tag }}
+        {{ form.responsibleSignature }}
         <br><br>
-        {{ form.inicio_jornada.label_tag }}
-        {{ form.inicio_jornada }}
+        {{ form.periodStart.label_tag }}
+        {{ form.periodStart }}
         <br><br>
-        {{ form.intervalo_refeicao.label_tag }}
-        {{ form.intervalo_refeicao }}
+        {{ form.periodEnd.label_tag }}
+        {{ form.periodEnd }}
         <br><br>
-        {{ form.fim_jornada.label_tag }}
-        {{ form.fim_jornada }}
-        <br><br>
-        {{ form.tempo_total_jornada.label_tag }}
-        {{ form.tempo_total_jornada }}
-        <br><br>
-        {{ form.tempo_total_parado.label_tag }}
-        {{ form.tempo_total_parado }}
-        <br><br>
+        {{ form.driver.label_tag }}
+        {{ form.driver }}
     </div>
     
     <button type="submit">Salvar</button>

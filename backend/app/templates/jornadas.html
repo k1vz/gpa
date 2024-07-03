@@ -2,10 +2,10 @@
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-    <h1 style="text-align: left; margin-top: 20px;">Edição de de Jornadas </h1>
-    <a href="{% url 'cadastrar_jornada' %}">
+    <h1 style="text-align: left; margin-top: 20px;">Edição de Jornadas</h1>
+    <a href="{% url 'work-period-create' %}">
         <button class="button">
-            Cadastrar Cliente
+            Cadastrar Jornada
         </button>
     </a>
 </div>
@@ -13,29 +13,21 @@
     <table>
         <thead>
             <tr>
-                <th>Data</th>
-                <th>Inicio</th>
-                <th>Intervalo da Manhã</th>
-                <th>Intervalo do Almoço</th>
-                <th>Intervalo da Tarde</th>
-                <th>Fim da Jornada</th>
-                <th>Tempo total de jornada</th>
-                <th>Tempo total de descanço</th>
+                <th>Motorista</th>
+                <th>Data de Criação</th>
+                <th>Início do Período</th>
+                <th>Fim do Período</th>
+                <th>Assinatura Responsável</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Loop para exibir os motoristas -->
-            <!-- Não tem nada nesses dados, tem q ver se funciona -->
-            {% for motoristas in dados_jornadas %}
+            {% for work_period in work_periods %}
             <tr>
-                <td>{{ jornada.data }}</td>
-                <td>{{ jornada.inicio }}</td>
-                <td>{{ jornada.intervaloManhã }}</td>
-                <td>{{ jornada.intervaloAlmoco }}</td>
-                <td>{{ jornada.intervaloTarde }}</td>
-                <td>{{ jornada.final }}</td>
-                <td>{{ jornada.totalJornada }}</td>
-                <td>{{ jornada.totalDescanco }}</td>
+                <td>{{ work_period.driver.name }}</td>
+                <td>{{ work_period.created_at }}</td>
+                <td>{{ work_period.periodStart }}</td>
+                <td>{{ work_period.periodEnd }}</td>
+                <td>{{ work_period.responsibleSignature }}</td>
             </tr>
             {% endfor %}
         </tbody>

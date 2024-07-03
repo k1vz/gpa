@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -27,12 +28,20 @@ class TicketDetailView(APIView):
 		except Ticket.DoesNotExist:
 			raise NotFound('Ticket not found')
 
+
 class TicketListView(APIView):
 	def get(self, req):
-		tickets = Ticket.objects.filter(active=True)
+		tickets = Ticket.objects.all()
 		serializer = TicketSerializer(tickets, many=True)
 
-		return Response(serializer.data)
+		return render(req, 'multas.html', {'tickets': serializer.data})
+
+# class TicketListAPIView(APIView):
+# 	def get(self, req):
+# 		tickets = Ticket.objects.filter(active=True)
+# 		serializer = TicketSerializer(tickets, many=True)
+
+# 		return Response(serializer.data)
 
 class TicketUpdateView(APIView):
 	def put(self, req, pk):

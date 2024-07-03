@@ -1,6 +1,9 @@
 from django.urls import path
 from .views import UserDeleteView, UserDetailView, UserListView, UserLoginView, UserLogoutView, UserRegisterView, UserUpdateView
 
+handler404 = 'app.views.handler404'
+handler500 = 'app.views.handler500'
+
 urlpatterns = [
 	path('', UserListView.as_view(), name='user-list'),
     path('register/', UserRegisterView.as_view(), name='user-register'),

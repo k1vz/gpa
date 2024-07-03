@@ -8,6 +8,5 @@ urlpatterns = [
     path('clients/', include('clients.urls')),
     path('tickets/', include('tickets.urls')),
     path('drivers/', include('drivers.urls')),
-    path('', include('app.urls')),
-	path('home/', HomeView.as_view(), name='home')
+	path('', HomeView.as_view(), name='home')
 ]

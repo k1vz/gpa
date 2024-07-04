@@ -50,11 +50,11 @@ body, html {
     border-radius: 4px;
 }
 
-.register {
+.alt {
     background-color: #b3b3b3; /* Cor de fundo do botão */
 }
 
-.register:hover {
+.alt:hover {
     background-color: #888888; /* Cor de fundo do botão ao passar o mouse */
 }
 
@@ -71,4 +71,8 @@ button {
 
 button:hover {
     background-color: #1056d6; /* Cor de fundo do botão ao passar o mouse */
+}
+
+.error-messages {
+	color: #a10000;
 }

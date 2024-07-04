@@ -30,7 +30,6 @@ class UserRegisterView(View):
 	
 	def post(self, req):
 		user_form = UserRegistrationForm(req.POST)
-
 		if user_form.is_valid():
 			
 			user = user_form.save(commit=False)
@@ -39,7 +38,7 @@ class UserRegisterView(View):
 			user.save()
 		else:
 			messages.error(req, 'Erro no formulário. Verifique os campos.')
-			print(user_form.errors)
+			print(user_form.errors.as_data())
 			return redirect('user-register')
 
 		return redirect('home')

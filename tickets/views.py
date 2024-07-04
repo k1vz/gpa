@@ -1,13 +1,13 @@
-from django.shortcuts import redirect, render
 from django.views import View
 from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
-from .forms import TicketForm
-from .serializers import TicketSerializer, TicketTypeSerializer
-from .models.ticket_type import TicketType
 from .models.ticket import Ticket
+from rest_framework.views import APIView
+from .models.ticket_type import TicketType
+from rest_framework.response import Response
+from .forms import TicketForm, TicketTypeForm
+from django.shortcuts import redirect, render
+from rest_framework.exceptions import NotFound
+from .serializers import TicketSerializer, TicketTypeSerializer
 
 class TicketCreateView(View):
 	def get(self, req):
@@ -94,14 +94,36 @@ class TicketDeleteView(APIView):
 			return Ticket.objects.get(pk=pk, active=True)
 		except Ticket.DoesNotExist:
 			raise NotFound('Ticket not found')
+		
+		
 
-class TicketTypeCreateView(APIView):
+class TicketTypeCreateView(View):
+	def get(self, req):
+		ticket_type_form = TicketTypeForm()
+
+		return render(req, 'cadastrar_multa_tipificada.html', {
+			'form': ticket_type_form,
+		})
+	
 	def post(self, req):
-		serializer = TicketTypeSerializer(data=req.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
+		ticket_type_form = TicketTypeForm(req.POST)
 
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		if ticket_type_form.is_valid():
+			ticket_type = ticket_type_form.save(commit=False)
+
+			ticket_type.save()
+			return redirect('ticket-type-list')
+		else:
+			print(ticket_type_form.errors)
+			return render(req, 'cadastrar_multa_tipificada.html', {'form': ticket_type_form})
+
+# class TicketTypeCreateAPIView(APIView):
+# 	def post(self, req):
+# 		serializer = TicketTypeSerializer(data=req.data)
+# 		serializer.is_valid(raise_exception=True)
+# 		serializer.save()
+
+# 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class TicketTypeDetailView(APIView):
 	def get(self, req, pk):
@@ -120,7 +142,14 @@ class TicketTypeListView(APIView):
 	def get(self, req):
 		ticket_types = TicketType.objects.all()
 		serializer = TicketTypeSerializer(ticket_types, many=True)
-		return Response(serializer.data)
+
+		return render(req, 'multas_tipificadas.html', {'ticket_types': serializer.data})
+
+# class TicketTypeListAPIView(APIView):
+# 	def get(self, req):
+# 		ticket_types = TicketType.objects.all()
+# 		serializer = TicketTypeSerializer(ticket_types, many=True)
+# 		return Response(serializer.data)
 
 class TicketTypeUpdateView(APIView):
 	def put(self, req, pk):

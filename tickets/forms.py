@@ -6,11 +6,7 @@ from clients.models.client import Client
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = [
-            'due_date', 'infraction_datetime', 'city', 'state', 'infraction_location',
-            'ait', 'denatran_agency_code', 'autuador_agency_code', 'observation',
-            'active', 'judicial_status', 'license_plate', 'client', 'ticket_type'
-        ]
+        fields = '__all__'
         labels = {
             'due_date': 'Data de Vencimento',
             'infraction_datetime': 'Data da Infração',
@@ -34,3 +30,14 @@ class TicketForm(forms.ModelForm):
         self.fields['infraction_datetime'].widget = forms.DateTimeInput(attrs={'type': 'datetime-local'})
         self.fields['ticket_type'].queryset = TicketType.objects.all()
         self.fields['client'].queryset = Client.objects.all()
+
+class TicketTypeForm(forms.ModelForm):
+    class Meta:
+        model = TicketType
+        fields = '__all__'
+        labels = {
+            'code': 'Código',
+            'description': 'Descrição',
+            'legal_basis': 'Fundamento Legal',
+            'classification': 'Classificação',
+        }

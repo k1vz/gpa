@@ -1,39 +1,40 @@
-<!-- motoristas.html -->
 {% extends 'base.html' %}
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-    <h1 style="text-align: left; margin-top: 20px;">Lista de Motoristas</h1>
-    <a href="{% url 'driver-create' %}" class="button">
-        <span>Cadastrar Motorista</span>
-    </a>
+	<h1 style="text-align: left; margin-top: 20px;">Lista de Motoristas</h1>
+
+	<a href="{% url 'driver-create' %}">
+		<button class="button">
+			Cadastrar Motorista
+		</button>
+	</a>
 </div>
 
 <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Data de Nascimento</th>
-                <th>CNH</th>
-                <th>Tipo de Habilitação</th>
-                <th>Cliente Relacionado</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for driver in drivers %}
-            <tr>
-                <td>{{ driver.name }}</td>
-                <td>{{ driver.cpf }}</td>
-                <td>{{ driver.birth_date }}</td>
-                <td>{{ driver.cnh }}</td>
-                <td>{{ driver.license_type }}</td>
-                <td>{{ driver.client.name }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Data de Nascimento</th>
+				<th>CNH</th>
+				<th>Tipo de Habilitação</th>
+				<th>Cliente Relacionado</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for driver in drivers %}
+			<tr>
+				<td>{{ driver.name }}</td>
+				<td>{{ driver.cpf }}</td>
+				<td>{{ driver.birth_date }}</td>
+				<td>{{ driver.cnh }}</td>
+				<td>{{ driver.license_type }}</td>
+				<td>{{ driver.client.name }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 {% endblock %}
-

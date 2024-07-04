@@ -20,6 +20,7 @@
 						{% endfor %}
 					</div>
 				{% endif %}
+
 				<div class="form-group">
 					<label for="email">Email:</label>
 					{{ form.email }}
@@ -32,11 +33,12 @@
 					<label for="password2">Confirme a Senha:</label>
 					{{ form.password2 }}
 				</div>
-				<button type="submit">Registrar</button>
+				<button type="submit" class="main">Registrar</button>
 			</form>
-			<div style="text-align: center; margin-top: 10px;">
+			
+            <div class="alt-area">
                 <a href="{% url 'user-login' %}">
-                    <button class="alt button">
+                    <button class="alt">
                         Entrar
                     </button>
                 </a>

@@ -1,13 +1,11 @@
-/* Estilos globais */
 body {
-    background-color: #172654; /* Azul escuro para o fundo */
-    font-family: "Arial", sans-serif; /* Fonte padrão */
-    color: #000000; /* Cor do texto global */
+    background-color: #172654;
+    font-family: "Arial", sans-serif;
+    color: #000000;
 }
 
-/* Estilos para o menu lateral */
 .sidebar {
-    width: 200px; /* Largura padrão da barra lateral */
+    width: 200px;
     height: 100%;
     background-color: #363636;
     position: fixed;
@@ -17,102 +15,96 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 999; /* Ajusta a camada z-index para sobrepor o conteúdo */
-    transition: width 0.3s ease; /* Adiciona uma transição suave na largura */
+    z-index: 999;
+    transition: width 0.3s ease;
 }
 
-/* Estilos para o logotipo */
 .logo img {
-    width: 150px; /* Ajuste conforme necessário */
+    width: 150px;
 }
 
-/* Estilos para os itens do menu */
 .sidebar ul {
     list-style-type: none;
     padding: 0;
-    margin-top: 30px; /* Espaçamento acima dos itens do menu */
+    margin-top: 30px;
 }
 
 .sidebar ul li {
-    width: 100%; /* Ocupa toda a largura do menu */
+    width: 100%;
 }
 
 .sidebar ul li a {
-    color: #000000; /* Cor do texto */
+    color: #000000;
     text-decoration: none;
-    display: flex; /* Faz com que os itens do menu se comportem como flex containers */
-    align-items: center; /* Alinha os itens verticalmente */
-    justify-content: center; /* Centraliza o texto */
-    border-radius: 20px; /* Adiciona bordas arredondadas */
-    padding: 12px; /* Espaçamento interno */
-    background-color: #D9D9D9; /* Cor de fundo do botão */
-    margin-bottom: 10px; /* Espaçamento entre os itens do menu */
-    transition: all 0.3s ease; /* Adiciona uma transição suave */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 12px;
+    background-color: #D9D9D9;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
 }
 
 .sidebar ul li a:hover {
-    background-color: #6a6a6a; /* Cor de fundo ao passar o mouse */
-    border-color: #555; /* Altera a cor da borda ao passar o mouse */
+    background-color: #6a6a6a;
+    border-color: #555;
 }
 
 .sidebar ul li a img {
-    width: 20px; /* Largura da imagem reduzida */
-    height: 20px; /* Altura da imagem reduzida */
-    margin-right: 10px; /* Espaçamento entre a imagem e o texto */
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 ul.logout {
-	position: fixed;
-	bottom: 0;
+    position: fixed;
+    bottom: 0;
 }
 
-/* Botão de toggle para abrir e fechar o menu em dispositivos menores */
 .toggle-menu {
-    display: none; /* Esconde o botão em telas maiores */
+    display: none;
 }
 
-/* Todo o conteúdo */
 .content {
-    margin-left: 200px; /* Ajusta a margem esquerda para deixar espaço para o menu lateral */
-    margin-top: 50px; /* Adiciona espaço superior para separar o conteúdo do menu */
+    margin-left: 200px;
+    margin-top: 50px;
     padding: 50px;
-    border: 1px solid #fff; /* Adiciona uma borda de 1px sólida branca */
-    background-color: #C5C5C5; /* Cor de fundo ao passar o mouse */
-    border-radius: 5px; /* Adiciona bordas arredondadas */
-    color: #000000; /* Cor do texto */
+    border: 1px solid #fff;
+    background-color: #C5C5C5;
+    border-radius: 5px;
+    color: #000000;
 }
 
-/* Estilos para tabelas */
 .table-container {
     width: 100%;
-    max-width: 1000px; /* Largura máxima da tabela */
-    overflow: hidden; /* Previne que as bordas arredondadas sejam cortadas */
-    border-radius: 10px; /* Bordas arredondadas para a tabela */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para dar um efeito visual */
+    max-width: 1000px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0; /* Remove o espaço entre as células para que o border-radius funcione */
+    border-spacing: 0;
 }
 
 th, td {
-    padding: 12px; /* Espaçamento dentro das células */
-    border: 1px solid #ddd; /* Bordas das células */
-    text-align: center; /* Alinhamento do texto */
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
 }
 
 th {
-    background-color: #f4f4f4; /* Cor de fundo do cabeçalho */
-    font-weight: bold; /* Negrito para o texto do cabeçalho */
+    background-color: #f4f4f4;
+    font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9; /* Cor de fundo alternada para as linhas pares */
+    background-color: #f9f9f9;
 }
 
-/* Adiciona bordas arredondadas às primeiras e últimas células */
 .table-container table tr:first-child th:first-child {
     border-top-left-radius: 10px;
 }
@@ -129,8 +121,7 @@ tr:nth-child(even) {
     border-bottom-right-radius: 10px;
 }
 
-/* Estilos para botões */
-.button {
+button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #286ff3;
@@ -141,10 +132,23 @@ tr:nth-child(even) {
     font-size: 16px;
     border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
-    margin-right: 20px; /* Espaçamento à direita do título */
+    transition: background-color 0.3s ease;
+    margin-right: 20px;
 }
 
-.button:hover {
+button.cadastrar {
+	background-color: #286ff3;
+}
+
+button.cadastrar:hover {
     background-color: #1056d6;
+}
+
+button.alt {
+	margin-top: 1rem;
+    background-color: #747474;
+}
+
+button.alt:hover {
+    background-color: #555555;
 }

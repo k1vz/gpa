@@ -1,4 +1,5 @@
 from django.views import View
+from django.urls import reverse
 from .models.client import Client
 from rest_framework import status
 from rest_framework.views import APIView
@@ -19,7 +20,7 @@ class ClientCreateView(View):
 			'address_form': address_form,
 			'contact_form': contact_form
 		})
-	
+
 	def post(self, req):
 		client_form = ClientForm(req.POST)
 		address_form = AddressForm(req.POST)
@@ -40,7 +41,7 @@ class ClientCreateView(View):
 			print(contact_form.errors)
 
 		return redirect('home')
-	
+
 class ClientDetailView(APIView):
 	def get(self, req, pk):
 		client = self.get_object(pk)
@@ -52,8 +53,7 @@ class ClientListView(APIView):
 	def get(self, req):
 		clients = Client.objects.all()
 		serializer = ClientListSerializer(clients, many=True)
-		
-		# return Response(serializer.data)
+
 		return render(req, 'view/view_clients.html', {'clients': serializer.data})
 
 class ClientUpdateView(APIView):
@@ -64,20 +64,21 @@ class ClientUpdateView(APIView):
 			raise NotFound('Client not found!')
 
 		serializer = ClientSerializer(client, data=req.data)
-		
+
 		if serializer.is_valid():
 			serializer.save()
-			
+
 			return Response(serializer.data)
-		
+
 		return Response(serializer.errors, status=status.HTTP_400_BAD_req)
 
 class ClientDeleteView(APIView):
-	def delete(self, req, pk):
+	def get(self, req, pk):
 		try:
 			client = Client.objects.get(pk=pk)
 		except Client.DoesNotExist:
 			raise NotFound('Client not found!')
 
-		client.delete()
-		return Response({'message': 'Client deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+		client.active = False
+		client.save()
+		return redirect(reverse('client-list'))

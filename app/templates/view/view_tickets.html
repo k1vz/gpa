@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
@@ -19,6 +20,7 @@
 				<th>Auto de Infração de Trânsito</th>
 				<th>Status Judicial</th>
 				<th>Placa do Veículo</th>
+				<th>Ação</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,6 +31,14 @@
 				<td>{{ ticket.ait }}</td>
 				<td>{{ ticket.judicial_status }}</td>
 				<td>{{ ticket.license_plate }}</td>
+				<td>
+                    <form method="get" action="{% url 'ticket-delete' ticket.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button" title="Delete">
+                            <img src="{% static 'imagens/ImgDelete.png' %}" alt="Delete" style="width:20px;height:20px;">
+                        </button>
+                    </form>
+                </td>
 			</tr>
 			{% endfor %}
 		</tbody>

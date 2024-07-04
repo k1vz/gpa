@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.views import View
 from rest_framework import status
 from rest_framework import generics
@@ -98,13 +99,13 @@ class DriverUpdateView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DriverDeleteView(APIView):
-	def delete(self, req, pk):
+	def get(self, req, pk):
 		try:
 			driver = Driver.objects.get(pk=pk)
 		except Driver.DoesNotExist:
 			raise NotFound('Driver not found')
 
-		driver.active = False
-		driver.save()
+		driver.delete()
 
-		return Response({'message': 'Driver deactivated successfully'}, status=status.HTTP_204_NO_CONTENT)
+		return redirect(reverse('driver-list'))
+	

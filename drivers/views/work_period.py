@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views import View
 from rest_framework import status
 from rest_framework.views import APIView
@@ -77,7 +78,7 @@ class WorkPeriodUpdateView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class WorkPeriodDeleteView(APIView):
-	def delete(self, req, pk):
+	def get(self, req, pk):
 		try:
 			work_period = WorkPeriod.objects.get(pk=pk)
 		except WorkPeriod.DoesNotExist:
@@ -85,4 +86,4 @@ class WorkPeriodDeleteView(APIView):
 
 		work_period.delete()
 
-		return Response({'message': 'Work Period deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+		return redirect(reverse('work-period-list'))

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
@@ -20,6 +21,7 @@
 				<th>CNH</th>
 				<th>Tipo de Habilitação</th>
 				<th>Cliente Relacionado</th>
+				<th>Ação</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,6 +33,14 @@
 				<td>{{ driver.cnh }}</td>
 				<td>{{ driver.license_type }}</td>
 				<td>{{ driver.client.name }}</td>
+				<td>
+					<form method="get" action="{% url 'driver-delete' driver.id %}" style="display:inline;">
+						{% csrf_token %}
+						<button type="submit" class="delete-button" title="Delete">
+							<img src="{% static 'imagens/ImgDelete.png' %}" alt="Delete" style="width:20px;height:20px;">
+						</button>
+					</form>
+				</td>
 			</tr>
 			{% endfor %}
 		</tbody>

@@ -66,7 +66,7 @@ class ClientSerializer(serializers.ModelSerializer):
 class ClientListSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Client
-		fields = ['name', 'client_type', 'active']
+		fields = ['id', 'name', 'client_type', 'active']
 
 	def to_representation(self, instance):
 		representation = super().to_representation(instance)

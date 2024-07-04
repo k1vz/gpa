@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
 	<h1 style="text-align: left; margin-top: 20px;">Lista de Clientes</h1>
 
 	<a href="{% url 'client-create' %}">
-		<button class="button">
+		<button class="button cadastrar">
 			Cadastrar Cliente
 		</button>
 	</a>
@@ -18,9 +19,9 @@
 				<th>CPF/CNPJ</th>
 				<th>Tipo da Empresa</th>
 				<th>Ativo</th>
+				<th>Ações</th>
 			</tr>
 		</thead>
-
 		<tbody>
 			{% for client in clients %}
 			<tr>
@@ -34,6 +35,14 @@
 				</td>
 				<td>{{ client.client_type }}</td>
 				<td>{{ client.active }}</td>
+				<td>
+					<form action="{% url 'client-delete' client.id %}" style="display:inline;">
+						{% csrf_token %}
+						<button type="submit" class="delete-button" title="Delete">
+							<img src="{% static 'imagens/ImgDelete.png' %}" alt="Delete" style="width:20px;height:20px;">
+						</button>
+					</form>
+				</td>
 			</tr>
 			{% endfor %}
 		</tbody>

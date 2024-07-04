@@ -47,7 +47,7 @@ class DailyUpdateView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DailyDeleteView(APIView):
-	def delete(self, req, pk):
+	def get(self, req, pk):
 		try:
 			daily = Daily.objects.get(pk=pk)
 		except Daily.DoesNotExist:

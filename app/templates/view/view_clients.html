@@ -34,7 +34,13 @@
 					{% endif %}
 				</td>
 				<td>{{ client.client_type }}</td>
-				<td>{{ client.active }}</td>
+				<td>
+					{% if client.active %}
+						Sim
+					{% else %}
+						Não
+					{% endif %}
+				</td>
 				<td>
 					<form action="{% url 'client-delete' client.id %}" style="display:inline;">
 						{% csrf_token %}

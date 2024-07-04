@@ -31,7 +31,13 @@
 				<td>{{ work_period.created_at }}</td>
 				<td>{{ work_period.periodStart }}</td>
 				<td>{{ work_period.periodEnd }}</td>
-				<td>{{ work_period.responsibleSignature }}</td>
+				<td>
+					{% if work_period.responsibleSignature %}
+						Sim
+					{% else %}
+						Não
+					{% endif %}
+				</td>
 				<td>
 					<form method="get" action="{% url 'work-period-delete' work_period.id %}" style="display:inline;">
 						{% csrf_token %}

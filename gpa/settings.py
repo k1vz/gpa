@@ -44,10 +44,10 @@ MIDDLEWARE = [
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	
-	'backend.middleware.AuthMiddleware',
+	'gpa.middleware.AuthMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'gpa.urls'
 
 TEMPLATES = [
 	{
@@ -65,7 +65,7 @@ TEMPLATES = [
 	},
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+WSGI_APPLICATION = 'gpa.wsgi.application'
 
 DATABASES = {
 	'default': {

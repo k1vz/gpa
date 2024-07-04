@@ -41,11 +41,13 @@
                 <img src="{% static 'imagens/ImgJornada.png' %}" alt="_Moto_">
                 <span>Jornadas</span>
             </a></li>
+		</ul>
+		<ul class="logout">
             <li><a href="{% url 'user-logout' %}">
                 <img src="{% static 'imagens/imfOff.png' %}" alt="_Off_">
                 <span>Logout</span>
             </a></li>
-        </ul>
+		</ul>
     </div>
 <div class="content">
     {% block content %}

@@ -61,6 +61,11 @@ body {
     margin-right: 10px; /* Espaçamento entre a imagem e o texto */
 }
 
+ul.logout {
+	position: fixed;
+	bottom: 0;
+}
+
 /* Botão de toggle para abrir e fechar o menu em dispositivos menores */
 .toggle-menu {
     display: none; /* Esconde o botão em telas maiores */

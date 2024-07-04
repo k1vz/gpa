@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth import authenticate, login
 from rest_framework import status
 from .forms import UserLoginForm, UserRegistrationForm
 from .serializers import UserSerializer
@@ -59,24 +60,32 @@ class UserLoginView(APIView):
 
 	def post(self, req):
 		form = UserLoginForm(req.POST)
-		user = get_object_or_404(User, email=req.data['email'])
 
-		if not user.check_password(req.data['password']):
-			messages.error(req, 'Senha incorreta.')
-			return JsonResponse({'error': 'Not authorized'}, status=401)
+		if form.is_valid():
+			try:
+				user = get_object_or_404(User, email=form['email'].value())
 
-		payload = {
-			'id': user.id,
-			'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-			'iat': datetime.datetime.utcnow()
-		}
+				if not user.check_password(form['password'].value()):
+					messages.error(req, 'Email ou senha inválidos.')
+				else:
+					payload = {
+						'id': user.id,
+						'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=180),
+						'iat': datetime.datetime.utcnow()
+					}
 
-		token = jwt.encode(payload, 'secret', algorithm='HS256')
+					token = jwt.encode(payload, 'secret', algorithm='HS256')
 
-		res = redirect('home')
-		res.set_cookie(key='jwt', value=token, httponly=True)
-	
-		return res
+					res = redirect('home')
+					res.set_cookie(key='jwt', value=token, httponly=True)
+				
+					return res
+			except:
+				messages.error(req, 'Email ou senha inválidos')
+		else:
+			messages.error(req, 'Erro no formulário. Verifique os campos.')
+
+		return render(req, 'login.html', {'form': form})
 
 class UserDetailView(APIView):
 	def get(self, req, pk):

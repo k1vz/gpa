@@ -1,25 +1,22 @@
-/* --Menuzinho lá-- */
 body, html {
     height: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #172654; /* Cor de fundo do body */
-    font-family: Arial, sans-serif; /* Fonte para o texto */
+    background-color: #172654;
+    font-family: Arial, sans-serif;
 }
 
-/* --Texto na parte de cima-- */
 .login-container {
     text-align: center;
 }
 
-/* --Estilo da caixa no centro--*/
 .login-form {
-    background-color: #ffffff; /* Cor de fundo do formulário */
+    background-color: #ffffff;
     padding: 30px;
-    border-radius: 10px; /* Borda arredondada */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     width: 100%;
 }
@@ -27,7 +24,7 @@ body, html {
 .login-form h2 {
     margin-bottom: 10px;
     text-align: center;
-    color: #333; /* Cor do título */
+    color: #333;
 }
 
 .form-group {
@@ -39,29 +36,28 @@ body, html {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: #666; /* Cor do texto do label */
+    color: #666;
 }
 
 .form-group input {
     width: 100%;
     padding: 8px;
     font-size: 16px;
-    border: 1px solid #b8b8b8; /* Borda cinza */
+    border: 1px solid #b8b8b8;
     border-radius: 4px;
 }
 
 .alt {
-    background-color: #b3b3b3; /* Cor de fundo do botão */
+    background-color: #b3b3b3;
 }
 
 .alt:hover {
-    background-color: #888888; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #888888;
 }
 
-
 button {
-    background-color: #286ff3; /* Cor de fundo do botão */
-    color: white; /* Cor do texto do botão */
+    background-color: #286ff3;
+    color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -70,9 +66,9 @@ button {
 }
 
 button:hover {
-    background-color: #1056d6; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #1056d6;
 }
 
 .error-messages {
-	color: #a10000;
+    color: #a10000;
 }

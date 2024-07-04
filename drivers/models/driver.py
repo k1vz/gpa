@@ -3,12 +3,12 @@ from clients.models.client import Client
 
 class Driver(models.Model):
 	LICENSE_TYPE = [
-		('A', 'Moto'),
-		('B', 'Carro'),
-		('AB', 'Carro e Moto'),
-		('C', 'Caminhões pequenos'),
-		('D', 'Ôninus'),
-		('E', 'Reboque'),
+		('A', 'A'),
+		('B', 'B'),
+		('AB', 'AB'),
+		('C', 'C'),
+		('D', 'D'),
+		('E', 'E'),
 	]
 
 	active = models.BooleanField(default=True)

@@ -1,55 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Cadastro de Cliente</h1>
+<h1>Cadastrar Cliente</h1>
 
 <form method="post">
-    {% csrf_token %}
+	{% csrf_token %}
 
-    <div class="topic-container">
-        <h2>Informações Gerais</h2>
-        <hr>
-        {{ client_form.client_type.label_tag }}
-        {{ client_form.client_type }}
-        <br><br>
-        {{ client_form.name.label_tag }}
-        {{ client_form.name }}
-        <br><br>
-        {{ client_form.active.label_tag }}
-        {{ client_form.active }}
-        <br><br>
-        {{ client_form.defaulting.label_tag }}
-        {{ client_form.defaulting }}
-        <br><br>
-        {{ client_form.truck_count.label_tag }}
-        {{ client_form.truck_count }}
-        <br><br>
+	<div class="topic-container">
+		<h2>Informações Gerais</h2>
+		<hr>
+		{{ client_form.client_type.label_tag }}
+		{{ client_form.client_type }}
+		<br><br>
+		{{ client_form.name.label_tag }}
+		{{ client_form.name }}
+		<br><br>
+		{{ client_form.active.label_tag }}
+		{{ client_form.active }}
+		<br><br>
+		{{ client_form.defaulting.label_tag }}
+		{{ client_form.defaulting }}
+		<br><br>
+		{{ client_form.truck_count.label_tag }}
+		{{ client_form.truck_count }}
+		<br><br>
 
-        <div id="pj_fields" style="display: none;">
-            {{ client_form.cnpj.label_tag }}
-            {{ client_form.cnpj }}
-            <br><br>
-            {{ client_form.trade_name.label_tag }}
-            {{ client_form.trade_name }}
-            <br><br>
-            {{ client_form.business_registration.label_tag }}
-            {{ client_form.business_registration }}
-            <br><br>
-        </div>
+		<div id="pj_fields" style="display: none;">
+			{{ client_form.cnpj.label_tag }}
+			{{ client_form.cnpj }}
+			<br><br>
+			{{ client_form.trade_name.label_tag }}
+			{{ client_form.trade_name }}
+			<br><br>
+			{{ client_form.business_registration.label_tag }}
+			{{ client_form.business_registration }}
+			<br><br>
+		</div>
 
-        <div id="pf_fields" style="display: none;">
-            {{ client_form.cpf.label_tag }}
-            {{ client_form.cpf }}
-            <br><br>
-            {{ client_form.birth_date.label_tag }}
-            {{ client_form.birth_date}}
-            <br><br>
-        </div>
-    </div>
+		<div id="pf_fields" style="display: none;">
+			{{ client_form.cpf.label_tag }}
+			{{ client_form.cpf }}
+			<br><br>
+			{{ client_form.birth_date.label_tag }}
+			{{ client_form.birth_date}}
+			<br><br>
+		</div>
+	</div>
 
-    <div class="topic-container">
-        <h2>Contato</h2>
-        <hr>
+	<div class="topic-container">
+		<h2>Contato</h2>
+		<hr>
 			{{ contact_form.id }}
 			{{ contact_form.role.label_tag }}
 			{{ contact_form.role }}
@@ -66,58 +66,58 @@
 			{% for error in contact_form.errors %}
 				<div>{{ error }}</div>
 			{% endfor %}
-    </div>
+	</div>
 
-    <div class="topic-container">
-        <h2>Endereço</h2>
-        <hr>
-            {{ address_form.id }}
-            {{ address_form.street.label_tag }}
-            {{ address_form.street }}
-            {{ address_form.number.label_tag }}
-            {{ address_form.number }}
-            <br><br>
-            {{ address_form.city.label_tag }}
-            {{ address_form.city }}
-            {{ address_form.state.label_tag }}
-            {{ address_form.state }}
-            <br><br>
-            {{ address_form.neighborhood.label_tag }}
-            {{ address_form.neighborhood }}
-            <br><br>
-            {{ address_form.complement.label_tag }}
-            {{ address_form.complement }}
-            <br><br>
-            {{ address_form.reference_point.label_tag }}
-            {{ address_form.reference_point }}
-            <br><br>
+	<div class="topic-container">
+		<h2>Endereço</h2>
+		<hr>
+			{{ address_form.id }}
+			{{ address_form.street.label_tag }}
+			{{ address_form.street }}
+			{{ address_form.number.label_tag }}
+			{{ address_form.number }}
+			<br><br>
+			{{ address_form.city.label_tag }}
+			{{ address_form.city }}
+			{{ address_form.state.label_tag }}
+			{{ address_form.state }}
+			<br><br>
+			{{ address_form.neighborhood.label_tag }}
+			{{ address_form.neighborhood }}
+			<br><br>
+			{{ address_form.complement.label_tag }}
+			{{ address_form.complement }}
+			<br><br>
+			{{ address_form.reference_point.label_tag }}
+			{{ address_form.reference_point }}
+			<br><br>
 
-            {% for error in address_form.errors %}
-                <div>{{ error }}</div>
-            {% endfor %}
-    </div>
+			{% for error in address_form.errors %}
+				<div>{{ error }}</div>
+			{% endfor %}
+	</div>
 
-    <button type="submit">Salvar</button>
+	<button type="submit">Salvar</button>
 </form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var clientTypeField = document.querySelector('#id_client_type');
-        var pjFields = document.querySelector('#pj_fields');
-        var pfFields = document.querySelector('#pf_fields');
+	document.addEventListener('DOMContentLoaded', function() {
+		var clientTypeField = document.querySelector('#id_client_type');
+		var pjFields = document.querySelector('#pj_fields');
+		var pfFields = document.querySelector('#pf_fields');
 
-        function toggleFields() {
-            if (clientTypeField.value === 'PJ') {
-                pjFields.style.display = 'block';
-                pfFields.style.display = 'none';
-            } else if (clientTypeField.value === 'PF') {
-                pjFields.style.display = 'none';
-                pfFields.style.display = 'block';
-            }
-        }
+		function toggleFields() {
+			if (clientTypeField.value === 'PJ') {
+				pjFields.style.display = 'block';
+				pfFields.style.display = 'none';
+			} else if (clientTypeField.value === 'PF') {
+				pjFields.style.display = 'none';
+				pfFields.style.display = 'block';
+			}
+		}
 
-        clientTypeField.addEventListener('change', toggleFields);
-        toggleFields();
-    });
+		clientTypeField.addEventListener('change', toggleFields);
+		toggleFields();
+	});
 </script>
 {% endblock %}

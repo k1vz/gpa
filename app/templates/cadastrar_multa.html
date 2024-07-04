@@ -4,67 +4,67 @@
 <h1>Cadastrar Multa</h1>
 
 <form method="post">
-    {% csrf_token %}
-    
-    <div class="form-section">
-        <h2>Multa Tipificada</h2>
-        <hr>
-        {{ form.ticket_type.label_tag }}
-        {{ form.ticket_type }}
-    </div>
-    
-    <div class="form-section">
-        <h2>Envolvidos</h2>
-        <hr>
-        {{ form.client.label_tag }}
-        {{ form.client }}
-        <br><br>
-    </div>
-    
-    <div class="form-section">
-        <h2>Datas e Localização</h2>
-        <hr>
-        {{ form.due_date.label_tag }}
-        {{ form.due_date }}
-        <br><br>
-        {{ form.infraction_datetime.label_tag }}
-        {{ form.infraction_datetime }}
-        <br><br>
-        {{ form.state.label_tag }}
-        {{ form.state }}
-        <br><br>
-        {{ form.city.label_tag }}
-        {{ form.city }}
-        <br><br>
-        {{ form.infraction_location.label_tag }}
-        {{ form.infraction_location }}
-        <br><br>
-    </div>
-    
-    <div class="form-section">
-        <h2>Detalhes da Infração</h2>
-        <hr>
-        {{ form.ait.label_tag }}
-        {{ form.ait }}
-        <br><br>
-        {{ form.denatran_agency_code.label_tag }}
-        {{ form.denatran_agency_code }}
-        <br><br>
-        {{ form.autuador_agency_code.label_tag }}
-        {{ form.autuador_agency_code }}
-        <br><br>
-        {{ form.judicial_status.label_tag }}
-        {{ form.judicial_status }}
-        <br><br>
-        {{ form.license_plate.label_tag }}
-        {{ form.license_plate }}
-        <br><br>
-        {{ form.observation.label_tag }}
-        {{ form.observation }}
-        <br><br>
-    </div>
-    
-    <button type="submit">Salvar</button>
+	{% csrf_token %}
+
+	<div class="form-section">
+		<h2>Multa Tipificada</h2>
+		<hr>
+		{{ form.ticket_type.label_tag }}
+		{{ form.ticket_type }}
+	</div>
+
+	<div class="form-section">
+		<h2>Envolvidos</h2>
+		<hr>
+		{{ form.client.label_tag }}
+		{{ form.client }}
+		<br><br>
+	</div>
+
+	<div class="form-section">
+		<h2>Datas e Localização</h2>
+		<hr>
+		{{ form.due_date.label_tag }}
+		{{ form.due_date }}
+		<br><br>
+		{{ form.infraction_datetime.label_tag }}
+		{{ form.infraction_datetime }}
+		<br><br>
+		{{ form.state.label_tag }}
+		{{ form.state }}
+		<br><br>
+		{{ form.city.label_tag }}
+		{{ form.city }}
+		<br><br>
+		{{ form.infraction_location.label_tag }}
+		{{ form.infraction_location }}
+		<br><br>
+	</div>
+
+	<div class="form-section">
+		<h2>Detalhes da Infração</h2>
+		<hr>
+		{{ form.ait.label_tag }}
+		{{ form.ait }}
+		<br><br>
+		{{ form.denatran_agency_code.label_tag }}
+		{{ form.denatran_agency_code }}
+		<br><br>
+		{{ form.autuador_agency_code.label_tag }}
+		{{ form.autuador_agency_code }}
+		<br><br>
+		{{ form.judicial_status.label_tag }}
+		{{ form.judicial_status }}
+		<br><br>
+		{{ form.license_plate.label_tag }}
+		{{ form.license_plate }}
+		<br><br>
+		{{ form.observation.label_tag }}
+		{{ form.observation }}
+		<br><br>
+	</div>
+
+	<button type="submit">Salvar</button>
 </form>
 
 {% endblock %}

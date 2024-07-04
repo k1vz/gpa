@@ -2,37 +2,37 @@
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-    <h1 style="text-align: left; margin-top: 20px;">Edição de Jornadas</h1>
+	<h1 style="text-align: left; margin-top: 20px;">Edição de Jornadas</h1>
 
-    <a href="{% url 'work-period-create' %}">
-        <button class="button">
-            Cadastrar Jornada
-        </button>
-    </a>
+	<a href="{% url 'work-period-create' %}">
+		<button class="button">
+			Cadastrar Jornada
+		</button>
+	</a>
 </div>
 <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Motorista</th>
-                <th>Data de Criação</th>
-                <th>Início do Período</th>
-                <th>Fim do Período</th>
-                <th>Assinatura Responsável</th>
-            </tr>
-        </thead>
-		
-        <tbody>
-            {% for work_period in work_periods %}
-            <tr>
-                <td>{{ work_period.driver.name }}</td>
-                <td>{{ work_period.created_at }}</td>
-                <td>{{ work_period.periodStart }}</td>
-                <td>{{ work_period.periodEnd }}</td>
-                <td>{{ work_period.responsibleSignature }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th>Motorista</th>
+				<th>Data de Criação</th>
+				<th>Início do Período</th>
+				<th>Fim do Período</th>
+				<th>Assinatura Responsável</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for work_period in work_periods %}
+			<tr>
+				<td>{{ work_period.driver.name }}</td>
+				<td>{{ work_period.created_at }}</td>
+				<td>{{ work_period.periodStart }}</td>
+				<td>{{ work_period.periodEnd }}</td>
+				<td>{{ work_period.responsibleSignature }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 {% endblock %}

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Cadastro de Motorista</h1>
+<h1>Cadastrar Motorista</h1>
 
 <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Salvar</button>
 </form>
+
 {% endblock %}

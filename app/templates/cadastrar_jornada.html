@@ -3,23 +3,9 @@
 {% block content %}
 <h1>Cadastrar Jornada</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    
-    <div class="form-section">
-        {{ form.responsibleSignature.label_tag }}
-        {{ form.responsibleSignature }}
-        <br><br>
-        {{ form.periodStart.label_tag }}
-        {{ form.periodStart }}
-        <br><br>
-        {{ form.periodEnd.label_tag }}
-        {{ form.periodEnd }}
-        <br><br>
-        {{ form.driver.label_tag }}
-        {{ form.driver }}
-    </div>
-    
+    {{ form.as_p }}
     <button type="submit">Salvar</button>
 </form>
 

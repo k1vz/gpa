@@ -2,44 +2,44 @@
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-    <h1 style="text-align: left; margin-top: 20px;">Lista de Multas</h1>
-	
-    <a href="{% url 'ticket-create' %}">
-        <button class="cadastrar">
-            Cadastrar Multas
-        </button>
-    </a>
+	<h1 style="text-align: left; margin-top: 20px;">Lista de Multas</h1>
+
+	<a href="{% url 'ticket-create' %}">
+		<button class="cadastrar">
+			Cadastrar Multas
+		</button>
+	</a>
 </div>
 <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Cliente Relacionado</th>
-                <th>Classificação</th>
-                <th>Auto de Infração de Trânsito</th>
-                <th>Status Judicial</th>
-                <th>Placa do Veículo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ticket in tickets %}
-            <tr>
-                <td>{{ ticket.client.name }}</td>
-                <td>{{ ticket.ticket_type.classification }}</td>
-                <td>{{ ticket.ait }}</td>
-                <td>{{ ticket.judicial_status }}</td>
-                <td>{{ ticket.license_plate }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th>Cliente Relacionado</th>
+				<th>Classificação</th>
+				<th>Auto de Infração de Trânsito</th>
+				<th>Status Judicial</th>
+				<th>Placa do Veículo</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for ticket in tickets %}
+			<tr>
+				<td>{{ ticket.client.name }}</td>
+				<td>{{ ticket.ticket_type.classification }}</td>
+				<td>{{ ticket.ait }}</td>
+				<td>{{ ticket.judicial_status }}</td>
+				<td>{{ ticket.license_plate }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 
 <div style="text-align: right">
 	<a href="{% url 'ticket-type-list' %}">
-        <button class="alt">
-            Lista de Multas Tipificadas
-        </button>
-    </a>
+		<button class="alt">
+			Lista de Multas Tipificadas
+		</button>
+	</a>
 </div>
 {% endblock %}

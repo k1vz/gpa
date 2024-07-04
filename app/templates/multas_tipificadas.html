@@ -2,34 +2,34 @@
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-    <h1 style="text-align: left; margin-top: 20px;">Lista de Multas Tipificadas</h1>
-	
-    <a href="{% url 'ticket-type-create' %}">
-        <button class="button">
-            Cadastrar Multa Tipificada
-        </button>
-    </a>
+	<h1 style="text-align: left; margin-top: 20px;">Lista de Multas Tipificadas</h1>
+
+	<a href="{% url 'ticket-type-create' %}">
+		<button class="button">
+			Cadastrar Multa Tipificada
+		</button>
+	</a>
 </div>
 <div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Descrição</th>
-                <th>Base Legal</th>
-                <th>Classificação</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ticket_type in ticket_types %}
-            <tr>
-                <td>{{ ticket_type.code }}</td>
-                <td>{{ ticket_type.description }}</td>
-                <td>{{ ticket_type.legal_basis }}</td>
-                <td>{{ ticket_type.classification }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th>Código</th>
+				<th>Descrição</th>
+				<th>Base Legal</th>
+				<th>Classificação</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for ticket_type in ticket_types %}
+			<tr>
+				<td>{{ ticket_type.code }}</td>
+				<td>{{ ticket_type.description }}</td>
+				<td>{{ ticket_type.legal_basis }}</td>
+				<td>{{ ticket_type.classification }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 </div>
 {% endblock %}

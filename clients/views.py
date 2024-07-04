@@ -14,7 +14,7 @@ class ClientCreateView(View):
 		address_form = AddressForm()
 		contact_form = ContactForm()
 
-		return render(req, 'cadastrar_cliente.html', {
+		return render(req, 'create/create_client.html', {
 			'client_form': client_form,
 			'address_form': address_form,
 			'contact_form': contact_form
@@ -54,7 +54,7 @@ class ClientListView(APIView):
 		serializer = ClientListSerializer(clients, many=True)
 		
 		# return Response(serializer.data)
-		return render(req, 'clientes.html', {'clients': serializer.data})
+		return render(req, 'view/view_clients.html', {'clients': serializer.data})
 
 class ClientUpdateView(APIView):
 	def put(self, req, pk):

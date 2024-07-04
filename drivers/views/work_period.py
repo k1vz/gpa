@@ -12,7 +12,7 @@ class WorkPeriodCreateView(View):
 	def get(self, req):
 		work_period_form = WorkPeriodForm()
 
-		return render(req, 'cadastrar_jornada.html', {
+		return render(req, 'create/create_work_period.html', {
 			'form': work_period_form,
 		})
 	
@@ -33,7 +33,7 @@ class WorkPeriodListView(APIView):
 		work_periods = WorkPeriod.objects.all()
 		serializer = WorkPeriodSerializer(work_periods, many=True)
 
-		return render(req, 'jornadas.html', {'work_periods': serializer.data})
+		return render(req, 'view/view_work_periods.html', {'work_periods': serializer.data})
 
 class WorkPeriodCreateAPIView(APIView):
 	def post(self, req):

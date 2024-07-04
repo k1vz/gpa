@@ -13,7 +13,7 @@ class TicketCreateView(View):
 	def get(self, req):
 		ticket_form = TicketForm()
 
-		return render(req, 'cadastrar_multa.html', {
+		return render(req, 'create/create_ticket.html', {
 			'form': ticket_form,
 		})
 	
@@ -56,7 +56,7 @@ class TicketListView(APIView):
 		tickets = Ticket.objects.all()
 		serializer = TicketSerializer(tickets, many=True)
 
-		return render(req, 'multas.html', {'tickets': serializer.data})
+		return render(req, 'view/view_tickets.html', {'tickets': serializer.data})
 
 # class TicketListAPIView(APIView):
 # 	def get(self, req):
@@ -101,7 +101,7 @@ class TicketTypeCreateView(View):
 	def get(self, req):
 		ticket_type_form = TicketTypeForm()
 
-		return render(req, 'cadastrar_multa_tipificada.html', {
+		return render(req, 'create/create_ticket_type.html', {
 			'form': ticket_type_form,
 		})
 	
@@ -115,7 +115,7 @@ class TicketTypeCreateView(View):
 			return redirect('ticket-type-list')
 		else:
 			print(ticket_type_form.errors)
-			return render(req, 'cadastrar_multa_tipificada.html', {'form': ticket_type_form})
+			return render(req, 'create/create_ticket_type.html', {'form': ticket_type_form})
 
 # class TicketTypeCreateAPIView(APIView):
 # 	def post(self, req):
@@ -143,7 +143,7 @@ class TicketTypeListView(APIView):
 		ticket_types = TicketType.objects.all()
 		serializer = TicketTypeSerializer(ticket_types, many=True)
 
-		return render(req, 'multas_tipificadas.html', {'ticket_types': serializer.data})
+		return render(req, 'view/view_ticket_types.html', {'ticket_types': serializer.data})
 
 # class TicketTypeListAPIView(APIView):
 # 	def get(self, req):

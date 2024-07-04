@@ -33,4 +33,4 @@ class HomeView(APIView):
 			'last_month_tickets': last_month_tickets,
 			'active_tickets': active_tickets
 		}
-		return render(req, 'home.html', context)
+		return render(req, 'view/view_home.html', context)

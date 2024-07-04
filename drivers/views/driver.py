@@ -15,7 +15,7 @@ class DriverCreateView(View):
 	def get(self, req):
 		driver_form = DriverForm()
 
-		return render(req, 'cadastrar_motorista.html', {
+		return render(req, 'create/create_driver.html', {
 			'form': driver_form,
 		})
 	
@@ -59,7 +59,7 @@ class DriverListView(APIView):
 		drivers = Driver.objects.all()
 		serializer = DriverSerializer(drivers, many=True)
 
-		return render(req, 'motoristas.html', {'drivers': serializer.data})
+		return render(req, 'view/view_drivers.html', {'drivers': serializer.data})
 	
 class DriverListAPIView(APIView):
 	def get(self, req):

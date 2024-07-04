@@ -24,7 +24,7 @@ class UserRegisterView(View):
 	def get(self, req):
 		user_form = UserRegistrationForm()
 
-		return render(req, 'registrar_usuario.html', {
+		return render(req, 'auth/registrar_usuario.html', {
 			'form': user_form,
 		})
 	
@@ -55,7 +55,7 @@ class UserLoginView(APIView):
 	def get(self, req):
 		form = UserLoginForm()
 		
-		return render(req, 'login.html', {'form': form})
+		return render(req, 'auth/login.html', {'form': form})
 
 	def post(self, req):
 		form = UserLoginForm(req.POST)
@@ -84,7 +84,7 @@ class UserLoginView(APIView):
 		else:
 			messages.error(req, 'Erro no formulário. Verifique os campos.')
 
-		return render(req, 'login.html', {'form': form})
+		return render(req, 'auth/login.html', {'form': form})
 
 class UserDetailView(APIView):
 	def get(self, req, pk):

@@ -49,13 +49,6 @@ class ClientDetailView(APIView):
 
 		return render(req, 'detail/detail_client.html', {'client': serializer.data})
 
-# class ClientDetailAPIView(APIView):
-# 	def get(self, req, pk):
-# 		client = self.get_object(pk)
-# 		serializer = ClientSerializer(client)
-
-# 		return Response(serializer.data)
-
 class ClientListView(APIView):
 	def get(self, req):
 		clients = Client.objects.all()
@@ -100,22 +93,6 @@ class ClientUpdateView(View):
 					'contact_form_errors': contact_form.errors
 				}
 			})
-
-# class ClientUpdateAPIView(APIView):
-# 	def put(self, req, pk):
-# 		try:
-# 			client = Client.objects.get(pk=pk)
-# 		except Client.DoesNotExist:
-# 			raise NotFound('Client not found!')
-
-# 		serializer = ClientSerializer(client, data=req.data)
-
-# 		if serializer.is_valid():
-# 			serializer.save()
-
-# 			return Response(serializer.data)
-
-# 		return Response(serializer.errors, status=status.HTTP_400_BAD_req)
 
 class ClientDeleteView(APIView):
 	def get(self, req, pk):

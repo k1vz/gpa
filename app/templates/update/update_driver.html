@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Editar Motorista: {{ driver.name }}</h1>
+
+<form method="post">
+	{% csrf_token %}
+	<div class="topic-container">
+		<h2>Informações Gerais</h2>
+		{{ driver_form.as_p }}
+	</div>
+	<button type="submit" class="button">Salvar</button>
+</form>
+
+<a href="{% url 'driver-detail' driver.id %}">
+	<button class="button alt">Cancelar</button>
+</a>
+{% endblock %}

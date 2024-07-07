@@ -3,55 +3,66 @@
 
 {% block content %}
 <div style="text-align: right; margin-bottom: 10px;">
-	<h1 style="text-align: left; margin-top: 20px;">Lista de Clientes</h1>
+    <h1 style="text-align: left; margin-top: 20px;">Lista de Clientes</h1>
 
-	<a href="{% url 'client-create' %}">
-		<button class="button cadastrar">
-			Cadastrar Cliente
-		</button>
-	</a>
+    <a href="{% url 'client-create' %}">
+        <button class="button cadastrar">
+            Cadastrar Cliente
+        </button>
+    </a>
 </div>
 <div class="table-container">
-	<table>
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>CPF/CNPJ</th>
-				<th>Tipo da Empresa</th>
-				<th>Ativo</th>
-				<th>Ações</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for client in clients %}
-			<tr>
-				<td>{{ client.name }}</td>
-				<td>
-					{% if client.client_type == 'PF' %}
-						{{ client.cpf }}
-					{% elif client.client_type == 'PJ' %}
-						{{ client.cnpj }}
-					{% endif %}
-				</td>
-				<td>{{ client.client_type }}</td>
-				<td>
-					{% if client.active %}
-						Sim
-					{% else %}
-						Não
-					{% endif %}
-				</td>
-				<td>
-					<form action="{% url 'client-delete' client.id %}" style="display:inline;">
-						{% csrf_token %}
-						<button type="submit" class="delete-button" title="Delete">
-							<img src="{% static 'imagens/ImgDelete.png' %}" alt="Delete" style="width:20px;height:20px;">
-						</button>
-					</form>
-				</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF/CNPJ</th>
+                <th>Tipo da Empresa</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr class="clickable-row" data-href="{% url 'client-detail' client.id %}">
+                <td>{{ client.name }}</td>
+                <td>
+                    {% if client.client_type == 'PF' %}
+                        {{ client.cpf }}
+                    {% elif client.client_type == 'PJ' %}
+                        {{ client.cnpj }}
+                    {% endif %}
+                </td>
+                <td>{{ client.client_type }}</td>
+                <td>
+                    {% if client.active %}
+                        Sim
+                    {% else %}
+                        Não
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="{% url 'client-delete' client.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button" title="Delete">
+                            <img src="{% static 'imagens/ImgDelete.png' %}" alt="Delete" style="width:20px;height:20px;">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('.clickable-row');
+        rows.forEach(row => {
+            row.addEventListener('click', function() {
+                window.location = this.dataset.href;
+            });
+        });
+    });
+</script>
 {% endblock %}

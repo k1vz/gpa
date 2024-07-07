@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Cliente: {{ client.name }}</h1>
+
+<div class="container">
+	<div class="topic-container">
+		<hr>
+		<h2>Informações Gerais</h2>
+		Tipo do cliente: {{ client.client_type }} <br><br>
+		Nome: {{ client.name }} <br><br>
+		Ativo:
+		{% if client.active %}
+			Sim
+		{% else %}
+			Não
+		{% endif %}
+		<br><br>
+		Inadimplente:
+		{% if client.defaulting %}
+			Sim
+		{% else %}
+			Não
+		{% endif %}
+		<br><br>
+		Quantidade de caminhões: {{ client.truck_count }} <br><br>
+
+		{% if client.client_type == 'PF' %}
+			<div id="pf_fields">
+				CPF: {{ client.cpf }} <br><br>
+				Data de nascimento: {{ client.birth_date }} <br><br>
+			</div>
+
+		{% else %}
+			<div id="pj_fields">
+				CNPJ: {{ client.cnpj }} <br><br>
+				Nome fantasia: {{ client.trade_name }} <br><br>
+				Inscrição estadual: {{ client.business_registration }} <br><br>
+			</div>
+		{% endif %}
+	</div>
+
+	<div class="topic-container">
+		<hr>
+		<h2>Contato</h2>
+		{% if client.contact.role %}
+			Cargo: {{ client.contact.role }} <br><br>
+		{% endif %}
+		{% if client.contact.email %}
+			Email: {{ client.contact.email }} <br><br>
+		{% endif %}
+		Telefone: {{ client.contact.phone }} 
+		{% if client.contact.phone_alt %}
+			<br><br> Telefone secundário: {{ client.contact.phone_alt }} <br><br>
+		{% endif %}
+	</div>
+
+	<div class="topic-container">
+		<hr>
+		<h2>Endereço</h2>
+		Rua: {{ client.address.street }} - Nº {{ client.address.number }} <br><br>
+		Bairro: {{ client.address.neighborhood }} <br><br>
+		Cidade: {{ client.address.city }} Estado: {{ client.address.state }} <br><br>
+		{% if client.address.complement %}
+			Complemento: {{ client.address.complement }} <br><br>
+		{% endif %}
+		{% if client.address.reference_point %}
+			Ponto de referência: {{ client.address.reference_point }} <br><br>
+		{% endif %}
+	</div>
+</div>
+
+<a href="{% url 'client-update' client.id %}">
+	<button class="button alt">
+		Editar
+	</button>
+</a>
+{% endblock %}

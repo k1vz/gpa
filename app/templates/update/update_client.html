@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Editar Cliente: {{ client.name }}</h1>
+
+<form method="post">
+	{% csrf_token %}
+	<hr>
+	<div class="topic-container">
+		<h2>Informações Gerais</h2>
+		{{ client_form.as_p }}
+	</div>
+
+	<hr>
+	<div class="topic-container">
+		<h2>Contato</h2>
+		{{ contact_form.as_p }}
+	</div>
+
+	<hr>
+	<div class="topic-container">
+		<h2>Endereço</h2>
+		{{ address_form.as_p }}
+	</div>
+
+	<button type="submit" class="button cadastrar">Salvar</button>
+</form>
+
+{% if errors %}
+	<div class="errors">
+		{% if errors.client_form_errors %}
+			<div class="client-form-errors">
+				{{ errors.client_form_errors }}
+			</div>
+		{% endif %}
+		{% if errors.address_form_errors %}
+			<div class="address-form-errors">
+				{{ errors.address_form_errors }}
+			</div>
+		{% endif %}
+		{% if errors.contact_form_errors %}
+			<div class="contact-form-errors">
+				{{ errors.contact_form_errors }}
+			</div>
+		{% endif %}
+	</div>
+{% endif %}
+
+<a href="{% url 'client-detail' client.id %}">
+	<button class="button alt">Cancelar</button>
+</a>
+
+{% endblock %}

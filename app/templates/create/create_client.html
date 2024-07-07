@@ -62,10 +62,6 @@
 			{{ contact_form.phone_alt.label_tag }}
 			{{ contact_form.phone_alt }}
 			<br><br>
-
-			{% for error in contact_form.errors %}
-				<div>{{ error }}</div>
-			{% endfor %}
 	</div>
 
 	<div class="topic-container">
@@ -92,9 +88,16 @@
 			{{ address_form.reference_point }}
 			<br><br>
 
-			{% for error in address_form.errors %}
-				<div>{{ error }}</div>
-			{% endfor %}
+			{% if errors %}
+			<div class="errors">
+				<h3>Erros:</h3>
+				<ul>
+					{% for field, error_list in errors.items %}
+						<li>{{ field }}: {{ error_list }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
 	</div>
 
 	<button type="submit">Salvar</button>

@@ -16,7 +16,7 @@ class WorkPeriodCreateView(View):
 		return render(req, 'create/create_work_period.html', {
 			'form': work_period_form,
 		})
-	
+
 	def post(self, req):
 		work_period_form = WorkPeriodForm(req.POST)
 
@@ -28,7 +28,7 @@ class WorkPeriodCreateView(View):
 			print(work_period_form.errors)
 
 		return redirect('work-period-list')
-	
+
 class WorkPeriodListView(APIView):
 	def get(self, req):
 		work_periods = WorkPeriod.objects.all()
@@ -86,4 +86,4 @@ class WorkPeriodDeleteView(APIView):
 
 		work_period.delete()
 
-		return redirect(reverse('work-period-list'))
+		return redirect('driver-detail', work_period.driver.id)

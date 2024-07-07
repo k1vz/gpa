@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Motorista: {{ driver.name }}</h1>
+
+<div class="container">
+    <div class="topic-container">
+        <hr>
+        <h2>Informações Gerais</h2>
+        Nome: {{ driver.name }}<br><br>
+        CPF: {{ driver.cpf }}<br><br>
+        Data de Nascimento: {{ driver.birth_date }}<br><br>
+        Tipo da CNH: {{ driver.license_type }}<br><br>
+        CNH: {{ driver.cnh }}<br><br>
+        Pontos na CNH: {{ driver.demerit_points }}<br><br>
+        Cliente Associado: {{ driver.client.name }}<br><br>
+        Ativo: {% if driver.active %}Sim{% else %}Não{% endif %}<br><br>
+    </div>
+
+    <div class="topic-container">
+        <hr>
+        <h2>Períodos de Trabalho</h2>
+        {% for work_period in work_periods %}
+			<form action="{% url 'work-period-delete' work_period.id %}" style="display:inline;">
+				{% csrf_token %}
+				<button type="submit" class="delete-button" title="Delete">
+					<img src="{% static 'imagens/ImgDelete.png' %}" alt="Delete" style="width:20px;height:20px;">
+				</button>
+			</form>
+			<h3>Período #{{ work_period.id }}</h3>
+			Início: {{ work_period.periodStart }}<br>
+			Fim: {{ work_period.periodEnd }}<br>
+			Assinatura do Responsável:
+			{% if work_period.responsibleSignature %}
+				Sim
+			{% else %}
+				Não
+			{% endif %}
+			<br>
+
+			<h4>Diárias</h4>
+			{% for daily in work_period.dailies %}
+				<div>
+					<strong>Diária #{{ daily.id }}</strong><br>
+					Data: {{ daily.date }}<br>
+					Início: {{ daily.start }}<br>
+					Fim: {{ daily.end }}<br>
+					Início do Intervalo: {{ daily.intervalStart }}<br>
+					Fim do Intervalo: {{ daily.intervalEnd }}<br>
+					Início do Descanso: {{ daily.restStart }}<br>
+					Fim do Descanso: {{ daily.restEnd }}<br>
+					Assinatura do Funcionário:
+					{% if daily.employeeSignature %}
+						Sim
+					{% else %}
+						Não
+					{% endif %}
+					<br>
+				</div>
+			{% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+<a href="{% url 'driver-update' driver.id %}">
+    <button class="button alt">
+        Editar
+    </button>
+</a>
+{% endblock %}

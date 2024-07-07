@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Detalhes da Multa: {{ ticket.ait }}</h1>
+
+<div class="topic-container">
+    <h2>Informações Gerais</h2>
+	<hr>
+	<p>Cliente Relacionado: {{ ticket.client.name }}</p>
+    <p>Classificação: {{ ticket.ticket_type.classification }}</p>
+    <p>Auto de Infração de Trânsito: {{ ticket.ait }}</p>
+    <p>Status Judicial: {{ ticket.judicial_status }}</p>
+    <p>Placa do Veículo: {{ ticket.license_plate }}</p>
+    <p>Data de Vencimento: {{ ticket.due_date }}</p>
+    <p>Data da Infração: {{ ticket.infraction_datetime }}</p>
+    <p>Cidade: {{ ticket.city }}</p>
+    <p>Estado: {{ ticket.state }}</p>
+    <p>Local da Infração: {{ ticket.infraction_location }}</p>
+    <p>Código do Órgão Denatran: {{ ticket.denatran_agency_code }}</p>
+    <p>Código do Autuador: {{ ticket.autuador_agency_code }}</p>
+    <p>Observações: {{ ticket.observation }}</p>
+    <p>Ativo:
+		{% if ticket.active %}
+			Sim
+		{% else %}
+			Não
+		{% endif %}
+	</p>
+</div>
+
+<a href="{% url 'ticket-update' ticket.id %}">
+    <button class="button alt">Editar</button>
+</a>
+{% endblock %}

@@ -7,8 +7,8 @@
 	{% csrf_token %}
 
 	<div class="topic-container">
-		<h2>Informações Gerais</h2>
 		<hr>
+		<h2>Informações Gerais</h2>
 		{{ client_form.client_type.label_tag }}
 		{{ client_form.client_type }}
 		<br><br>
@@ -48,8 +48,8 @@
 	</div>
 
 	<div class="topic-container">
-		<h2>Contato</h2>
 		<hr>
+		<h2>Contato</h2>
 			{{ contact_form.id }}
 			{{ contact_form.role.label_tag }}
 			{{ contact_form.role }}
@@ -65,8 +65,8 @@
 	</div>
 
 	<div class="topic-container">
-		<h2>Endereço</h2>
 		<hr>
+		<h2>Endereço</h2>
 			{{ address_form.id }}
 			{{ address_form.street.label_tag }}
 			{{ address_form.street }}

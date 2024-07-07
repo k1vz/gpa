@@ -25,7 +25,7 @@
 		</thead>
 		<tbody>
 			{% for ticket in tickets %}
-			<tr>
+            <tr class="clickable-row" data-href="{% url 'ticket-detail' ticket.id %}">
 				<td>{{ ticket.client.name }}</td>
 				<td>{{ ticket.ticket_type.classification }}</td>
 				<td>{{ ticket.ait }}</td>
@@ -52,4 +52,15 @@
 		</button>
 	</a>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('.clickable-row');
+        rows.forEach(row => {
+            row.addEventListener('click', function() {
+                window.location = this.dataset.href;
+            });
+        });
+    });
+</script>
 {% endblock %}

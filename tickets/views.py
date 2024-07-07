@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from .models.ticket_type import TicketType
 from rest_framework.response import Response
 from .forms import TicketForm, TicketTypeForm
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework.exceptions import NotFound
 from .serializers import TicketSerializer, TicketTypeSerializer
 
@@ -66,21 +66,53 @@ class TicketListView(APIView):
 
 # 		return Response(serializer.data)
 
-class TicketUpdateView(APIView):
-	def put(self, req, pk):
-		ticket = self.get_object(pk)
-
-		serializer = TicketSerializer(ticket, data=req.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
-
-		return Response(serializer.data)
-
-	def get_object(self, pk):
+class TicketDetailView(View):
+	def get(self, req, pk):
 		try:
-			return Ticket.objects.get(pk=pk, active=True)
+			ticket = Ticket.objects.get(pk=pk)
 		except Ticket.DoesNotExist:
 			raise NotFound('Ticket not found')
+		
+		return render(req, 'detail/detail_ticket.html', {'ticket': ticket})
+
+class TicketUpdateView(View):
+	def get(self, req, pk):
+		ticket = get_object_or_404(Ticket, pk=pk)
+		form = TicketForm(instance=ticket)
+		
+		return render(req, 'update/update_ticket.html', {
+			'form': form,
+			'ticket': ticket
+		})
+
+	def post(self, req, pk):
+		ticket = get_object_or_404(Ticket, pk=pk)
+		form = TicketForm(req.POST, instance=ticket)
+
+		if form.is_valid():
+			form.save()
+			return redirect('ticket-detail', pk=pk)
+		else:
+			return render(req, 'update/update_ticket.html', {
+				'form': form,
+				'ticket': ticket
+			})
+
+# class TicketUpdateAPIView(APIView):
+# 	def put(self, req, pk):
+# 		ticket = self.get_object(pk)
+
+# 		serializer = TicketSerializer(ticket, data=req.data)
+# 		serializer.is_valid(raise_exception=True)
+# 		serializer.save()
+
+# 		return Response(serializer.data)
+
+# 	def get_object(self, pk):
+# 		try:
+# 			return Ticket.objects.get(pk=pk, active=True)
+# 		except Ticket.DoesNotExist:
+# 			raise NotFound('Ticket not found')
 
 class TicketDeleteView(APIView):
 	def get(self, req, pk):
@@ -146,21 +178,44 @@ class TicketTypeListView(APIView):
 # 		serializer = TicketTypeSerializer(ticket_types, many=True)
 # 		return Response(serializer.data)
 
-class TicketTypeUpdateView(APIView):
-	def put(self, req, pk):
-		ticket_type = self.get_object(pk)
+class TicketTypeUpdateView(View):
+	def get(self, req, pk):
+		ticket_type = get_object_or_404(TicketType, pk=pk)
+		form = TicketTypeForm(instance=ticket_type)
+		
+		return render(req, 'update/update_ticket_type.html', {
+			'form': form,
+			'ticket_type': ticket_type
+		})
 
-		serializer = TicketTypeSerializer(ticket_type, data=req.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
+	def post(self, req, pk):
+		ticket_type = get_object_or_404(TicketType, pk=pk)
+		form = TicketTypeForm(req.POST, instance=ticket_type)
 
-		return Response(serializer.data)
+		if form.is_valid():
+			form.save()
+			return redirect('ticket-type-detail', pk=pk)
+		else:
+			return render(req, 'update/update_ticket_type.html', {
+				'form': form,
+				'ticket_type': ticket_type
+			})
 
-	def get_object(self, pk):
-		try:
-			return TicketType.objects.get(pk=pk)
-		except TicketType.DoesNotExist:
-			raise NotFound('Ticket type not found')
+# class TicketTypeUpdateAPIView(APIView):
+# 	def put(self, req, pk):
+# 		ticket_type = self.get_object(pk)
+
+# 		serializer = TicketTypeSerializer(ticket_type, data=req.data)
+# 		serializer.is_valid(raise_exception=True)
+# 		serializer.save()
+
+# 		return Response(serializer.data)
+
+# 	def get_object(self, pk):
+# 		try:
+# 			return TicketType.objects.get(pk=pk)
+# 		except TicketType.DoesNotExist:
+# 			raise NotFound('Ticket type not found')
 
 class TicketTypeDeleteView(APIView):
 	def get(self, req, pk):

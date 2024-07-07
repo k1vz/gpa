@@ -15,7 +15,12 @@
         CNH: {{ driver.cnh }}<br><br>
         Pontos na CNH: {{ driver.demerit_points }}<br><br>
         Cliente Associado: {{ driver.client.name }}<br><br>
-        Ativo: {% if driver.active %}Sim{% else %}Não{% endif %}<br><br>
+        Ativo: {% if driver.active %}
+			Sim
+		{% else %}
+			Não
+		{% endif %}
+		<br><br>
     </div>
 
     <div class="topic-container">

@@ -1,66 +1,31 @@
-# API Routes 
+# Gerencie GPA
+Link: http://18.189.153.26:8000/
 
-### Users
-Request | Method | Route URI | Cookies | Body | Response 
---- | --- | --- | --- | --- |--- 
-Register User |<div align="center">  ![POST](https://img.shields.io/badge/POST-yellow?style=flat) </div>| /users/register/ | <div align="center">null</div> | ` { "email": string, "password": string } ` | ` {"id": int, "email": string} `
-Login User |<div align="center">  ![POST](https://img.shields.io/badge/POST-yellow?style=flat) </div>| /users/login/ | <div align="center">null</div> | ` { "email": string, "password": string } ` | ` { "jwt": string } `
-Logout | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/logout/ | ` jwt=string ` | <div align="center">null</div> | ` {"message": string} `
-Detail User | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/detail/<id:int>/ |  ` jwt=string ` | <div align="center">null</div> | ` {"id": int, "email": string} `
-List All Users | <div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /users/ | ` jwt=string ` | <div align="center">null</div> | ` [{"id": int, "email": string}] `
-Update User | <div align="center"> ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) </div>| /users/update/<id:int>/ | ` jwt=string ` | ` { "email"?: string, "current_password": string, "new_password"?: string } ` | ` {"id": int, "email": string} `
-Delete User | <div align="center"> ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) </div>| /users/delete/<id:int>/ | ` jwt=string ` | <div align="center">null</div> | ` {"message": string} `
+### Software de controle de gestão para prestadora de serviços a transportadoras.
 
-"?" means opcional parameter
-You can use 0 in the "pk" fields to refer to the current user
+Nosso software tem como propósito automatizar e facilitar um trabalho que hoje em dia é feito de forma manual e com os arquivos na sua forma física sendo guardados e organizados em pastas.
+A implementação desse sistema trará agilidade, praticidade e a possibilidade de garantia de disponibilidade.
 
----
+Tela inicial:
+![image](https://github.com/k1vz/gpa/assets/61050418/33c3321b-80fb-435e-9504-9c05cfdb8042)
 
-### Clients
-Request | Method | Route URI | Cookies | Body | Response 
---- | --- | --- | --- | --- |--- 
-Create Client |<div align="center"> ![POST](https://img.shields.io/badge/POST-yellow?style=flat) </div>| /clients/create/ | <div align="center"> ` jwt=string ` </div> | ` { "active": boolean, "name": string, "defaulting": boolean, "client_type": string, "cpf": string, "cnpj": string, "birth_date": string, "business_registration": string, "address": { "street": string, "number": int, "city": string, "state": string, "reference_point": string, "neighborhood": string, "complement": string }, "truck_count": int, "corporate_name": string, "trade_name": string, "contact": { "phone": string, "email": string } } ` | ` { "id": int, "active": boolean, "name": string, "defaulting": boolean, "client_type": string, "cpf": string, "cnpj": string, "birth_date": string, "business_registration": string, "address": { "id": int, "street": string, "number": int, "city": string, "state": string, "reference_point": string, "neighborhood": string, "complement": string }, "truck_count": int, "corporate_name": string, "trade_name": string, "contact": { "id": int, "phone": string, "email": string } } `
-List All Clients |<div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /clients/ | <div align="center"> ` jwt=string ` </div> | <div align="center"> null </div> | ` [{ "id": int, "active": boolean, "name": string, "defaulting": boolean, "client_type": string, "cpf": string, "cnpj": string, "birth_date": string, "business_registration": string, "address": { "id": int, "street": string, "number": int, "city": string, "state": string, "reference_point": string, "neighborhood": string, "complement": string }, "truck_count": int, "corporate_name": string, "trade_name": string, "contact": { "id": int, "phone": string, "email": string } }] `
-Detail Client |<div align="center"> ![GET](https://img.shields.io/badge/GET-green?style=flat) </div>| /clients/<id:int>/ | <div align="center"> ` jwt=string ` </div> | <div align="center"> null </div> | ` { "id": int, "active": boolean, "name": string, "defaulting": boolean, "client_type": string, "cpf": string, "cnpj": string, "birth_date": string, "business_registration": string, "address": { "id": int, "street": string, "number": int, "city": string, "state": string, "reference_point": string, "neighborhood": string, "complement": string }, "truck_count": int, "corporate_name": string, "trade_name": string, "contact": { "id": int, "phone": string, "email": string } } `
-Update Client |<div align="center"> ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) </div>| /clients/<id:int>/ | <div align="center"> ` jwt=string ` </div> | ` { "active": boolean, "name": string, "defaulting": boolean, "client_type": string, "cpf": string, "cnpj": string, "birth_date": string, "business_registration": string, "address": { "street": string, "number": int, "city": string, "state": string, "reference_point": string, "neighborhood": string, "complement": string }, "truck_count": int, "corporate_name": string, "trade_name": string, "contact": { "phone": string, "email": string } } ` | ` { "id": int, "active": boolean, "name": string, "defaulting": boolean, "client_type": string, "cpf": string, "cnpj": string, "birth_date": string, "business_registration": string, "address": { "id": int, "street": string, "number": int, "city": string, "state": string, "reference_point": string, "neighborhood": string, "complement": string }, "truck_count": int, "corporate_name": string, "trade_name": string, "contact": { "id": int, "phone": string, "email": string } } `
-Delete Client |<div align="center"> ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) </div>| /clients/<id:int>/ | <div align="center"> ` jwt=string ` </div> | <div align="center"> null </div> | ` { "message": string } `
+Lista de Clientes:
+![image](https://github.com/k1vz/gpa/assets/61050418/e82b2a27-07e5-42f0-bfd7-ec33aa671624)
 
----
+Detalhe de um Cliente:
+![image](https://github.com/k1vz/gpa/assets/61050418/dc01ef9b-c7a6-43f5-9da8-968cbecd1f7d)
 
-### Tickets
-Request | Method | Route URI |  Cookies | Body | Response 
---- | --- | --- | --- | --- |--- 
-Create Ticket | ![POST](https://img.shields.io/badge/POST-yellow?style=flat) | /tickets/create/ | ` jwt=string ` | `{ "due_date": string, "infraction_datetime": string, "city": string, "state": string, "infraction_location": string, "ait": int, "denatran_agency_code": int, "autuador_agency_code": int, "observation": string, "active": boolean, "judicial_status": string, "license_plate": string, "client_id": int, "ticket_type_id": int }` | `{ "id": int, "due_date": string, "infraction_datetime": string, "city": string, "state": string, "infraction_location": string, "ait": int, "denatran_agency_code": int, "autuador_agency_code": int, "observation": string, "active": boolean, "judicial_status": string, "license_plate": string, "client_id": int, "ticket_type_id": int }`
-List All Tickets | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /tickets/ | ` jwt=string ` | null | ` [{ "id": int, "due_date": string, "infraction_datetime": string, "city": string, "state": string, "infraction_location": string, "ait": int, "denatran_agency_code": int, "autuador_agency_code": int, "observation": string, "active": boolean, "judicial_status": string, "license_plate": string, "client_id": int, "ticket_type_id": int }]`
-Detail Ticket | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /tickets/detail/<id:int>/ | ` jwt=string ` | null | `{ "id": int, "due_date": string, "infraction_datetime": string, "city": string, "state": string, "infraction_location": string, "ait": int, "denatran_agency_code": int, "autuador_agency_code": int, "observation": string, "active": boolean, "judicial_status": string, "license_plate": string, "client_id": int, "ticket_type_id": int }`
-Update Ticket | ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) | /tickets/update/<id:int>/ | ` jwt=string ` | `{ "due_date": string, "infraction_datetime": string, "city": string, "state": string, "infraction_location": string, "ait": int, "denatran_agency_code": int, "autuador_agency_code": int, "observation": string, "active": boolean, "judicial_status": string, "license_plate": string, "client_id": int, "ticket_type_id": int }` | `{ "id": int, "due_date": string, "infraction_datetime": string, "city": string, "state": string, "infraction_location": string, "ait": int, "denatran_agency_code": int, "autuador_agency_code": int, "observation": string, "active": boolean, "judicial_status": string, "license_plate": string, "client_id": int, "ticket_type_id": int }`
-Delete Ticket | ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) | /tickets/delete/<id:int>/ | ` jwt=string ` | null | ` { "message": string } `
---- | --- | --- | --- | --- | --- 
-Create Ticket Type | ![POST](https://img.shields.io/badge/POST-yellow?style=flat) | /tickets/types/create/ | ` jwt=string ` | `{ "description": string, "code": int, "legal_basis": string, "classification": string }` | `{ "id": int, "description": string, "code": int, "legal_basis": string, "classification": string }`
-List All Ticket Types | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /tickets/types/ | ` jwt=string ` | null | ` [{ "id": int, "description": string, "code": int, "legal_basis": string, "classification": string }]`
-Detail Ticket Type | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /tickets/types/detail/<id:int>/ | ` jwt=string ` | null | `{ "id": int, "description": string, "code": int, "legal_basis": string, "classification": string }`
-Update Ticket Type | ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) | /tickets/types/update/<id:int>/ | ` jwt=string ` | `{ "description": string, "code": int, "legal_basis": string, "classification": string }` | `{ "id": int, "description": string, "code": int, "legal_basis": string, "classification": string }`
-Delete Ticket Type | ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) | /tickets/types/delete/<id:int>/ | ` jwt=string ` | null |` { "message": string } `
+Lista de Motoristas:
+![image](https://github.com/k1vz/gpa/assets/61050418/afdd5c09-c5fb-4794-8aa4-80d5f35aec09)
+
+Cadastrar Cliente:
+![image](https://github.com/k1vz/gpa/assets/61050418/25cdb414-9172-400d-9803-5d7f67a60813)
+
+Login:
+![image](https://github.com/k1vz/gpa/assets/61050418/bdf3fb03-3f79-489c-b33d-225e85b78c60)
 
 ---
 
-### Drivers
-Request | Method | Route URI | Cookies | Body | Response 
---- | --- | --- | --- | --- | --- 
-Create Driver | ![POST](https://img.shields.io/badge/POST-yellow?style=flat) | /drivers/create/ | ` jwt=string ` | `{ "active": boolean, "name": string, "cpf": string, "birth_date": string, "license_type": string, "cnh": string, "demerit_points": int, "client_id": int }` | `{ "id": int, "active": boolean, "name": string, "cpf": string, "birth_date": string, "license_type": string, "cnh": string, "demerit_points": int, "client_id": int }`
-List All Drivers | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /drivers/ | ` jwt=string ` | null | ` [{ "id": int, "active": boolean, "name": string, "cpf": string, "birth_date": string, "license_type": string, "cnh": string, "demerit_points": int, "client_id": int, "work_periods": [{ "id": int, "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "dailies": [{ "id": int, "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean }] }] }]`
-Detail Driver | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /drivers/detail/<id:int>/ | ` jwt=string ` | null | `{ "id": int, "active": boolean, "name": string, "cpf": string, "birth_date": string, "license_type": string, "cnh": string, "demerit_points": int, "client_id": int, "work_periods": [{ "id": int, "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "dailies": [{ "id": int, "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean }] }] }`
-Update Driver | ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) | /drivers/update/<id:int>/ | ` jwt=string ` | `{ "active": boolean, "name": string, "cpf": string, "birth_date": string, "license_type": string, "cnh": string, "demerit_points": int, "client_id": int }` | `{ "id": int, "active": boolean, "name": string, "cpf": string, "birth_date": string, "license_type": string, "cnh": string, "demerit_points": int, "client_id": int }`
-Delete Driver | ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) | /drivers/delete/<id:int>/ | ` jwt=string ` | null | ` { "message": string } `
---- | --- | --- | --- | --- | --- 
-Create Work Period | ![POST](https://img.shields.io/badge/POST-yellow?style=flat) | /drivers/work_periods/create/ | ` jwt=string ` | `{ "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "driver_id": int }` | `{ "id": int, "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "driver_id": int }`
-List All Work Periods | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /drivers/work_periods/ | ` jwt=string ` | null | ` [{ "id": int, "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "driver_id": int }]`
-Detail Work Period | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /drivers/work_periods/detail/<id:int>/ | ` jwt=string ` | null | `{ "id": int, "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "driver_id": int }`
-Update Work Period | ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) | /drivers/work_periods/update/<id:int>/ | ` jwt=string ` | `{ "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "driver_id": int }` | `{ "id": int, "responsibleSignature": boolean, "creationDate": string, "periodStart": string, "periodEnd": string, "driver_id": int }`
-Delete Work Period | ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) | /drivers/work_periods/delete/<id:int>/ | ` jwt=string ` | null | ` { "message": string } `
---- | --- | --- | --- | --- | --- 
-Create Daily | ![POST](https://img.shields.io/badge/POST-yellow?style=flat) | /drivers/dailies/create/ | ` jwt=string ` | `{ "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean, "work_period_id": int }` | `{ "id": int, "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean, "work_period_id": int }`
-List All Dailies | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /drivers/dailies/ | ` jwt=string ` | null | ` [{ "id": int, "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean, "work_period_id": int }]`
-Detail Daily | ![GET](https://img.shields.io/badge/GET-green?style=flat) | /drivers/dailies/detail/<id:int>/ | ` jwt=string ` | null | `{ "id": int, "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean, "work_period_id": int }`
-Update Daily | ![PUT](https://img.shields.io/badge/PUT-blue?style=flat) | /drivers/dailies/update/<id:int>/ | ` jwt=string ` | `{ "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean, "work_period_id": int }` | `{ "id": int, "date": string, "start": string, "end": string, "intervalStart": string, "intervalEnd": string, "restStart": string, "restEnd": string, "employeeSignature": boolean, "work_period_id": int }`
-Delete Daily | ![DELETE](https://img.shields.io/badge/DELETE-red?style=flat) | /drivers/dailies/delete/<id:int>/ | ` jwt=string ` | null | ` { "message": string } `
+### Modelo Lógico
+
+![image](https://github.com/k1vz/gpa/assets/61050418/67fe67fb-b62d-44db-a0a0-07d1cda7694a)
